@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026年度 視覚伝達デザイン学科 卒業・修了制作展 | 武蔵野美術大学</title>
+<meta name="description" content="武蔵野美術大学 造形学部 視覚伝達デザイン学科 2026年度 卒業・修了制作展「実りの、その先へ。」2027年1月14日㊍から17日㊐。9時から17時（最終入場16時）。鷹の台キャンパス。">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<meta name="theme-color" content="#da3915">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="2026年度 視覚伝達デザイン学科 卒業・修了制作展">
+<meta property="og:description" content="実りの、その先へ。2027年1月14日㊍から17日㊐。武蔵野美術大学 鷹の台キャンパス">
+<meta property="og:image" content="assets/img/ogp.png?v=20261105"><!-- 2026-10-28：最終版の KV（studio-embed/home/ogp-v5.html → ogp-v5.png）。本番では絶対 URL にする -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
+<link rel="stylesheet" href="assets/style.css?v=20261115i">
+<!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
+     表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
+<script>
+  document.documentElement.classList.add('js-intro');
+  addEventListener('DOMContentLoaded', function () {
+    const fallback = () => setTimeout(function () { document.documentElement.classList.add('intro-fallback'); }, 10000);
+    const intro = document.getElementById('motion-intro');
+    if (intro && intro.open) intro.addEventListener('close', fallback, { once: true }); else fallback();
+  });
+</script>
+<!-- トップの切り替え（2026-10-28 整理。クエリ名はスイッチャーの行名、値はボタンの表示と同じ）
+       ?layout=1a / 1b（1 列。KV 小 / 大）/ 2a〜2e（既定 2c。2026-10-29 に 1b から 2b、10-31 に 2c へ）（左右分け＝Miro の d1〜d4。2026-10-31 に 2c＝2b の展覧会名のブロックを右の列の左端へ寄せた版＝data-kvd 5 を差し込み、元の 2c・2d は 2d・2e に）。2026-10-28 に 2a・2b を入れ替え（2a＝絵を収める＝data-kvd 2、2b＝絵が大きい＝data-kvd 1。上の段が収める、下の段が大きいにそろえるため）
+       ?kv-fade=no / 1（既定 no、Template 2 は 1。2026-10-29 に 1 にしたのを 10-31 に戻した）・ ?kv-anim=no / 1 / 2（既定 2。2026-10-29 に 1 から変えた）・ ?fruit-anim=1 / 2 / 3（ゼミ一覧の実。seminars/embed.html が読む）・ ?fruit-deco=no / 1（Template 1 の既定はスマホのみ、Template 2 は 1）・ ?works=no / 1（作品・展示場所のセクション）・ ?campus-map=no / 1（ゼミ一覧の下のキャンパスマップ）・ ?access-map=1 / 3 / 4 / 5（アクセスの地図。番号は Teams（SharePoint サイン班/サイン制作物/MAP）の「武蔵美への地図」の版。3＝右のコンビニの文字を道路の下に移した版、4＝それに西武国分寺線と玉川上水沿いの道の交わりの細い線を足した版（サイン班）。既定 4。2026-10-29、4 は 11-01、5 は 11-02）・ ?greeting=1 / 2 / 3（既定 1。2026-10-29 に 3 から）・ ?statement=edge / left / center（ステートメントの画像。既定 edge（10-31 に left から）。edge＝左揃えの画像をセクションの左端（見出しの左端）に置く。2026-10-29、edge は 10-30）・ ?white=1〜3
+       ?design= は作品ページと共通の案（A〜D）。指定があればそれを使う。html に data-design などを付け、style.css が効く -->
+<script>
+  (function () {
+    var p = new URLSearchParams(location.search), h = document.documentElement.dataset;
+    // ?template=1 / 2（組み合わせの型。2026-10-29）：1＝既定の組み合わせ（layout 2c・KV fade なし・Fruit deco なし・ステートメント左端・ご挨拶 1）、2＝layout 1b・KV fade あり・Fruit deco あり・ステートメント中央・ご挨拶 2。ほかの指定があればそちらが優先
+    var t2 = ['3', '4'].includes(p.get('template')), simple = ['2', '4'].includes(p.get('template'));
+    var lay = p.get('layout') || (t2 ? '1b' : '2c'); // 既定 2c（2026-10-31 に 2b から）
+    var one = { '1a': 'a', '1b': 'b' }[lay], two = { '2a': '2', '2b': '1', '2c': '5', '2d': '3', '2e': '4' }[lay] || '1';
+    var d = (p.get('design') || (one ? 'c' : 'd')).toLowerCase();
+    if (d !== 'a') h.design = d;
+    if (one) h.kv1 = one;
+    if (d === 'd') h.kvd = two;
+    h.statementSize = ['smallest', 'small', 'normal'].includes(p.get('statement-size')) ? p.get('statement-size') : 'smallest';
+    var st = p.get('statement') || (t2 ? 'center' : 'edge'); if (st !== 'center') h.statement = 'edge'; // ステートメントは左端が既定（2026-10-31。?statement=left で本文の左端、center で中央）
+    var hs = p.get('heading-size'); h.headingSize = ['tiny', 'small', 'normal', 'large'].includes(hs) ? hs : 'normal'; // 既定は標準（2026-11-08。最新・最新（待機なし）も 1列案と同じ）
+    var g = p.get('greeting') || ''; h.greet = /^[123]$/.test(g) ? g : (t2 ? '2' : '1'); // 既定 1（2026-10-29 に 3 から変えた）。Template 2 は 2
+    if ((p.get('kv-fade') || (t2 ? '1' : 'no')) !== 'no') h.kvfade = '2'; // 既定は Template 1 で なし、2 で あり（2026-10-31）
+    h.kvorder = '2'; // 開催情報を先、キャッチを後に固定
+    var an = p.get('kv-anim') || (simple ? 'no' : '2'); if (an === 'no') h.kvanim = '0'; else if (an !== '1') h.kvanim = an === '3' ? '3' : '2';
+    h.kvSpeed = p.get('kv-speed') === 'slow' ? 'slow' : 'fast';
+    // PC とスマホの装飾は別々に設定する。Template 1 の既定は PC なし・スマホあり。
+    h.pcDeco = ['1', 'no'].includes(p.get('fruit-deco')) ? p.get('fruit-deco') : (t2 ? '1' : 'no');
+    h.mobileDeco = ['1', 'no'].includes(p.get('mobile-fruit-deco')) ? p.get('mobile-fruit-deco') : '1';
+    // 旧 works の指定も読みつつ、配置と操作を独立して選ぶ。
+    var legacyWorks = p.get('works');
+    var requestedFruitLayout = p.get('fruit-layout');
+    var fruitLayout = requestedFruitLayout === 'grid' ? 'grid5' : requestedFruitLayout === 'grid2' ? 'grid3' : requestedFruitLayout === 'long' ? 'longlong' : (['no', 'scatter', 'grid3', 'grid4', 'grid5', 'longshort', 'longlong'].includes(requestedFruitLayout) ? requestedFruitLayout : ({ no: 'no', intro: 'longlong', 'intro-grid': 'grid5' }[legacyWorks] || 'scatter'));
+    var fruitAction = ['none', 'works', 'short', 'linked'].includes(p.get('fruit-action')) ? p.get('fruit-action') : ({ '1': 'works', intro: 'none', 'intro-short': 'short', 'intro-grid': 'short' }[legacyWorks] || 'linked');
+    if ((one || ['longshort', 'longlong'].includes(fruitLayout)) && fruitAction === 'linked') fruitAction = 'none';
+    var hoverDefault = ({ none: 'none', works: 'none', short: 'short', linked: 'linked' })[fruitAction];
+    var clickDefault = ({ none: 'none', works: 'works', short: 'none', linked: 'mobile' })[fruitAction];
+    var fruitHover = ['none', 'short', 'linked'].includes(p.get('fruit-hover')) ? p.get('fruit-hover') : hoverDefault;
+    var fruitClick = ['none', 'works', 'short', 'seminar', 'mobile'].includes(p.get('fruit-click')) ? p.get('fruit-click') : clickDefault;
+    if ((one || ['longshort', 'longlong'].includes(fruitLayout)) && fruitHover === 'linked') fruitHover = 'none';
+    h.fruitLayout = fruitLayout; h.fruitHover = fruitHover; h.fruitClick = fruitClick;
+    if (fruitLayout === 'no') h.noworks = '';
+    if (['longshort', 'longlong'].includes(fruitLayout)) h.worksIntro = '1';
+    if (fruitHover === 'short' || fruitClick === 'short') h.worksShort = '1';
+    if (['grid3', 'grid4', 'grid5'].includes(fruitLayout)) h.worksGrid = '1';
+    if (fruitHover === 'linked' || fruitClick === 'seminar' || fruitClick === 'mobile') h.worksLinked = '1';
+    if (p.get('campus-map') === 'no') h.nocampus = '';
+    if (p.get('catalog-photo') !== '1') h.catalogPhoto = 'no';
+    // Template 1 は動画あり、Template 2 はなし。明示的な指定を優先。
+    var mv = p.get('motion-video');
+    if (!['1', 'no'].includes(mv)) mv = simple ? 'no' : '1';
+    if (mv === '1') h.motionVideo = '1';
+    var w = p.get('white') || (t2 ? '2' : '1'); if (/^[123]$/.test(w)) h.white = w;
+    // 比較案1と新しい赤を既定にする。従来値は ?top-layout=2（文字組み「初期」。旧 0 も可）/ ?bg=1 で明示する。
+    // ?top-layout=3 は「2列整理」でラベル（左の列）を右揃えにする案（2026-11-08）。
+    if (p.get('bg') === '3') h.bg = '3'; else if (p.get('bg') !== '1') h.bg = '2';
+    if (!['0', '2'].includes(p.get('top-layout'))) h.topLayout = '1';
+    // 文字組みの既定：最新・最新（待機なし）は「2列整理・右揃え」（3）、1列案は「2列整理」（1）（2026-11-08）
+    { var tl = p.get('top-layout') || (t2 ? '1' : '3'); if (tl === '3') h.layoutLabel = 'right'; }
+    // 最新と最新（待機なし）は2列・右揃え、1列案は丸ボタンを既定にする。
+    { var cb = p.get('campus-btn'); h.campusBtn = ['no', 'round', 'grid', 'grid-fit', 'fill-full', 'fill', 'edge'].includes(cb) ? cb : (t2 ? 'round' : 'fill'); }
+  })();
+</script>
+</head>
+
+<body class="home">
+
+
+<!-- ============================================================
+     Header : ハンバーガー（固定）
+     ============================================================ -->
+<header class="site-header">
+  <button class="menu-btn" id="menuBtn" type="button"
+          aria-controls="sidebar" aria-expanded="false" aria-label="メニューを開く">
+    <i class="fa-solid fa-bars menu-btn__icon" aria-hidden="true"></i>
+  </button>
+</header>
+
+<!-- ============================================================
+     Sidebar : 右から出し入れするナビゲーション
+     ============================================================ -->
+<div class="scrim" id="scrim" hidden></div>
+
+<nav class="sidebar" id="sidebar" aria-label="サイト内ナビゲーション" aria-hidden="true">
+  <button class="sidebar__close" id="closeBtn" type="button" aria-label="メニューを閉じる">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+  <ul class="sidebar__list">
+    <li>
+      <a href="#kv">トップ</a>
+      <ul class="sidebar__sub">
+        <li><a href="#greeting">ご挨拶</a></li>
+        <li><a href="#outline">開催概要</a></li>
+        <li><a href="#access">アクセス</a></li>
+        <li><a href="#home-campus">展示場所</a></li>
+        <li><a href="#handouts">配布物情報</a></li>
+        <li><a href="#seminar-introduction">ゼミの紹介</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<!-- サイドバー（studio-embed/home-b/sidebar-embed.html。STUDIO と同じ埋め込み。閉じるボタン・ゼミの線画アイコン・押したときの演出つき。全デザイン共通）。
+     印の間は build-local.mjs が書き換える。手で直さない。上の A のハンバーガーとサイドバーは style.css で隠している（2026-10-27〜） -->
+<!-- sidebar-b:start -->
+<div class="sidebar-b">
+<!-- サイドバー（埋め込み）。全ページ・全デザイン共通（2026-10-27〜。それまでは Home B・C だけ）。STUDIO の要素では閉じるアイコンが本番で出ず、ゼミのアイコンも付けられず、クリック後の演出も挟めないので、ハンバーガー・パネル・リンクを丸ごとここで作る。
+     ローカル（web/src/index.html と works/ のページ）にも同じものを入れる（build-local.mjs。印（studio-only）の付いた行は外す。環境の違いは ROUTES・SRC・VIEW・ENV だけ）
+     STUDIO 側：位置=固定・上 0・左 0・幅 100%・高さ auto・重なり 50。高さは中身に合わせて STUDIO が変える
+       閉じているとき 64px の帯（ハンバーガーの分）／開いているとき 画面（モニタ）の高さ
+     ゼミを押すと：アイコンが画面の中央で中くらいになる → にじみの絵が出る → 画面いっぱいに広がる → 赤地へフェード → 作品一覧へ移動
+     状態のクラス（is-tall / is-open / is-closing / is-fx）と変数は .sbx に付ける（ページの html は汚さない。CSS のネスト）
+     ※ textarea 以外に波かっこ2つを書かないこと（STUDIO に置き換えられる） -->
+<textarea id="q-url" hidden></textarea>
+<textarea id="q-white" hidden></textarea>
+<script>
+  // ローカル：STUDIO が置き換える値（ページの URL とクエリ）を、ページの URL から上の textarea に入れる
+  (() => { const p = new URLSearchParams(location.search); document.querySelectorAll('textarea[id^="q-"]').forEach((t) => { const k = t.id.slice(2); t.value = k === 'url' ? location.href : (p.get(k) || ''); }); })();
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+<style>
+  /* 白（?white=1〜3。2 が既定）。STUDIO の iframe の中ではここで決める。ローカルではページの style.css と同じ値 */
+  :root { --paper-rgb: 253 252 248; }
+  :root[data-white="1"] { --paper-rgb: 255 255 255; }
+  :root[data-white="3"] { --paper-rgb: 251 248 241; }
+  .sbx {
+    --bg: var(--c-bg, #bd3124); --panel: var(--c-sidebar, var(--c-bg, #bd3124)); /* 2026-10-29 にページ背景と同じ色に（それまで #a32718） */ --w: 230px; /* 2026-10-28 に 320px から 192px（6 割）→ 狭すぎたので 1.2 倍の 230px に */
+    /* 白（文字）：ページのトークンがあればそれ、無ければ既定の暖色の白 */
+    --white: rgb(var(--paper-rgb, 253 252 248));
+    color: var(--white); font-family: "Work Sans", "Zen Kaku Gothic New", sans-serif; font-weight: 400; letter-spacing: 0; -webkit-tap-highlight-color: transparent;
+    #root { position: relative; height: 64px; }
+    /* 先に高さだけ伸ばし（is-tall）、STUDIO が枠を伸ばし終えてからスライドする（is-open）。同時にやると、伸びていく枠でパネルが上から切れて見える
+       状態のクラスは body ではなく埋め込みの要素に付ける：STUDIO の埋め込みは body の中が変わると高さの通知を 400ms 待たせる（MutationObserver）が、
+       高さの変化（ResizeObserver）だけなら 5ms 後に通知される。演出中（is-fx）はパネルを閉じても高さを保つ */
+    &.is-tall #root, &.is-fx #root { height: var(--h); }
+    .ms { font-family: "Material Symbols Outlined"; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; direction: ltr; -webkit-font-smoothing: antialiased; }
+    button { all: unset; cursor: pointer; }
+    button:focus-visible, a:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+
+    /* ハンバーガー（上 20・右 20・30px）。白地（作品ページの B〜D）の上でも見えるよう、ページと同じ赤の丸を敷く（赤地では溶け込む） */
+    #burger { position: absolute; top: 13px; right: 13px; width: 44px; height: 44px; display: grid; place-items: center; font-size: 30px; background: var(--bg); border-radius: 50%; }
+    /* パネルの外（クリックで閉じる）。開いているあいだだけ */
+    /* 開いているあいだ、ページに薄い黒をかける。押す（タップ）と閉じる（2026-10-28） */
+    #sbScrim { position: absolute; inset: 0; background: rgb(0 0 0 / .35); opacity: 0; pointer-events: none; transition: opacity .3s; }
+    &.is-open #sbScrim { opacity: 1; pointer-events: auto; }
+    /* パネル：右からスライド */
+    #panel {
+      position: absolute; top: 0; right: 0; width: var(--w); height: 100%; box-sizing: border-box; overflow-y: auto;
+      padding: 18px 36px 40px; background: var(--panel); display: flex; flex-direction: column; gap: 28px;
+      transform: translateX(100%); transition: transform .3s ease-out; visibility: hidden;
+    }
+    &.is-open #panel { transform: none; visibility: visible; }
+    &.is-closing #panel { visibility: visible; }
+    /* 閉じるボタン：パネルの右上に浮かせる（ハンバーガーと同じ位置。2026-10-27） */
+    #close { position: absolute; top: 13px; right: 13px; width: 44px; height: 44px; display: grid; place-items: center; font-size: 28px; }
+    #panel { padding-top: 26px; } /* 72px → 26px（2026-10-28「上のマージンが大きい」）。閉じるボタンは右上に浮いているので、左の文字とは重ならない */
+    .group { display: flex; flex-direction: column; gap: 10px; }
+    .group > a { font-size: 20px; line-height: 1.4; }
+    /* 子の項目の字下げ：ゼミのアイコン（28px＋間 10px）が親（トップ・作品一覧）の左端に来る幅。両方のグループで文字の左端をそろえる（2026-10-27） */
+    .items { display: flex; flex-direction: column; gap: 6px; padding-left: 0; }
+    .items a { font-size: 15px; line-height: 1.6; }
+    .items.sem { gap: 8px; }
+    a { color: var(--white); text-decoration: none; align-self: flex-start; } /* 下線は 2026-10-29 に全パターンでやめた */
+    .sem a { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    /* アイコン：トップの子項目もゼミも同じ 28px。字下げなし（親の左端からアイコン、その右に文字） */
+    .sem .icon { width: 28px; height: 28px; flex: none; object-fit: contain; }
+
+    /* サイドバーの 3 パターン（?sidebar=1〜3。2 が既定。2026-10-28。切り替えの Sidebar の行）
+       1：文字だけ（子の項目は少し右に下げる。ゼミを押したときの演出もなし）／2：上の項目は中黒（文字の「・」。2026-10-31 まで手書きっぽい形）・ゼミは線画アイコン／3：線画アイコン（上の項目もゼミも）。2026-10-28 に 1 と 3 を入れ替え */
+    /* 上の項目の中黒は文字の「・」（2026-10-31。それまでは手書きっぽい形の SVG を 5 つ。元は scratchpad に控えた）。幅 28px の真ん中に置き、ゼミのアイコン（14px＋左右 7px）と中心・文字の頭をそろえる */
+    .dot { display: none; width: 28px; flex: none; font-style: normal; text-align: center; line-height: 1; }
+    .dot::before { content: "・"; }
+    &[data-sb="2"] .icon { display: none; }
+      &[data-sb="2"] #top-items .dot { display: block; width: 1em; }
+    &[data-sb="2"] .sem a { gap: 0; }
+    &[data-sb="2"] .items { padding-left: 1.2em; }
+    /* 4〜6（2026-10-29。Miro の案。色は 1〜3 と同じ）。どれも下線なし
+       4：1 と同じく文字だけで、トップと作品・展示場所のあいだに実のアイコンを 1 つ（.sep）
+       5：ゼミは出さず、トップの子項目を大きくして親と同じ並びに。項目の上に線画アイコン
+       6：5 を中央揃え */
+    .sep { display: none; }
+    &[data-sb="1"] :is(.icon, .dot) { display: none; }
+    &[data-sb="1"] .sem a { gap: 0; }
+    &[data-sb="1"] .items { padding-left: 1.6em; gap: 10px; }
+    &[data-sb="1"] .sep { display: block; width: 26px; height: 26px; object-fit: contain; align-self: center; margin: 8px 0; }
+    &:is([data-sb="4"], [data-sb="5"]) {
+      .group ~ .group { display: none; } /* ゼミの一覧は出さない（あいだに .sep があるので + ではなく ~） */
+      .dot { display: none; }
+      .group, .items { gap: 16px; }
+      .items { padding-left: 0; }
+      #top-items a { flex-direction: column; align-items: flex-start; gap: 16px; font-size: 20px; line-height: 1.4; }
+      #top-items .icon { width: 22px; height: 22px; }
+    }
+    &[data-sb="5"] {
+      .group, .items { align-items: center; }
+      a, #top-items a { align-self: center; align-items: center; text-align: center; }
+    }
+    /* 共有された中央揃え案：文字は20px、間の実は16px・不透明度80%。 */
+    &[data-sb="5"] {
+      --w: max-content;
+      #panel { max-width: 100vw; padding: 70px 48px 40px; }
+      .group, .items { gap: 20px; }
+      .group > a, #top-items a { font-size: 20px; font-weight: 700; }
+      #top-items a { gap: 20px; }
+      #top-items .icon { width: 16px; height: 16px; opacity: .8; }
+    }
+    /* 演出 */
+    #fx { position: fixed; inset: 0; pointer-events: none; visibility: hidden; }
+    #fx.on { visibility: visible; pointer-events: auto; }
+    #fx .bg { position: absolute; inset: 0; background: var(--bg); opacity: 0; }
+    #fx img { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform, opacity; }
+  }
+</style>
+<div class="sbx" id="sbx">
+<div id="root">
+  <button id="burger" class="ms" aria-label="メニューを開く" aria-expanded="false" aria-controls="panel">menu</button>
+  <div id="sbScrim"></div>
+  <nav id="panel" aria-label="サイトメニュー" aria-hidden="true">
+    <button id="close" class="ms" aria-label="メニューを閉じる">close</button>
+    <div class="group">
+      <a data-to="top" href="#">トップ</a>
+      <!-- トップの子項目にも線画アイコン（ゼミと同じ描き味。top-icons/draw.html で描いた PNG を build が埋め込む。2026-10-27） -->
+      <div class="items sem" id="top-items">
+        <a data-hash="greeting" href="#"><img class="icon" data-icon="greeting" alt=""><i class="dot"></i><span>ご挨拶</span></a>
+        <a data-hash="outline" href="#"><img class="icon" data-icon="outline" alt=""><i class="dot"></i><span>開催概要</span></a>
+        <a data-hash="access" href="#"><img class="icon" data-icon="access" alt=""><i class="dot"></i><span>アクセス</span></a>
+        <a data-hash="home-campus" href="#"><img class="icon" data-icon="works" alt=""><i class="dot"></i><span>展示場所</span></a>
+        <a data-hash="handouts" href="#"><img class="icon" data-icon="handouts" alt=""><i class="dot"></i><span>配布物情報</span></a>
+        <a data-hash="seminar-introduction" href="#"><img class="icon" data-icon="seminar" alt=""><i class="dot"></i><span>ゼ実の紹介</span></a>
+      </div>
+    </div>
+      <div class="group" id="sidebar-works" style="display:none"><a data-to="works" href="#">作品一覧</a></div>
+  </nav>
+</div>
+<div id="fx"><div class="bg"></div></div>
+</div>
+<script>
+(() => {
+  // サイドバーのパターン（?sidebar=1〜6。2 が既定。4〜6 は 2026-10-29）。URL に無ければ前に選んだもの（sessionStorage。STUDIO は埋め込みのドメインで全ページ共通）
+  const SB = (() => {
+    let v = ''; try { v = new URL(document.getElementById('q-url').value.trim()).searchParams.get('sidebar') || ''; } catch (e) {}
+    try { if (/^[1-5]$/.test(v)) sessionStorage.setItem('vcd2026-sidebar-v2', v); else v = sessionStorage.getItem('vcd2026-sidebar-v2') || ''; } catch (e) {}
+    return /^[1-5]$/.test(v) ? v : '5';
+  })();
+  document.getElementById('sbx').dataset.sb = SB;
+  // 白の案（?white=1〜3。STUDIO が textarea に入れる。ローカルは ENV）
+  { let w = (document.getElementById('q-white') || {}).value || ''; try { const u = new URL(document.getElementById('q-url').value.trim()), last = u.pathname.replace(/\/$/, '').split('/').pop(), home = !/^(?:work|works|teaser)(?:[.-]|$)/.test(last); if (!/^[123]$/.test(w.trim())) w = u.searchParams.get('white') || (home && !['3','4'].includes(u.searchParams.get('template')) ? '1' : '2'); } catch (e) {} if (/^[123]$/.test(w.trim())) document.documentElement.dataset.white = w.trim(); }
+  // slug, 名前。線画アイコンとにじみ＋線画の絵（作品一覧ブロックと同じ素材）の URL は SRC（環境で違う。build が入れる）
+  const SEMINARS = [['ishizuka', '石塚ゼミ'], ['shirai', '白井ゼミ'], ['sawada', '沢田ゼミ'], ['terayama', '寺山ゼミ'], ['nakano', '中野ゼミ'], ['goto', '後藤ゼミ'], ['furugen', '古堅ゼミ'], ['kitazaki', '北崎ゼミ'], ['ota', '大田ゼミ'], ['in', '大学院']];
+  const SRC = {"icon":{"ishizuka":"assets/img/seminars/ishizuka-emoji.png?v=1102","shirai":"assets/img/seminars/shirai-emoji.png?v=1102","sawada":"assets/img/seminars/sawada-emoji.png?v=1102","terayama":"assets/img/seminars/terayama-emoji.png?v=1102","nakano":"assets/img/seminars/nakano-emoji.png?v=1102","goto":"assets/img/seminars/goto-emoji.png?v=1102","furugen":"assets/img/seminars/furugen-emoji.png?v=1102","kitazaki":"assets/img/seminars/kitazaki-emoji.png?v=1102","ota":"assets/img/seminars/ota-emoji.png?v=1102","in":"assets/img/seminars/in-emoji.png?v=1102"},"pic":{"ishizuka":"assets/img/seminars/seminar-ishizuka.webp?v=1030","shirai":"assets/img/seminars/seminar-shirai.webp?v=1030","sawada":"assets/img/seminars/seminar-sawada.webp?v=1030","terayama":"assets/img/seminars/seminar-terayama.webp?v=1030","nakano":"assets/img/seminars/seminar-nakano.webp?v=1030","goto":"assets/img/seminars/seminar-goto.webp?v=1030","furugen":"assets/img/seminars/seminar-furugen.webp?v=1030","kitazaki":"assets/img/seminars/seminar-kitazaki.webp?v=1030","ota":"assets/img/seminars/seminar-ota.webp?v=1030","in":"assets/img/seminars/seminar-in.webp?v=1030"},"top":{"greeting":"data:image/png;base64,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","outline":"data:image/png;base64,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","access":"data:image/png;base64,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","works":"data:image/png;base64,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","handouts":"data:image/png;base64,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"}};       // { icon: { slug: URL }, pic: { slug: URL }, top: { セクション: data URL } }
+  document.querySelectorAll('#top-items [data-icon]').forEach((im) => { im.src = SRC.top[im.dataset.icon] || SRC.top.works; });
+  // 4〜6 は実の絵（ゼミの線画アイコン）を使う：4 はあいだに白井ゼミの実を 1 つ、5・6 は上の項目にそれぞれの実（Miro の案の並び）
+  const FRUIT = { greeting: 'shirai', outline: 'kitazaki', access: 'sawada', works: 'terayama', handouts: 'nakano', seminar: 'ishizuka' };
+  if (SB === '4' || SB === '5') document.querySelectorAll('#top-items [data-icon]').forEach((im) => { im.src = SRC.icon[FRUIT[im.dataset.icon]]; });
+  const ROUTES = {"home":"./","works":"works/"}; // { home: サイトのトップ（このページからの相対）, works: 作品一覧（トップからの相対） }
+  const VIEW = "home";     // ローカルはページごとに決め打ち（'home' | 'works' | 'work'）。STUDIO は '' にして URL から判断する
+  // リンク先：作品一覧（既定の案 D。白は引き継ぐ）。STUDIO（MODE 'page'）はページ名の末尾、ローカル（'query'）は ?design=
+  const MODE = "query", DEFAULT = {"home":"c","works":"e","work":"d"};
+  const white = (() => { try { return new URL(document.getElementById('q-url').value.trim()).searchParams.get('white') || ''; } catch { return ''; } })();
+  const toWorks = (base, params = {}) => {
+    const d = DEFAULT.works;
+    const u = new URL(ROUTES.works, base); // STUDIO は /works が既定の案（D）のページ
+    for (const [k, v] of Object.entries(params)) if (v) u.searchParams.set(k, v);
+    if (MODE === 'query' && d !== 'a') u.searchParams.set('design', d); // 作品一覧へのリンクだけ（トップへは topUrl で、?design= は付けない）
+    if (/^[13]$/.test(white)) u.searchParams.set('white', white);
+    return u.href;
+  };
+  // 演出の時間（ms）
+  const T_GROW = 450;    // アイコンが中央へ動いて中くらいになる（同時に赤地が出てパネルが引っ込む）
+  const T_BLOOM = 500;   // にじみの絵が出る
+  const T_SPREAD = 700;  // 画面いっぱいに広がる
+  const T_FADE = 400;    // 赤地へフェード → 移動
+  const MID = 160;       // 中くらいの大きさ（px）
+
+  // 親ページの URL（上の textarea。STUDIO が親ページの URL に置き換える。ローカルは ENV が入れる）から行き先を作る
+  let page = null, root = null;
+  try {
+    page = new URL(document.getElementById('q-url').value.trim()); page.hash = '';
+    const base = new URL(page.href);
+    if (/^\/live\/[^/]+$/.test(base.pathname)) base.pathname += '/';
+    root = new URL(ROUTES.home, base); root.search = ''; root.hash = '';
+  } catch {}
+  // トップのページ（/ と /home-x）では「トップ」はこのページ自身（今のデザインのまま）。作品ページからはサイトのトップ（既定の案）へ
+  const isHome = VIEW ? VIEW === 'home' : /^\/live\/[^/]+\/?$/.test(page?.pathname || '') || /^(home-(?:1a|1b|2b|2c|2d|a|b|d))?$/.test((page ? page.pathname : '').replace(/\/$/, '').split('/').pop());
+  const topUrl = () => (isHome ? page && page.href : root && root.href);
+  const urlOf = { top: topUrl, works: () => root && toWorks(root) };
+  const go = (url) => { if (url) window.open(url, '_top'); };
+
+  const inFrame = window.top !== window; // STUDIO の埋め込み（iframe）か、ページに直接入っているか（ローカル）
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const body = document.getElementById('sbx'), panel = document.getElementById('panel'), burger = document.getElementById('burger');
+  // 開いたときの高さ：iframe の中からは親の画面の高さが分からないので、モニタの高さを使う（はみ出た分は画面の外）。ページに直接入っているなら画面の高さ
+  body.style.setProperty('--h', inFrame ? Math.max(screen.availHeight || 0, screen.height || 0, 700) + 'px' : '100dvh');
+  // 実際に見えている高さ（演出の中心に使う）。iframe の中からは親の画面の大きさが読めないので、IntersectionObserver で見えている範囲を測る
+  let viewH = inFrame ? 0 : innerHeight;
+  if (inFrame) new IntersectionObserver(([e]) => { if (e.intersectionRect.height) viewH = e.intersectionRect.height; }, { threshold: [0, .25, .5, .75, 1] }).observe(document.getElementById('root'));
+  else addEventListener('resize', () => { viewH = innerHeight; });
+
+  // 開き方：枠（iframe）を画面の高さまで伸ばし、伸びきってから右からスライドする
+  // STUDIO は iframe の高さの変化に 0.3 秒のアニメーションを付けていて、埋め込みの中からは外せない。
+  // 伸びている途中でスライドすると、伸びていく枠でパネルが上から切れて見えるので、
+  // ハンバーガーにマウスが乗った（指が触れた）時点で先に伸ばしておき、押したときには伸びきっているようにする
+  const TALL = parseInt(getComputedStyle(body).getPropertyValue('--h'), 10);
+  const isTall = () => !inFrame || innerHeight >= TALL - 2;
+  let closeTimer = 0, openTimer = 0, shrinkTimer = 0, wantOpen = false;
+  const grow = () => { clearTimeout(shrinkTimer); clearTimeout(closeTimer); body.classList.remove('is-closing'); body.classList.add('is-tall'); };
+  const shrinkLater = () => {
+    clearTimeout(shrinkTimer);
+    shrinkTimer = setTimeout(() => { if (!wantOpen && !body.classList.contains('is-fx')) body.classList.remove('is-tall'); }, 600);
+  };
+  const slideIn = () => {
+    clearTimeout(openTimer); removeEventListener('resize', onResize);
+    if (!wantOpen) return;
+    requestAnimationFrame(() => {
+      body.classList.add('is-open');
+      burger.setAttribute('aria-expanded', 'true'); panel.setAttribute('aria-hidden', 'false');
+      document.getElementById('close').focus({ preventScroll: true });
+    });
+  };
+  const onResize = () => { if (isTall()) slideIn(); };
+  const open = () => {
+    wantOpen = true; grow();
+    if (isTall()) { slideIn(); return; }
+    addEventListener('resize', onResize);
+    openTimer = setTimeout(slideIn, 700); // 念のため
+  };
+  const close = () => {
+    wantOpen = false;
+    clearTimeout(openTimer); removeEventListener('resize', onResize);
+    body.classList.add('is-closing');
+    body.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false'); panel.setAttribute('aria-hidden', 'true');
+    // パネルが引っ込みきってから帯に戻す（先に縮めるとパネルが途中で切れる）
+    closeTimer = setTimeout(() => { body.classList.remove('is-closing'); if (!body.classList.contains('is-fx')) body.classList.remove('is-tall'); }, 320);
+  };
+  burger.addEventListener('pointerenter', grow);
+  burger.addEventListener('pointerdown', grow);
+  burger.addEventListener('focus', grow);
+  burger.addEventListener('pointerleave', () => { if (!wantOpen) shrinkLater(); });
+  burger.addEventListener('blur', () => { if (!wantOpen) shrinkLater(); });
+  burger.onclick = open;
+  document.getElementById('close').onclick = close;
+  document.getElementById('sbScrim').onclick = close;
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && body.classList.contains('is-open')) close(); });
+
+    // ゼ実のタップで作品一覧へ移動する設定のときだけ導線を表示する。
+    { const params = page ? page.searchParams : new URLSearchParams();
+      const action = document.documentElement.dataset.fruitClick || params.get('fruit-click') || (params.get('fruit-action') === 'works' || params.get('works') === '1' ? 'works' : '');
+      if (action === 'works') document.getElementById('sidebar-works').style.display = 'flex';
+    }
+  // トップのリンク
+  document.querySelectorAll('[data-to]').forEach((a) => {
+    const u = urlOf[a.dataset.to](); if (u) a.href = u; a.target = '_top';
+  });
+  // トップのセクションの id。作品一覧だけ STUDIO（works）とローカル（student-works）で違う（build が入れる）
+  const WORKS_ID = "student-works";
+  document.querySelectorAll('[data-hash]').forEach((a) => {
+    const hash = a.dataset.hash === 'works' ? WORKS_ID : a.dataset.hash;
+    if (topUrl()) a.href = topUrl() + '#' + hash;
+    a.target = '_top';
+    a.addEventListener('click', () => setTimeout(close, 0));
+  });
+
+  // 演出：アイコン → 中央で中くらい → にじみ → 全画面 → 赤地へフェード → 移動
+  let busy = false;
+  function play(iconEl, iconSrc, picSrc, url) {
+    if (busy) return; busy = true;
+    const fx = document.getElementById('fx'), bg = fx.querySelector('.bg');
+    const W = innerWidth, H = viewH || Math.min(innerHeight, screen.availHeight || innerHeight);
+    const cx = W / 2, cy = H / 2;
+    const r0 = iconEl.getBoundingClientRect();
+
+    const line = new Image(); line.src = iconSrc;
+    const nij = new Image(); nij.src = picSrc;
+    fx.append(line, nij);
+    fx.classList.add('on'); body.classList.add('is-fx');
+    // 絵は元の縦横比で MID に収める
+    const place = (el, w, h, x, y) => { el.style.width = w + 'px'; el.style.height = h + 'px'; el.style.transform = `translate(${x}px, ${y}px)`; };
+    place(line, r0.width, r0.height, r0.left, r0.top);
+    nij.style.opacity = 0;
+
+    const anim = (el, kf, ms, ease = 'cubic-bezier(.2,.7,.2,1)') => el.animate(kf, { duration: ms, easing: ease, fill: 'forwards' }).finished;
+
+    // 1. アイコンが中央へ動いて中くらいになる。同時に赤地が出て、パネルが引っ込む
+    const s1 = MID / r0.width;
+    anim(line, [{ transform: `translate(${r0.left}px, ${r0.top}px)` },
+                { transform: `translate(${cx - MID / 2}px, ${cy - MID / 2}px) scale(${s1})` }], T_GROW);
+    anim(bg, [{ opacity: 0 }, { opacity: 1 }], T_GROW, 'ease-out');
+    close();
+    setTimeout(async () => {
+      // 2. にじみの絵が出る（線画の上に重ね、少しふくらむ）
+      const nw = nij.naturalWidth || 900, nh = nij.naturalHeight || 900;
+      const k = MID / Math.max(nw, nh);
+      const w0 = nw * k, h0 = nh * k;
+      place(nij, w0, h0, 0, 0);
+      const at = (s) => `translate(${cx - w0 * s / 2}px, ${cy - h0 * s / 2}px) scale(${s})`;
+      anim(line, [{ opacity: 1 }, { opacity: 0 }], T_BLOOM, 'ease-in');
+      await anim(nij, [{ opacity: 0, transform: at(0.9) }, { opacity: 1, transform: at(1.3) }], T_BLOOM, 'ease-out');
+      // 3. 画面いっぱいに広がる（絵の短い辺が画面の対角線の 1.6 倍になるまで）
+      const big = 1.6 * Math.hypot(W, H) / Math.min(w0, h0);
+      await anim(nij, [{ opacity: 1, transform: at(1.3) }, { opacity: 1, transform: at(big) }], T_SPREAD, 'cubic-bezier(.55,0,.75,.2)');
+      // 4. 赤地へフェードして移動（作品一覧の背景も同じ赤なので、つながって見える）
+      await anim(nij, [{ opacity: 1, transform: at(big) }, { opacity: 0, transform: at(big * 1.1) }], T_FADE, 'ease-in');
+      go(url);
+      // 戻る（bfcache）で戻ってきたときのために片付ける
+      setTimeout(() => { fx.classList.remove('on'); body.classList.remove('is-fx'); line.remove(); nij.remove(); bg.getAnimations().forEach((x) => x.cancel()); busy = false; }, 1500);
+    }, T_GROW);
+  }
+  addEventListener('pageshow', (e) => { if (e.persisted) { const fx = document.getElementById('fx'); fx.classList.remove('on'); body.classList.remove('is-fx'); fx.querySelectorAll('img').forEach((x) => x.remove()); fx.querySelector('.bg').getAnimations().forEach((x) => x.cancel()); busy = false; } });
+})();
+</script>
+
+</div>
+<!-- sidebar-b:end -->
+
+<!-- デザイン案の切り替え（studio-embed/design-switch/embed.html と同じもの。ローカルのトップにあるのは A と D だけ）
+     この 2 つの印の間は build-local.mjs が書き換える。手で直さない -->
+<!-- design-switch:start -->
+<div class="design-switch">
+  <!-- デザイン A / B / C / D の切り替え。作品一覧・作品詳細の STUDIO の 8 ページ（/works /works-b /works-c /works-d /work /work-b /work-c /work-d）と、
+       ローカルの 2 ページ（web/src/works/index.html・work.html）に同じものを置く。見た目は Home の切り替え（STUDIO 要素）と同じ
+       STUDIO はページを分けているので、ページ名の末尾を見て同じ階層の別ページへ移る（MODE 'page'。/ と /works /work が既定の案）。?seminar= ?id= は URL から組み立てて引き継ぐ（STUDIO のリンクではクエリが落ちる）
+       ローカルは 1 ページで ?design=b を付け替える（MODE 'query'）
+       STUDIO 側：位置=固定・上 40・左 40（スマホ 20・20＝ページの余白）・幅 230px（A〜D の 4 つ分）・高さ auto・重なり 60（build.mjs → switch-dom.json）
+       ※ textarea 以外に波かっこ2つを書かないこと（STUDIO に置き換えられる） -->
+  <textarea id="q-url" hidden></textarea>
+  <textarea id="q-id" hidden></textarea>
+  <textarea id="q-seminar" hidden></textarea>
+  <textarea id="q-design" hidden></textarea>
+  <textarea id="q-white" hidden></textarea>
+  <script>
+    // ローカル：STUDIO が置き換える値（ページの URL とクエリ）を、ページの URL から上の textarea に入れる
+    (() => { const p = new URLSearchParams(location.search); document.querySelectorAll('textarea[id^="q-"]').forEach((t) => { const k = t.id.slice(2); t.value = k === 'url' ? location.href : (p.get(k) || ''); }); })();
+  </script>
+  <style>
+    /* 白（文字・白地・便箋）。純白は強いので、明度を少し落として暖色に。?white=1〜3 で比べられる（切り替えの White の行）。値は web/src/assets/style.css と同じにする */
+    :root { --paper-rgb: 253 252 248; }
+    :root[data-white="1"] { --paper-rgb: 255 255 255; }
+    :root[data-white="3"] { --paper-rgb: 251 248 241; }
+    .sws { display: grid; gap: 3px; justify-items: start; max-width: 100%; }
+    .sws.is-open { overflow: auto; max-height: var(--switch-max-height, 900px); overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+    /* 行は折り返さず、狭い画面では設定パネル全体をスクロールする。 */
+    .sw { flex-wrap: nowrap; width: max-content; box-sizing: border-box; border-radius: 22px; }
+    .sw { display: inline-flex; align-items: center; gap: 4px; padding: 3px 4px 3px 10px; border-radius: 999px; background: rgba(163, 39, 24, .9); font-family: Work Sans, sans-serif; line-height: 1; }
+    .sw .label { flex: 0 0 145px; box-sizing: border-box; white-space: nowrap; font-size: 11px; line-height: 1.3; letter-spacing: .04em; color: rgb(var(--paper-rgb) / .8); padding-right: 4px; }
+    @media (max-width: 690px) { .sw .label { flex-basis: 125px; } }
+    .sw .pill { box-sizing: border-box; flex: none; white-space: nowrap; min-width: 28px; padding: 5px 6px; border: 1px solid rgb(var(--paper-rgb)); border-radius: 999px; text-align: center; font-size: 12px; font-weight: 700; color: rgb(var(--paper-rgb)); text-decoration: none; }
+    @media (hover: none) and (pointer: coarse) { .sw .pill { min-height: 32px; display: inline-flex; align-items: center; justify-content: center; touch-action: manipulation; } .sw-toggle { touch-action: manipulation; } }
+    .sw a.pill:hover { background: rgb(var(--paper-rgb) / .2); opacity: 1; }
+    .sw .pill.is-current { background: rgb(var(--paper-rgb)); color: var(--vcd-red, #bd3124); }
+
+    .sw .pill.color-swatch, .sw a.pill.color-swatch:hover { background: var(--swatch-color); color: #fff; border-color: transparent; }
+    .sw .pill.color-swatch--light, .sw a.pill.color-swatch--light:hover { color: #632217; }
+    .sw .pill.color-swatch.is-current { outline: 2px solid #fff; outline-offset: 1px; }
+    /* 開閉（2026-10-28。既定は開く。閉じたら sessionStorage に覚える） */
+    .sw-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 0; border-radius: 999px; background: rgba(163, 39, 24, .9); font: 700 12px/1 Work Sans, sans-serif; letter-spacing: .1em; color: rgb(var(--paper-rgb)); cursor: pointer; }
+    .sws.is-open .sw-toggle { position: sticky; top: 0; z-index: 2; }
+    .sw-toggle::after { content: '+'; font-size: 15px; font-weight: 400; }
+    .sws.is-open .sw-toggle::after { content: '×'; }
+    .sws:not(.is-open) .sw { display: none; }
+    /* 閉じたときは「＋」だけの小さい丸（文字を隠し、薄く。2026-10-28） */
+    .sws:not(.is-open) .sw-toggle { width: 28px; height: 28px; padding: 0; gap: 0; justify-content: center; font-size: 0; letter-spacing: 0; background: rgba(163, 39, 24, .55); opacity: .7; }
+    /* 「＋」は文字だとフォントで上下にずれるので、線 2 本で描いて丸の真ん中に置く（gap も 0 に。隠した文字との間があくと右にずれる。2026-10-29） */
+    .sws:not(.is-open) .sw-toggle::after { content: ''; width: 10px; height: 10px; background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat, linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat; }
+    .sws:not(.is-open) .sw-toggle:hover { opacity: 1; }
+  </style>
+  <div class="sws is-open" id="sws">
+    <button type="button" class="sw-toggle" id="sw-toggle" aria-expanded="true" aria-controls="sws">設定</button>
+    <div class="sw" id="sw-design"><span class="label">デザイン</span></div>
+    <!-- 白の案（?white=1〜3。2 が既定）。文字・白地・便箋に使う白を比べる -->
+    <div class="sw" id="sw-white"><span class="label">白</span></div>
+    <!-- サイドバーのパターン（?sidebar=1〜6。1 文字だけ・2 中黒〈既定〉・3 線画アイコン・4 文字だけ＋実1つ・5 大きい項目＋アイコン・6 5の中央揃え。サイドバーの埋め込みが覚えるので、ここも同じところを読む） -->
+    <div class="sw" id="sw-bg" style="display:none"><span class="label">背景色</span></div>
+    <div class="sw" id="sw-sidebar"><span class="label">サイドバー</span></div>
+    <!-- ここから下はローカルのトップだけ（MODE 'query'）。クエリ名＝行名（?layout= ?kv-fade= ?kv-anim= ?fruit-anim= ?fruit-deco= ?works= ?campus-map= ?access-map= ?greeting=）、値＝ボタンの表示。中身は src/index.html の head -->
+    <div class="sw" id="sw-layout" style="display:none"><span class="label">レイアウト</span></div>
+    <div class="sw" id="sw-top-layout" style="display:none"><span class="label">文字組み</span></div>
+    <div class="sw" id="sw-kv-size" style="display:none"><span class="label">キービジュアルのサイズ</span></div>
+    <div class="sw" id="sw-kv-fade" style="display:none"><span class="label">キービジュアルのフェード</span></div>
+    <div class="sw" id="sw-kv-anim" style="display:none"><span class="label">キービジュアルの動き</span></div>
+    <div class="sw" id="sw-kv-speed" style="display:none"><span class="label">キービジュアルの速度</span></div>
+    <div class="sw" id="sw-fruit-anim" style="display:none"><span class="label">ゼ実の動き</span></div>
+    <div class="sw" id="sw-fruit-deco" style="display:none"><span class="label">装飾の実（パソコン）</span></div>
+    <div class="sw" id="sw-mobile-fruit-deco" style="display:none"><span class="label">装飾の実（スマホ）</span></div>
+    <div class="sw" id="sw-works" style="display:none"><span class="label">ゼ実の配置</span></div>
+    <div class="sw" id="sw-fruit-hover" style="display:none"><span class="label">ゼ実のマウスオーバー</span></div>
+    <div class="sw" id="sw-fruit-click" style="display:none"><span class="label">ゼ実のタップ</span></div>
+    <!-- ティザーだけ：?image=1（芽が右）/ 2（1 を下に沈めて土を減らす）/ 3（PC でも芽を小さく。絵を下に付ける）/ 4（芽が真ん中）/ 5（4 を沈める）/ 6（KV。ローカルだけ）・?text=1 / 2（1：COMING SOON が上、2：下） -->
+    <div class="sw" id="sw-tz-image" style="display:none"><span class="label">画像</span></div>
+    <div class="sw" id="sw-campus-map" style="display:none"><span class="label">展示場所</span></div>
+    <div class="sw" id="sw-campus-btn" style="display:none"><span class="label">展示場所のボタン列</span></div>
+    <!-- 作品一覧（ローカル）だけ：「ゼミごと／場所ごとに並べる」のボタンの有無（?order-switch=no / 1。E〜G） -->
+    <!-- 作品一覧（ローカル）は Design の代わりに：地（?ground=）・画像の並べ方（?image=）・並べ方のボタン（?order-switch=）。中身は works/embed.template.html -->
+    <div class="sw" id="sw-works-template" style="display:none; margin-top:14px"><span class="label">テンプレート</span></div>
+    <div class="sw" id="sw-works-layout" style="display:none"><span class="label">レイアウト</span></div>
+    <div class="sw" id="sw-ground" style="display:none"><span class="label">背景</span></div>
+    <div class="sw" id="sw-card-ground" style="display:none"><span class="label">カードの背景</span></div>
+    <div class="sw" id="sw-image" style="display:none"><span class="label">画像</span></div>
+    <div class="sw" id="sw-block-ground" style="display:none"><span class="label">ゼミ・建物ブロックの背景</span></div>
+    <div class="sw" id="sw-label-ground" style="display:none"><span class="label">ゼミ・建物ラベルの背景</span></div>
+    <div class="sw" id="sw-work-info" style="display:none"><span class="label">情報の表示</span></div>
+    <div class="sw" id="sw-works-width" style="display:none"><span class="label">作品の幅</span></div>
+    <div class="sw" id="sw-works-columns" style="display:none"><span class="label">作品の列数</span></div>
+    <div class="sw" id="sw-detail-link" style="display:none"><span class="label">詳細リンク</span></div>
+    <!-- 作品詳細（ローカル）は Design の代わりに：地（?ground=）・画像の見せ方（?layout=）・展示場所のカードの色（?card=） -->
+    <div class="sw" id="sw-wd-layout" style="display:none"><span class="label">レイアウト</span></div>
+    <div class="sw" id="sw-wd-card" style="display:none"><span class="label">カード</span></div>
+    <div class="sw" id="sw-statement" style="display:none"><span class="label">ステートメント</span></div>
+    <div class="sw" id="sw-statement-size" style="display:none"><span class="label">ステートメントの大きさ</span></div>
+    <div class="sw" id="sw-motion-video" style="display:none"><span class="label">モーション動画</span></div>
+    <div class="sw" id="sw-catalog-photo" style="display:none"><span class="label">図録の写真</span></div>
+    <div class="sw" id="sw-heading-size" style="display:none"><span class="label">見出しサイズ</span></div>
+    <div class="sw" id="sw-greeting" style="display:none"><span class="label">ご挨拶</span></div>
+    <!-- 組み合わせの型（?template=1 / 2。既定 1。2026-10-29）。1＝既定の組み合わせ（layout 2c・KV fade なし・Fruit deco なし・ステートメント左端・ご挨拶 1）、2＝layout 1b・KV fade あり・Fruit deco あり・ステートメント中央・ご挨拶 2。選ぶとほかの行の指定を外す。ほかの行とは別物なので一番下に少し離して置く -->
+    <div class="sw" id="sw-template" style="display:none; margin-top: 14px"><span class="label">テンプレート</span></div>
+  </div>
+  <script>
+  (() => {
+    let VIEW = "home";   // ローカルはページごとに決め打ち（'home' | 'works' | 'work'）。STUDIO は '' にして URL から判断する
+    const ONLY = ["A","B","C","D"];   // 出す案を絞る。null なら全部
+    const DEFAULT = {"home":"c","works":"e","work":"d"}; // ?design= が無いときの案（トップ C・一覧 D・詳細 D。embed.mjs の DEFAULT_DESIGN）。白の既定は 2
+    // ページごとのデザイン案（パスの最後の段）。ここに無い案のボタンは出さない。トップ（home）は STUDIO 要素の切り替えを使っている（home-b/build-version-switch.mjs）が、念のため
+    const MODE = "query";   // 'page'（STUDIO：ページを分けている）| 'query'（ローカル：?design=）
+    const SETS = {
+      // STUDIO のページ名（2026-10-27〜）：既定の案（トップ C・一覧 D・詳細 D）が末尾なし、ほかは -a -b -c -d
+      home: { A: 'home-a', B: 'home-b', C: '', D: 'home-d' },
+      works: { A: 'works-a', B: 'works-b', C: 'works-c', D: 'works', E: 'works-e', F: 'works-f', G: 'works-g' }, // E（地図で探す）は一覧だけ
+      // トップの Layout（STUDIO はページを分けている。2026-10-29 から 2b が / 、1b が /home-1b）。Design の行の代わりにこれを出す
+      layout: { '1a': 'home-1a', '1b': 'home-1b', '2a': 'home-2b', '2b': 'home-d', '2c': '', '2d': 'home-2c', '2e': 'home-2d' }, // 2026-10-31 から / が 2c（既定）、2b は /home-d（10-29〜30 の / と同じ中身）、1b は /home-1b。2c（2b の開催情報を左端へ）を差し込み、元の 2c・2d を 2d・2e に繰り下げた（STUDIO のページ名は元のまま）
+      teaser: {}, // ティザー：Design・Sidebar の行は出さない（White だけ）
+      work: { A: 'work-a', C: 'work-c', D: 'work', E: 'work-e' }, // 詳細の B は 2026-10-28 に外した（A は C の赤地版） // E（白地の地図カード）は 2026-10-28
+    };
+    // STUDIO がクエリの無いときに入れる「(No Data)」と、置き換えなかったもの（$ が残る）は空扱い
+    const val = (id) => { const v = document.getElementById(id).value.trim(); return v && !v.includes('$') && !/^\(no data\)$/i.test(v) ? v : ''; };
+    let url;
+    try { url = new URL(val('q-url')); } catch { return; }
+    // クエリ（$url に含まれていないことがあるので、STUDIO が置き換える $query でも補う）
+    for (const k of ['id', 'seminar', 'design', 'white']) { const v = val('q-' + k); if (v && !url.searchParams.has(k)) url.searchParams.set(k, v); }
+
+    const segs = url.pathname.replace(/\/$/, '').split('/');
+    const last = segs[segs.length - 1] || '';
+    if (!VIEW && last === 'teaser') VIEW = 'teaser'; // STUDIO の /teaser（2026-10-29。ティザーにも切り替えを置いた）
+    let found = Object.keys(SETS).find((v) => Object.values(SETS[v]).includes(last) && last !== '');
+    if (found === 'layout') found = 'home';
+    const set = SETS[VIEW || found || 'home'];
+    let here, target, toPage, pageName;
+    if (MODE === 'query') {
+      here = (url.searchParams.get('design') || DEFAULT[VIEW || found || 'home'] || 'a').toUpperCase();
+      target = (k) => { const u = new URL(url.href); u.searchParams.set('design', k.toLowerCase()); return u.href; };
+    } else {
+      // トップ（/ やプレビューの /live/<id>）は最後の段がページ名ではない
+      const isTop = !found;
+      here = Object.keys(set).find((k) => set[k] === (isTop ? '' : last)) || 'A';
+      const baseSegs = isTop ? segs : segs.slice(0, -1);
+      toPage = (name) => { const u = new URL(url.href); u.pathname = [...baseSegs, name].filter((x, i) => x !== '' || i === 0).join('/') || '/'; if (!u.pathname.startsWith('/')) u.pathname = '/' + u.pathname; return u.href; };
+      target = (k) => toPage(set[k]);
+      pageName = isTop ? '' : last;
+    }
+    if (!(here in set)) here = 'A';
+
+    const pills = (box, keys, cur, href, text = (k) => k === 'no' ? 'なし' : k === 'auto' ? '自動' : k) => (keys.includes('no') ? ['no', ...keys.filter((k) => k !== 'no')] : keys).forEach((k) => {
+      const el = document.createElement(k === cur ? 'span' : 'a');
+      el.className = 'pill' + (k === cur ? ' is-current' : '');
+      el.textContent = text(k);
+      const colorOptions = { 'sw-white': { '1': '#ffffff', '2': '#fdfcf8', '3': '#fbf8f1' }, 'sw-bg': { '1': '#bd3124', '2': '#da3915', '3': '#e53419' } };
+      const swatch = colorOptions[box.id]?.[k];
+      if (swatch) { el.classList.add('color-swatch'); el.style.setProperty('--swatch-color', swatch); if (box.id === 'sw-white') el.classList.add('color-swatch--light'); }
+      if (k !== cur) { el.href = href(k); el.target = '_top'; }
+      box.appendChild(el);
+    });
+    const bgBox = document.getElementById('sw-bg');
+    const bgValue = ['1', '3'].includes(url.searchParams.get('bg')) ? url.searchParams.get('bg') : '2';
+    bgBox.style.display = '';
+    pills(bgBox, ['1', '2', '3'], bgValue, (k) => { const u = new URL(url.href); if (k === '2') u.searchParams.delete('bg'); else u.searchParams.set('bg', k); return u.href; }, (k) => ({ '1': '189, 49, 36', '2': '218, 57, 21', '3': '229, 52, 25' }[k]));
+    // 作品一覧・作品詳細は STUDIO でもこの行（Design の行は隠す。どのページで開いても同じ組み立て。2026-10-28）
+    if (set === SETS.works) {
+      const presets = {
+      '1': { 'works-layout': '1', ground: 'red', 'card-ground': 'red', image: 'none2', 'block-ground': 'transparent', 'detail-link': 'no', 'order-switch': '1' },
+      '2': { 'works-layout': '2', ground: 'red', 'card-ground': 'red', image: 'none2', 'block-ground': 'transparent', 'detail-link': 'no', 'order-switch': '1' },
+      '3': { 'works-layout': '1', ground: 'white', 'card-ground': 'red', image: 'wide2', 'work-info': 'below', 'detail-link': '1', 'order-switch': '1' }
+    };
+      const labels = { '1': 'ガイド優先', '2': 'ガイド優先（2列）', '3': '作品情報入れる' };
+      const chosen = url.searchParams.get('template') || '2';
+      const defaults = presets[chosen] || {};
+      const params = new URLSearchParams(url.search);
+      for (const [k, v] of Object.entries(defaults)) if (!params.has(k)) params.set(k, v);
+      const set1 = (k, param) => { const u = new URL(url.href); u.searchParams.delete('design'); if (defaults[param] === k) u.searchParams.delete(param); else u.searchParams.set(param, k); return u.href; };
+      const dl = document.getElementById('sw-detail-link'); dl.style.display = '';
+      pills(dl, ['no', '1'], params.get('detail-link') === 'no' ? 'no' : '1', (k) => set1(k, 'detail-link'), (k) => k === '1' ? 'あり' : 'なし');
+      document.getElementById('sw-design').style.display = 'none';
+      const wl = document.getElementById('sw-works-layout'); wl.style.display = '';
+      pills(wl, ['1', '2'], params.get('works-layout') === '2' ? '2' : '1', (k) => set1(k, 'works-layout'), (k) => k + '列');
+      const g = document.getElementById('sw-ground'); g.style.display = '';
+      const fixedRed = params.get('works-layout') === '2';
+      pills(g, fixedRed ? ['red'] : ['white', 'red'], fixedRed || params.get('ground') === 'red' ? 'red' : 'white', (k) => set1(k, 'ground'), (k) => k === 'red' ? '赤' : '白');
+      const cg = document.getElementById('sw-card-ground'); cg.style.display = '';
+      pills(cg, ['white', 'red'], ['white', 'red'].includes(params.get('card-ground')) ? params.get('card-ground') : ((params.get('image') || '').startsWith('none') ? 'red' : 'white'), (k) => set1(k, 'card-ground'), (k) => k === 'white' ? '白' : '赤');
+      const im = document.getElementById('sw-image'); im.style.display = '';
+      const iv = ['rect', 'ratio', 'wide', 'wide2', 'wide6', 'none', 'none2', 'none3'].includes(params.get('image')) ? params.get('image') : 'wide';
+      const bg = document.getElementById('sw-block-ground'); bg.style.display = '';
+      const blockGround = ['transparent', 'white'].includes(params.get('block-ground')) ? 'transparent' : (['label', 'red'].includes(params.get('block-ground')) ? 'label' : (iv.startsWith('none') ? 'label' : 'transparent'));
+      pills(bg, ['transparent', 'label'], blockGround, (k) => set1(k, 'block-ground'), (k) => k === 'transparent' ? '透過' : 'ラベル色');
+      const lg = document.getElementById('sw-label-ground'); lg.style.display = '';
+      pills(lg, ['transparent', 'color'], params.get('label-ground') === 'transparent' ? 'transparent' : 'color', (k) => set1(k, 'label-ground'), (k) => k === 'transparent' ? '透過' : '色');
+      const info = ['below', 'overlay'].includes(params.get('work-info')) ? params.get('work-info') : (['wide2', 'wide6'].includes(iv) ? 'overlay' : 'below');
+      const arrangement = ['wide2', 'wide6'].includes(iv) ? 'wide' : (iv.startsWith('none') ? 'none2' : iv);
+      pills(im, ['rect', 'ratio', 'wide', 'none2'], arrangement, (k) => {
+        const u = new URL(set1(k, 'image')); u.searchParams.set('work-info', info);
+        if (iv === 'wide6') {
+          if (!params.has('works-width')) u.searchParams.set('works-width', 'full');
+          if (!params.has('works-columns')) u.searchParams.set('works-columns', '6');
+        }
+        return u.href;
+      }, (k) => ({ rect: '固定', ratio: '比率維持', wide: 'Balanced', none2: 'なし' }[k]));
+      if (!iv.startsWith('none')) {
+        const wi = document.getElementById('sw-work-info'); wi.style.display = '';
+        pills(wi, ['below', 'overlay'], info, (k) => set1(k, 'work-info'), (k) => k === 'below' ? '画像の下' : '画像に重ねる');
+      }
+      const ww = document.getElementById('sw-works-width'); ww.style.display = params.get('works-layout') === '2' ? 'none' : '';
+      const width = ['container', 'full'].includes(params.get('works-width')) ? params.get('works-width') : (iv === 'wide6' ? 'full' : 'container');
+      pills(ww, ['container', 'full'], width, (k) => set1(k, 'works-width'), (k) => k === 'container' ? 'コンテナ内' : '画面いっぱい');
+      const wc = document.getElementById('sw-works-columns'); wc.style.display = '';
+      const columnOptions = params.get('works-layout') === '2' ? ['2', '3'] : ['4', '6', '8'];
+      const columns = columnOptions.includes(params.get('works-columns')) ? params.get('works-columns') : (params.get('works-layout') === '2' ? '2' : (iv === 'wide6' ? '6' : '4'));
+      pills(wc, columnOptions, columns, (k) => set1(k, 'works-columns'), (k) => k + '列');
+      {
+        const box = document.getElementById('sw-works-template'); box.style.display = '';
+        const current = presets[chosen] && Object.entries(defaults).every(([k, v]) => params.get(k) === v) ? chosen : '';
+        pills(box, Object.keys(presets), current, (key) => {
+          const u = new URL(url.href); u.search = '';
+          for (const k of ['white', 'sidebar']) if (url.searchParams.get(k)) u.searchParams.set(k, url.searchParams.get(k));
+          u.searchParams.set('template', key); return u.href;
+        }, (key) => labels[key]);
+        // 選択中のテンプレートも押し直して設定を戻せるようにする。
+        const selected = box.querySelector('.pill.is-current');
+        if (selected) {
+          const link = document.createElement('a');
+          link.className = selected.className; link.textContent = selected.textContent;
+          const u = new URL(url.href); u.search = '';
+          for (const k of ['white', 'sidebar']) if (url.searchParams.get(k)) u.searchParams.set(k, url.searchParams.get(k));
+          u.searchParams.set('template', current); link.href = u.href; link.target = '_top';
+          selected.replaceWith(link);
+        }
+        box.addEventListener('click', (event) => {
+          const a = event.target.closest('a'); if (!a) return;
+          try { sessionStorage.setItem('vcd2026-works-order', 'seminar'); sessionStorage.removeItem('vcd2026-works-filter'); } catch (e) {}
+        });
+        document.getElementById('sws').append(box);
+      }
+    }
+    if (set === SETS.work) {
+      const set1 = (k, param, def) => { const u = new URL(url.href); u.searchParams.delete('design'); if (k === def) u.searchParams.delete(param); else u.searchParams.set(param, k); return u.href; };
+      document.getElementById('sw-design').style.display = 'none';
+      const row2 = (id, keys, param, def, text) => { const b = document.getElementById(id); b.style.display = ''; const v = url.searchParams.get(param); pills(b, keys, keys.includes(v) ? v : def, (k) => set1(k, param, def), text); };
+      row2('sw-ground', ['white', 'red'], 'ground', 'white', (k) => (k === 'red' ? '赤' : '白'));
+      row2('sw-wd-layout', ['carousel', 'flex'], 'layout', 'flex', (k) => (k === 'carousel' ? 'カルーセル' : '可変カルーセル'));
+      row2('sw-wd-card', ['red', 'white'], 'card', 'white', (k) => (k === 'red' ? '赤' : '白')); // 既定は白（2026-10-29）
+    }
+    if (VIEW === 'teaser') {
+      document.getElementById('sw-design').style.display = 'none'; document.getElementById('sw-sidebar').style.display = 'none';
+      const trow = (id, keys, param) => { const box = document.getElementById(id); box.style.display = ''; const v = url.searchParams.get(param);
+        pills(box, keys, keys.includes(v) ? v : '6', (k) => { const u = new URL(url.href); u.searchParams.set(param, k); return u.href; }); }; // 既定は 6（teaser.html の head と同じ）
+      trow('sw-tz-image', ['1', '2', '3', '4', '5', '6'], 'image');
+      // テンプレート：今は「最新」だけ（2026-11-08）。最新＝純白（white 1）・画像 6（どちらもティザーの既定）。選ぶとほかの行の指定を外す（背景色だけ引き継ぐ）。
+      // ほかの行が既定から外れていれば未選択にする（トップのテンプレートと同じ）。案が増えたら keys と text に足す
+      { const tb = document.getElementById('sw-template'); tb.style.display = '';
+        const LATEST = { white: '1', image: '6' };
+        const tzOff = [...url.searchParams.keys()].some((k) => !['bg', 'template'].includes(k) && url.searchParams.get(k) !== LATEST[k]);
+        pills(tb, ['1'], tzOff ? '' : '1', () => { const u = new URL(url.href); u.search = ''; if (url.searchParams.get('bg')) u.searchParams.set('bg', url.searchParams.get('bg')); return u.href; }, () => '最新'); }
+    }
+    // 作品一覧のボタンの表示は地の色で分ける（2026-10-28）：r＝赤地（A・G）、w＝白地（B〜F）。中の記号（?design=・STUDIO のページ名）は A〜G のまま
+    const WORKS_LABEL = { A: 'r1', G: 'r2', B: 'w1', C: 'w2', D: 'w3', E: 'w4', F: 'w5' };
+    const ORDER = set === SETS.works ? ['A', 'G', 'B', 'C', 'D', 'E', 'F'] : Object.keys(set);
+    pills(document.getElementById('sw-design'), ORDER.filter((k) => k in set && (!ONLY || ONLY.includes(k))), here, target, (k) => (set === SETS.works ? WORKS_LABEL[k] : k));
+    // トップの Template 1 は白1、Template 2 と他のページは白2が既定。
+    const whiteDefault = VIEW === 'teaser' || (set === SETS.home && !['3', '4'].includes(url.searchParams.get('template'))) ? '1' : '2'; // ティザーは純白が既定（teaser.html の head と同じ。2026-11-08）
+    const white = /^[123]$/.test(url.searchParams.get('white') || '') ? url.searchParams.get('white') : whiteDefault;
+    document.documentElement.dataset.white = white;
+    pills(document.getElementById('sw-white'), ['1', '2', '3'], white, (k) => { const u = new URL(url.href); if (k === whiteDefault) u.searchParams.delete('white'); else u.searchParams.set('white', k); return u.href; }, (k) => ({ '1': '255, 255, 255', '2': '253, 252, 248', '3': '251, 248, 241' }[k]));
+    // サイドバー：?sidebar= が無ければ前に選んだもの（サイドバーの埋め込みが sessionStorage に覚えている）。リンクには毎回 ?sidebar= を付ける（覚えた値より優先させるため）
+    let sb = url.searchParams.get('sidebar') || '';
+    if (!/^[1-5]$/.test(sb)) { try { sb = sessionStorage.getItem('vcd2026-sidebar-v2') || ''; } catch (e) {} }
+    if (!/^[1-5]$/.test(sb)) sb = '5';
+    pills(document.getElementById('sw-sidebar'), ['1', '2', '3', '4', '5'], sb, (k) => { const u = new URL(url.href); u.searchParams.set('sidebar', k); return u.href; });
+    if (set === SETS.home) {
+      document.getElementById('sw-design').style.display = 'none';
+      const row = (id, keys, param, def, text) => {
+        const box = document.getElementById(id); box.style.display = '';
+        const v = url.searchParams.get(param);
+        if (keys.includes(v) && v !== def) off = true; // 型の組み合わせから外れている
+        // トップは D に固定（?design= は外す）
+        pills(box, keys, keys.includes(v) ? v : def, (k) => { const u = new URL(url.href); u.searchParams.delete('design'); u.searchParams.set(param, k); return u.href; }, text);
+      };
+      // 1a・1b は 1 列（C の組み方。1a は KV が小さい＝A の 100svh、1b は大きい＝130svh）、2a〜2e は D の左右分け（Miro の d1〜d4 と、2b のタイトルを左端に寄せた 2c）
+      // クエリ名＝行名、値＝ボタンの表示（2026-10-28 整理）
+      // Template の行は最後に出す。ほかの行がどれか型の既定から外れていたら（off）1・2 とも未選択にする（2026-10-31）
+      let tpl = '1', off = sb !== '5' || url.searchParams.has('sidebar') || bgValue !== '2', tplHref; // サイドバーが既定から変わっていればテンプレートを再選択できる
+      if (MODE === 'query') {
+        // Template：選ぶとほかの行の指定を外して型の組み合わせにする（白は引き継ぎ、サイドバーは既定の2に戻す）
+        tpl = ['2', '3', '4'].includes(url.searchParams.get('template')) ? url.searchParams.get('template') : '1';
+        tplHref = (k) => { const u = new URL(url.href); u.search = ''; if (url.searchParams.get('white')) u.searchParams.set('white', url.searchParams.get('white')); if (k !== '1') u.searchParams.set('template', k); return u.href; };
+      }
+      else { // STUDIO：Layout はページを移る（ほかの行のクエリは引き継ぐ）。home-a・home-b（Design A・B）では選ばれていない状態
+        const L = SETS.layout;
+        // Template（STUDIO）：1＝/（既定の組み合わせ）、2＝/home-1b?template=2（1b・KV fade あり・ステートメント中央・ご挨拶 2）。白・サイドバーだけ引き継ぐ（2026-10-29）
+        tpl = ['2', '3', '4'].includes(url.searchParams.get('template')) ? url.searchParams.get('template') : '1';
+        if (pageName !== (['3', '4'].includes(tpl) ? L['1b'] : L['2c'])) off = true;
+        tplHref = (k) => { const u = new URL(toPage(['3', '4'].includes(k) ? L['1b'] : '')); u.search = ''; if (url.searchParams.get('white')) u.searchParams.set('white', url.searchParams.get('white')); if (k !== '1') u.searchParams.set('template', k); return u.href; };
+      }
+      // 従来の layout の値を、列の組み方と KV サイズの2軸で選ぶ。
+      const currentLayout = MODE === 'query' ? (url.searchParams.get('layout') || (['3', '4'].includes(tpl) ? '1b' : '2c')) : (Object.keys(SETS.layout).find((k) => SETS.layout[k] === pageName) || '2c');
+      const layoutKind = currentLayout.startsWith('1') ? 'one' : (['2d', '2e'].includes(currentLayout) ? 'left' : 'right');
+      const kvSize = ['1a', '2a', '2d'].includes(currentLayout) ? 'small' : 'large';
+      const choice = { one: { small: '1a', large: '1b' }, right: { small: '2a', large: '2c' }, left: { small: '2d', large: '2e' } };
+      const layoutHref = (kind, size) => {
+        const value = choice[kind][size];
+        if (MODE !== 'query') return toPage(SETS.layout[value]);
+        const u = new URL(url.href); u.searchParams.delete('design'); u.searchParams.set('layout', value); return u.href;
+      };
+      const lb = document.getElementById('sw-layout'), kb = document.getElementById('sw-kv-size');
+      lb.style.display = kb.style.display = '';
+      pills(lb, ['one', 'right', 'left'], layoutKind, (k) => layoutHref(k, kvSize), (k) => ({one: '1列', right: '2列右スクロール', left: '2列左スクロール'}[k]));
+      pills(kb, ['large', 'small'], kvSize, (k) => layoutHref(layoutKind, k), (k) => k === 'large' ? '大' : '小');
+      if (currentLayout !== (['3', '4'].includes(tpl) ? '1b' : '2c')) off = true;
+      const isOneColumn = ['3', '4'].includes(tpl);
+      row('sw-kv-fade', ['no', '1'], 'kv-fade', isOneColumn ? '1' : 'no'); // Template 1 は なし、2 は あり（2026-10-31）
+      row('sw-kv-anim', ['no', '1', '2', '3'], 'kv-anim', ['2', '4'].includes(tpl) ? 'no' : '2', (k) => ({ no: 'なし', '1': '中心から', '2': '上寄りから', '3': '最上部から' }[k]));
+      row('sw-kv-speed', ['slow', 'fast'], 'kv-speed', 'fast', (k) => k === 'fast' ? '速' : '遅');
+      row('sw-fruit-anim', ['1', '2', '3'], 'fruit-anim', '2', (k) => ({ '1': 'ぷるぷる', '2': '根本から揺れる', '3': '拡大' }[k]));
+      row('sw-fruit-deco', ['no', '1'], 'fruit-deco', isOneColumn ? '1' : 'no', (k) => k === '1' ? 'あり' : 'なし');
+      row('sw-mobile-fruit-deco', ['1', 'no'], 'mobile-fruit-deco', '1', (k) => k === '1' ? 'あり' : 'なし');
+      { const layout = document.documentElement.dataset.fruitLayout, hover = document.documentElement.dataset.fruitHover, click = document.documentElement.dataset.fruitClick;
+        const fruitHref = (key, value) => { const u = new URL(url.href); u.searchParams.delete('works'); u.searchParams.delete('fruit-action'); u.searchParams.set('fruit-layout', key === 'fruit-layout' ? value : layout); u.searchParams.set('fruit-hover', key === 'fruit-hover' ? value : hover); u.searchParams.set('fruit-click', key === 'fruit-click' ? value : click); return u.href; };
+        const layoutBox = document.getElementById('sw-works'); layoutBox.style.display = '';
+        pills(layoutBox, ['no', 'longshort', 'longlong', 'scatter', 'grid3', 'grid4', 'grid5'], layout, k => fruitHref('fruit-layout', k), k => ({ no: 'なし', scatter: '無造作', longshort: '縦・短文', longlong: '縦・長文', grid3: '3×4', grid4: '4×3', grid5: '5×2' }[k]));
+        const hoverBox = document.getElementById('sw-fruit-hover'), clickBox = document.getElementById('sw-fruit-click');
+        hoverBox.style.display = clickBox.style.display = layout === 'no' ? 'none' : '';
+        pills(hoverBox, layoutKind === 'one' || ['longshort', 'longlong'].includes(layout) ? ['none', 'short'] : ['none', 'short', 'linked'], hover, k => fruitHref('fruit-hover', k), k => ({ none: 'なし', short: '短文', linked: '片面解説' }[k]));
+        pills(clickBox, ['none', 'works', 'mobile'], click === 'seminar' ? 'mobile' : click, k => fruitHref('fruit-click', k), k => ({ none: 'なし', works: '作品一覧', mobile: 'ゼ実解説' }[k]));
+        if (layout !== 'scatter' || hover !== (layoutKind === 'one' ? 'none' : 'linked') || click !== (layoutKind === 'one' ? 'none' : 'mobile')) off = true;
+      }
+      row('sw-top-layout', ['2', '1', '3'], 'top-layout', isOneColumn ? '1' : '3', (k) => ({ '2': '初期', '1': '2列左揃え', '3': '2列ノド揃え' }[k])); // 文字組み：2＝初期、1＝2列左揃え、3＝2列で中央側に揃える
+      row('sw-campus-btn', ['no', 'round', 'grid', 'grid-fit', 'fill-full', 'fill', 'edge'], 'campus-btn', isOneColumn ? 'round' : 'fill', (k) => ({ no: 'なし', round: '◯', grid: '線・幅いっぱい', 'grid-fit': '線・可変幅', 'fill-full': '塗り・幅いっぱい', fill: '塗り・可変幅', edge: '右線' }[k]));
+      row('sw-campus-map', ['no', 'north', 'west'], 'campus-map', 'west', (k) => ({ no: 'なし', north: '北上', west: '西上' }[k])); // ゼミ一覧の下のキャンパスマップ。なし／北上／西上（2026-11-08 に向きの行をまとめた。旧 ?campus-map=1 は北上）
+      // アクセス地図は v4 に固定（2026-11-11）
+      row('sw-statement', ['edge', 'center'], 'statement', isOneColumn ? 'center' : 'edge', (k) => ({ center: '中央', edge: '左端' }[k])); // ステートメントの揃え（2026-10-29。左端は 10-30、10-31 から既定）
+      row('sw-statement-size', ['smallest', 'small', 'normal'], 'statement-size', 'smallest', (k) => ({ smallest: '小', small: '中', normal: '大' }[k]));
+      row('sw-greeting', ['1', '2', '3'], 'greeting', isOneColumn ? '2' : '1', (k) => ({ '1': '白抜き', '2': '白背景', '3': '便箋' }[k]));
+      { const motionDefault = ['2', '4'].includes(tpl) ? 'no' : '1';
+        row('sw-motion-video', ['no', '1'], 'motion-video', motionDefault, (k) => k === '1' ? 'あり' : 'なし'); }
+      row('sw-catalog-photo', ['1', 'no'], 'catalog-photo', 'no', (k) => k === '1' ? 'カルーセル' : 'なし');
+      row('sw-heading-size', ['tiny', 'small', 'normal', 'large'], 'heading-size', 'normal', (k) => ({ tiny: '最小', small: '小', normal: '標準', large: '大' }[k]));
+      const tb = document.getElementById('sw-template'); tb.style.display = '';
+      pills(tb, ['1', '2', '3'], off ? '' : tpl, tplHref, (k) => ({ '1': '最新', '2': '最新（待機なし）', '3': '1列案' }[k])); // 「1列案（待機なし）」（4）は 2026-11-08 にボタンを外した（?template=4 の URL はまだ動く）
+      tb.addEventListener('click', (e) => { if (e.target.closest('a')) { try { sessionStorage.setItem('vcd2026-sidebar-v2', '5'); } catch (er) {} } });
+      // トップページに現れる順に並べ、共通設定は後ろに置く。
+      {
+        const container = document.getElementById('sws');
+        ['sw-white', 'sw-bg', 'sw-sidebar', 'sw-layout', 'sw-top-layout', 'sw-kv-size', 'sw-heading-size', 'sw-motion-video', 'sw-kv-anim', 'sw-kv-speed', 'sw-kv-fade',
+         'sw-fruit-deco', 'sw-mobile-fruit-deco', 'sw-statement', 'sw-statement-size', 'sw-greeting', 'sw-campus-map', 'sw-campus-btn',
+         'sw-works', 'sw-fruit-hover', 'sw-fruit-click', 'sw-fruit-anim',
+         'sw-catalog-photo', 'sw-template'].forEach((id) => container.append(document.getElementById(id)));
+      }
+    }
+  })();
+  // 開閉。URL が読めなくても動くよう、上とは別にする
+  (() => {
+    const KEY = 'vcd2026-switch-open';
+    const box = document.getElementById('sws'), btn = document.getElementById('sw-toggle');
+    box.style.setProperty('--switch-max-height', Math.max(300, (screen.availHeight || screen.height || 900) - 80) + 'px');
+    // iframe 自体の高さではなく、親画面に見えている高さに合わせる。
+    const fitPanel = () => {
+      if (!box.classList.contains('is-open')) return;
+      const io = new IntersectionObserver(([entry]) => {
+        io.disconnect();
+        if (entry.intersectionRect.height > 200 && entry.intersectionRect.height < box.scrollHeight)
+          box.style.setProperty('--switch-max-height', Math.floor(entry.intersectionRect.height) + 'px');
+      });
+      io.observe(document.documentElement);
+    };
+    // 動画を使うトップだけでパネルを隠す。別ページで残った再生状態は無視する。
+    try {
+      const url = new URL(document.getElementById('q-url').value.trim());
+      const last = url.pathname.replace(/\/$/, '').split('/').pop();
+      const isTop = !/^(?:work|works|teaser)(?:-|$)/.test(last);
+      const tpl = url.searchParams.get('template') || '1';
+      const motion = isTop && (url.searchParams.get('motion-video') || (['2','4'].includes(tpl) ? 'no' : '1')) === '1';
+      const showMotion = (active) => { box.style.display = active ? 'none' : ''; };
+      if (motion) {
+        const state = JSON.parse(sessionStorage.getItem('vcd2026-motion-state') || '{}');
+        if (state.state === 'playing' && Date.now() - state.at < 60000) showMotion(true);
+        const channel = new BroadcastChannel('vcd2026-motion');
+        channel.onmessage = (e) => { if (e.data === 'playing' || e.data === 'ended') showMotion(e.data === 'playing'); };
+      } else showMotion(false);
+    } catch (e) {}
+    const set = (open) => { box.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', open); if (open) setTimeout(fitPanel, 1000); };
+    let open = true;
+    try { open = sessionStorage.getItem(KEY) !== '0'; } catch (e) {}
+    set(open);
+    btn.addEventListener('click', () => { open = !open; set(open); try { sessionStorage.setItem(KEY, open ? '1' : '0'); } catch (e) {} });
+  })();
+  </script>
+
+</div>
+<!-- design-switch:end -->
+
+<main id="main">
+
+  <!-- ==========================================================
+       1. キービジュアル
+       ========================================================== -->
+  <section class="kv" id="kv">
+
+    <!-- キービジュアルの WebGL アニメーション（assets/kv.js）
+         線画 → 水彩のにじみ の順で描かれる。画像は assets/img/kv/ -->
+    <div class="kv__canvas">
+      <canvas id="kvCanvas" aria-hidden="true"></canvas>
+    </div>
+
+    <div class="kv__inner">
+      <p class="kv__catch" aria-label="実りの、その先へ。">実りの、その先へ。</p>
+    </div>
+
+    <!-- MAU ロゴ（出典: musabi.ac.jp。単体ファイルは assets/img/mau-logo.svg）。KV の右上、ハンバーガーの左 -->
+    <p class="kv__logo">
+      <svg viewBox="0 0 92.561 28" role="img" aria-label="武蔵野美術大学 MAU"><path fill="currentColor" d="M82.119,0V15.349c0,2.681-.6,4.535-3.38,4.535-2.554,0-3.311-1.973-3.311-4.575V0H64.757V14.388a.458.458,0,0,1-.058.912.462.462,0,0,1-.463-.461.457.457,0,0,1,.241-.4L59.273,0h-14.7L39.108,15.413a.457.457,0,0,1,.251.4.463.463,0,0,1-.926,0,.455.455,0,0,1,.359-.441V0H23.06L19.587,13.444a.458.458,0,0,1,.312.433.463.463,0,1,1-.926,0,.459.459,0,0,1,.313-.433L15.772,0H0V27.526H9.081l0-18.671a.457.457,0,0,1-.38-.447.463.463,0,1,1,.653.42l5.307,18.7h8.88L29.012,8.84a.471.471,0,1,1,.2.022l.02,18.664H45.45L51.571,8.434a.466.466,0,1,1,.349,0L58,27.526H69.187l-.9-2.5C70.811,27.1,74.482,28,78.62,28c8.408,0,13.942-2.923,13.942-11.836V0Z"/></svg>
+    </p>
+  </section>
+
+  <!-- ==========================================================
+       1-2. 開催情報（KV の下。少しだけ KV に重ねる。1000px の枠）
+       ========================================================== -->
+  <section class="kv-info" aria-label="開催情報">
+    <div class="kv-info__inner">
+      <div class="kv-info__art" aria-hidden="true">
+        <img class="kv-info__image" src="assets/img/KV%20text.png" width="9523" height="6909" alt="">
+        <img class="kv-info__title-vector" src="assets/img/poster-title.svg" alt="">
+      </div>
+      <p class="kv__univ">武蔵野美術大学 造形学部</p>
+      <h1 class="kv__title">
+        <span>2026年度 視覚伝達デザイン学科</span>
+        <span>卒業・修了制作展</span>
+      </h1>
+      <p class="kv__title-en">
+        <span>Visual Communication Design</span>
+        <span>Degree Show 2026</span>
+      </p>
+      <!-- 会期・場所・MAU ロゴ。トップのデザイン D（PC）だけで出す（Miro の d1〜d4。2026-10-28） -->
+      <div class="kv-info__meta">
+        <p class="kv-info__date"><time datetime="2027-01-14">2027年1月14日<span class="weekday-mark">木</span></time>から<time datetime="2027-01-17">17日<span class="weekday-mark">日</span></time></p>
+        <p class="kv-info__time">9時から17時<small>（最終入場16時）</small></p>
+        <p class="kv-info__place">武蔵野美術大学 鷹の台キャンパス</p>
+        <p class="kv-info__logo"><svg viewBox="0 0 92.561 28" role="img" aria-label="武蔵野美術大学 MAU"><path fill="currentColor" d="M82.119,0V15.349c0,2.681-.6,4.535-3.38,4.535-2.554,0-3.311-1.973-3.311-4.575V0H64.757V14.388a.458.458,0,0,1-.058.912.462.462,0,0,1-.463-.461.457.457,0,0,1,.241-.4L59.273,0h-14.7L39.108,15.413a.457.457,0,0,1,.251.4.463.463,0,0,1-.926,0,.455.455,0,0,1,.359-.441V0H23.06L19.587,13.444a.458.458,0,0,1,.312.433.463.463,0,1,1-.926,0,.459.459,0,0,1,.313-.433L15.772,0H0V27.526H9.081l0-18.671a.457.457,0,0,1-.38-.447.463.463,0,1,1,.653.42l5.307,18.7h8.88L29.012,8.84a.471.471,0,1,1,.2.022l.02,18.664H45.45L51.571,8.434a.466.466,0,1,1,.349,0L58,27.526H69.187l-.9-2.5C70.811,27.1,74.482,28,78.62,28c8.408,0,13.942-2.923,13.942-11.836V0Z"/></svg></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       2. リード文
+       ========================================================== -->
+  <section class="lead" aria-label="ステートメント">
+    <!-- 左右に散らす絵（deco.js）。--w は幅、--r は傾き。--top は 1300px 以上での位置（section の高さに対する割合）。
+         data-wide / data-narrow があると、1300px 以上 / 未満の縦位置を deco.js が周りの要素から計算する（書き方は deco.js の冒頭） -->
+    <div class="deco deco--right" data-deco="ota" style="--w:240px; --r:10deg"
+         data-wide="between .lead #greeting" data-narrow="between .lead #greeting"></div>
+    <!-- ステートメントは配布されたアウトライン素材から書き出した SVG。PC・スマホ共通 -->
+    <img class="lead__img reveal" src="assets/img/statement.svg?v=20261115" width="1305" height="1170"
+         alt="作品は、ある日突然生まれるものではありません。小さな興味や違和感から始まり、試行錯誤を重ねながら、時間をかけて育まれていきます。この展示に並ぶのは、私たちが学びの中で育ててきた、世界にひとつだけの「実り」です。それぞれの時間や思考から生まれた実りは、やがて新たな問いの種となり、次の探求へとつながっていきます。どうぞ、私たちが育んだ「実り」をお楽しみください。">
+    <!-- ?statement=left / edge：左揃えの版（大きさは中央揃えと同じ） -->
+    <script>if (document.documentElement.dataset.statement === 'edge') document.currentScript.previousElementSibling.src = 'assets/img/statement-left.svg?v=20261115';</script>
+  </section>
+
+  <!-- ==========================================================
+       3. ご挨拶
+       ========================================================== -->
+  <section class="section section--split" id="greeting">
+    <div class="deco deco--left" data-deco="furugen" style="--top:48%; --w:330px; --r:-8deg"
+         data-wide="below #greeting" data-narrow="below #greeting"></div>
+    <div class="section__head reveal">
+      <h2 class="section__title">ご挨拶</h2>
+      <p class="section__byline">
+        視覚伝達デザイン学科<br>
+        主任教授　白井 敬尚
+      </p>
+    </div>
+    <!-- デザイン C・D のご挨拶（Home C の封筒。studio-embed/home-c/greeting-embed.html）。印の間は build-local.mjs が書き換える。手で直さない。style.css が C・D のときだけ出し、上の見出しと下の本文を隠す -->
+    <!-- greeting-c:start -->
+    <div class="greeting-c">
+      <!-- Home C のご挨拶（埋め込み）。ローカルのトップのデザイン C・D にも同じものを入れる（build-local.mjs。印（studio-only）の付いた行は外す）。封筒から便箋の頭がのぞいていて、マウスを乗せる（スマホはタップ）と便箋が引き出されて開く。封筒の表に文字や案内は書かない。影は黒の透過（赤みは付けない）（下端は封筒に入ったまま）
+           STUDIO 側：ご挨拶セクションの中に幅 100%・高さ auto。高さは中身に合わせて STUDIO が変える（開くと便箋の長さぶん伸びる）
+           学科名・主任教授・本文（下の大文字の仮置き）は build-greeting.mjs が文面に置き換える
+           ※ 波かっこを2つ続けて書かないこと（STUDIO に置き換えられる） -->
+      <textarea id="q-white" hidden></textarea>
+      <textarea id="q-url" hidden></textarea><!-- ?greeting=1（文字だけ）/ 2（便箋）/ 3（封筒・既定）。トップの切り替え「Greeting」（2026-10-28） -->
+      <script>
+        // ローカル：STUDIO が置き換える値（ページの URL とクエリ）を、ページの URL から上の textarea に入れる
+        (() => { const p = new URLSearchParams(location.search); document.querySelectorAll('textarea[id^="q-"]').forEach((t) => { const k = t.id.slice(2); t.value = k === 'url' ? location.href : (p.get(k) || ''); }); })();
+      </script>
+      <style>
+        /* 白（?white=1〜3。2 が既定）。STUDIO の iframe の中ではここで決める。ローカルではページの style.css と同じ値 */
+        :root { --paper-rgb: 253 252 248; }
+        :root[data-white="1"] { --paper-rgb: 255 255 255; }
+        :root[data-white="3"] { --paper-rgb: 251 248 241; }
+
+        /* 状態（is-open / is-anim）と変数は .gc に持つ（CSS のネスト）。ローカルのトップ（デザイン C・D）にそのまま入れても、ページの html を汚さない */
+        .gc {
+
+        & {
+          --red: #bd3124; --ink: #6b2f22; --paper: rgb(var(--paper-rgb, 253 252 248)); /* 白：ページのトークンがあればそれ、無ければ既定（明度を少し落として暖色） */ --rule: rgba(189, 49, 36, .22);
+          --env: #f3e9d9; --env-fold: #ebdcc6; --env-in: #dcc7a6; --env-back: #e4d4bb; --env-line: rgba(107, 47, 34, .18);
+          --lh: 32.4px; --ease: cubic-bezier(.55, 0, .25, 1);
+          --t-open: 1600ms;
+        }
+        #stage { position: relative; height: 420px; cursor: pointer; outline: none; }
+        #stage:focus-visible .back { outline: 2px solid #fff; outline-offset: 4px; }
+        &.is-open #stage { cursor: auto; }
+        /* 重なり：封筒の内側の面とふた（奥）＜ 便箋 ＜ 左右と下の折り返し（手前）。
+           開いた封筒を裏から見ているので、上の口（折り返しの V の上）は塗らず、中の便箋が見える。開いたあとも便箋の下端は折り返しの後ろ */
+        .back, .flap, .pocket, .letter { position: absolute; top: 0; left: 0; }
+        .back { z-index: 0; background: var(--env-back); box-shadow: 10px 14px 28px rgba(0, 0, 0, .14); }
+        .flap { z-index: 1; filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, .10)); }
+        .letter { z-index: 2; }
+        /* 封筒の影は内側の面（長方形）に付ける。折り返しは便箋の上にうっすら影を落とす */
+        .pocket { z-index: 3; filter: drop-shadow(0 -1px 3px rgba(0, 0, 0, .08)); }
+        svg .in { fill: var(--env-in); } svg .fold { fill: var(--env-fold); } svg .base { fill: var(--env); }
+        svg .in, svg .fold, svg .base { stroke: var(--env-line); stroke-width: 1; }
+        .flap svg, .pocket svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+
+        /* 動き。is-anim のあいだだけ transition を付ける（画面幅が変わったときは付けずに置き直す） */
+        &.is-anim #stage { transition: height var(--t-open) var(--ease); }
+        &.is-anim .back, &.is-anim .flap, &.is-anim .pocket { transition: transform var(--t-open) var(--ease); }
+        &.is-anim .letter { transition: transform var(--t-open) var(--ease), height var(--t-open) var(--ease), box-shadow var(--t-open) ease; }
+
+
+        /* 便箋 */
+        .letter {
+          overflow: hidden; background: var(--paper); box-sizing: border-box; /* 上の赤い線（border-top 6px）は、封筒からのぞくと線だけ浮いて見えるので外した（2026-10-28） */
+          box-shadow: 4px 6px 14px rgba(0, 0, 0, .08); transform-origin: 50% 0; transform: rotate(-1.2deg);
+        }
+        &.is-open .letter { transform: none; }
+        &.is-open .letter { box-shadow: 10px 14px 28px rgba(0, 0, 0, .14); } /* 封筒と同じ、右下へ淡く */
+        .sheet { box-sizing: border-box; display: flex; flex-direction: column; gap: 48px; padding: 88px 100px 96px; color: var(--ink); font-family: "Work Sans", "Zen Kaku Gothic New", sans-serif; }
+        .head { display: flex; flex-direction: column; gap: 10px; }
+        .head .en { font: 400 13px/1.4 Work Sans, sans-serif; letter-spacing: .2em; color: var(--red); }
+        .head h2 { margin: 0; font-size: 32px; font-weight: 700; line-height: 1.4; }
+        /* 罫線：行送りと同じ間隔の線を本文の背面に */
+        .body {
+          margin: 0; font-size: 16px; line-height: var(--lh); letter-spacing: .05em; text-align: justify;
+          background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--lh) - 1px), var(--rule) calc(var(--lh) - 1px), var(--rule) var(--lh));
+        }
+        .body p { margin: 0; text-indent: 1em; }
+        .sign { display: flex; flex-direction: column; align-items: flex-end; gap: 0; text-align: right; }
+        .sign .dept { font-size: 14px; line-height: 1.6; }
+        .sign .prof { font-size: 18px; font-weight: 700; line-height: 1.6; letter-spacing: .1em; }
+
+        /* small（親が 1000px 以下 ≒ iframe 860px 以下）/ mobile（親が 690px 以下 ≒ iframe 650px 以下） */
+        @media (max-width: 860px) {
+          .sheet { padding: 72px 64px 80px; }
+        }
+        @media (max-width: 650px) {
+          .back, &.is-open .letter { box-shadow: 6px 8px 16px rgba(0, 0, 0, .12); }
+          & { --lh: 25.2px; } /* スマホは本文 14px・行送り 28px（2026-10-10 に 15px / 32px から小さく） */
+          .sheet { padding: 40px 22px 48px; gap: 32px; }
+          .head h2 { font-size: 24px; }
+          .body { font-size: 14px; letter-spacing: .02em; }
+          .sign .prof { font-size: 16px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          &.is-anim #stage, &.is-anim .back, &.is-anim .flap, &.is-anim .pocket, &.is-anim .letter { transition: none; }
+        }
+        }
+
+        /* ご挨拶 1（文字だけ）・2（便箋）。?greeting= で封筒の代わりに出す（ローカルの style.css の #greeting と html[data-greet="2"] と同じ見た目。2026-10-28）
+           iframe の幅で分ける：700px 以上は見出しと本文の 2 列、未満は縦に積む。500px 未満はスマホの文字の大きさ */
+        .gc .body, .gp .b, .gl .b { padding-right: clamp(16px, 3vw, 48px); }
+        .gc .body p:first-child, .gp .b p:first-child, .gl .b p:first-child { text-indent: 0; }
+        .greeting-dash { display: inline-block; transform: scaleX(2); transform-origin: left; margin-right: 1em; text-indent: 0; }
+        .gx { display: none; font-family: "Work Sans", "Zen Kaku Gothic New", sans-serif; color: rgb(var(--paper-rgb)); }
+        .gx.is-on { display: grid; }
+        .gp { grid-template-columns: 160px 1fr; column-gap: 100px; row-gap: 48px; align-items: start; }
+        .gp .h { display: grid; gap: 18px; }
+        .gp h2 { margin: 0; font-size: 40px; font-weight: 700; line-height: 1.4; }
+        .gp .by { margin: 0; font-size: 14px; line-height: 1.6; color: rgb(var(--paper-rgb) / .72); }
+        .gp .b { display: grid; gap: 0; font-size: 16px; line-height: 1.98; }
+        .gp .b p { margin: 0; text-align: justify; text-indent: 1em; }
+        @media (max-width: 860px) { .gp { grid-template-columns: 140px 1fr; column-gap: 56px; } }
+        @media (max-width: 699px) { .gp { grid-template-columns: 1fr; row-gap: 28px; } }
+        @media (max-width: 499px) { .gp h2 { font-size: 28px; } .gp .b { font-size: 15px; line-height: 1.71; letter-spacing: .02em; } .gp .by { line-height: 1.6; } }
+        .gl { --ink: #6b2f22; --lh: 32.4px; margin-bottom: 64px; /* 影が iframe の下で切れないぶん */ grid-template-columns: 1fr; gap: 48px; padding: 88px 100px 96px;
+          background: rgb(var(--paper-rgb)); color: var(--ink); border-top: 6px solid #bd3124; box-shadow: 0 24px 60px rgba(0, 0, 0, .22); }
+        .gl h2 { margin: 0; font-size: 32px; font-weight: 700; line-height: 1.4; }
+        .gl .b { margin: 0; font-size: 16px; line-height: var(--lh); letter-spacing: .05em; text-align: justify;
+          background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--lh) - 1px), rgba(189, 49, 36, .22) calc(var(--lh) - 1px), rgba(189, 49, 36, .22) var(--lh)); }
+        .gl .b p { margin: 0; text-indent: 1em; }
+        .gl .by { margin: 0; justify-self: end; text-align: right; font-size: 15px; line-height: 1.6; letter-spacing: .05em; }
+        @media (max-width: 860px) { .gl { padding: 72px 64px 80px; } }
+        @media (max-width: 650px) { .gl { --lh: 25.2px; padding: 48px 24px 56px; gap: 32px; } .gl h2 { font-size: 24px; } .gl .b { font-size: 14px; letter-spacing: .02em; } }
+        .gp h2 { font-size: calc(40px * var(--heading-scale,1)); }
+        .gl h2, .gc .head h2 { font-size: calc(32px * var(--heading-scale,1)); }
+        @media (max-width:499px) { .gp h2 { font-size: calc(28px * var(--heading-scale,1)); } }
+        @media (max-width:650px) { .gl h2, .gc .head h2 { font-size: calc(24px * var(--heading-scale,1)); } }
+      /* layout1 greeting 2026-11-05 */
+      .gp.is-on{grid-template-columns:var(--layout1-label-col,152px) minmax(0,1fr);column-gap:var(--layout1-column-gap,20px);row-gap:32px;align-items:start}.gp .h{display:contents}.gp h2{grid-column:1/-1;grid-row:1;font-size:calc(24px * var(--heading-scale,1));line-height:1.4}.gp .by{grid-column:1;grid-row:2;margin:0;padding-top:2px;white-space:nowrap;font-size:var(--layout1-label-size,15px);font-weight:700;line-height:1.64;color:rgb(var(--paper-rgb))}.gp .b{grid-column:2;grid-row:2;min-width:0;padding-right:0;line-height:1.8}.layout1-mobile .gp.is-on{grid-template-columns:1fr;row-gap:6px}.layout1-mobile .gp h2,.layout1-mobile .gp .by,.layout1-mobile .gp .b{grid-column:1;grid-row:auto}.layout1-mobile .gp h2{font-size:calc(24px * var(--heading-scale,1))}.layout1-mobile .gp .b{font-size:15px}
+      </style><script>if(Math.min(screen.width,screen.height)<=690||innerWidth<=560)document.documentElement.classList.add("layout1-mobile");</script>
+      <div class="gx gp" id="gp"><div class="h"><h2>ご挨拶</h2><p class="by">視覚伝達デザイン学科<br>主任教授　白井 敬尚</p></div><div class="b"><p>視覚伝達デザイン学科はその名称の冠に「視覚」と付くが、視デの教育は視覚のみに特化したものでなく、聴覚、嗅覚、味覚、触覚と五感にもとづく伝達（コミュニケーション）をその基盤としてきた。なかでも学生自身の肉体から導き出される身体性、そして調査・体験・観察・発見・分析へと進むステップから導き出される理は最も重要視されてきた。ここ数年その成果は顕著に表れている。これもひとえに視デ中興の祖、勝井三雄教授をはじめとする歴代の主任教授陣の存在もさることながら、30年以上にわたって影に日向に視デを支えてきた前主任教授の寺山祐策教授の理念と信念の賜物だといえよう。</p><p>近年、視デの専任教員の陣容は若手を中心に大きく様変わりをした。それに伴い卒業制作の領域は拡張と厚みを増し、同時に、その枠組みに留まるだけでなく、そこから飛躍（逸脱）するという新たな芽も出始めている。ここに掲載された卒業制作はいずれもその末端であり最先端に位置するものだ。そこには知と美と技は無論のこと、主観と客観を行き来する感情、感覚、感性、そして精神性という豊かなものが存在する。そして学事に業務に生活に具体的にAIが導入され浸透……その進化の度合いは凄まじく学生諸氏も皆、何らかのカタチで恩恵に預かっている。しかしながら視デの培った理念との関係性において、なにを許容し、しないのか、またどこに境界を置くのか、はたまた境界などと呼べるものが存在するのかどうかも怪しく、判断しづらい悩ましい時代に入った。</p><p>卒業制作は4年間の、そして1年間のゼミの集積である。学部生117名、院生9名が何を学び、何を考え、何を捉えてきたのか、我々教員は目を凝らし注意深く読み取らなくてはならない。現れ出でた形と色だけが全てではない。その背後にある126名の1460日の内と外の何がしかを。そこには彼らの苦しみと楽しみがギチギチに詰まっているはずなのだから。</p><p>2026年度、寺山教授の後を継ぎ、主任を仰せつかることとなった。関係者にとってはなんとも心許なく頼りないことであっただろう。しかし、専任、非常勤、助教・助手、なにより学生諸君のおかげで、なんとか体裁を保つことができた（のだろうか?）。まずはひとまず、この場を借りて御礼申し上げたい。</p><p>最後に<span class="greeting-dash">―</span>。毎年ではあるが、この卒業・修了制作展の運営、展示、図録・WEB制作を自らの制作と併行して進めた制作展委員の皆々に改めてご苦労様、ありがとうと伝えたい。その苦労たるやいかばかりのものか。視覚伝達デザイン学科の卒業・修了制作展はそこをも含めての展覧会なのである。</p></div></div>
+      <div class="gx gl" id="gl"><h2>ご挨拶</h2><div class="b"><p>視覚伝達デザイン学科はその名称の冠に「視覚」と付くが、視デの教育は視覚のみに特化したものでなく、聴覚、嗅覚、味覚、触覚と五感にもとづく伝達（コミュニケーション）をその基盤としてきた。なかでも学生自身の肉体から導き出される身体性、そして調査・体験・観察・発見・分析へと進むステップから導き出される理は最も重要視されてきた。ここ数年その成果は顕著に表れている。これもひとえに視デ中興の祖、勝井三雄教授をはじめとする歴代の主任教授陣の存在もさることながら、30年以上にわたって影に日向に視デを支えてきた前主任教授の寺山祐策教授の理念と信念の賜物だといえよう。</p><p>近年、視デの専任教員の陣容は若手を中心に大きく様変わりをした。それに伴い卒業制作の領域は拡張と厚みを増し、同時に、その枠組みに留まるだけでなく、そこから飛躍（逸脱）するという新たな芽も出始めている。ここに掲載された卒業制作はいずれもその末端であり最先端に位置するものだ。そこには知と美と技は無論のこと、主観と客観を行き来する感情、感覚、感性、そして精神性という豊かなものが存在する。そして学事に業務に生活に具体的にAIが導入され浸透……その進化の度合いは凄まじく学生諸氏も皆、何らかのカタチで恩恵に預かっている。しかしながら視デの培った理念との関係性において、なにを許容し、しないのか、またどこに境界を置くのか、はたまた境界などと呼べるものが存在するのかどうかも怪しく、判断しづらい悩ましい時代に入った。</p><p>卒業制作は4年間の、そして1年間のゼミの集積である。学部生117名、院生9名が何を学び、何を考え、何を捉えてきたのか、我々教員は目を凝らし注意深く読み取らなくてはならない。現れ出でた形と色だけが全てではない。その背後にある126名の1460日の内と外の何がしかを。そこには彼らの苦しみと楽しみがギチギチに詰まっているはずなのだから。</p><p>2026年度、寺山教授の後を継ぎ、主任を仰せつかることとなった。関係者にとってはなんとも心許なく頼りないことであっただろう。しかし、専任、非常勤、助教・助手、なにより学生諸君のおかげで、なんとか体裁を保つことができた（のだろうか?）。まずはひとまず、この場を借りて御礼申し上げたい。</p><p>最後に<span class="greeting-dash">―</span>。毎年ではあるが、この卒業・修了制作展の運営、展示、図録・WEB制作を自らの制作と併行して進めた制作展委員の皆々に改めてご苦労様、ありがとうと伝えたい。その苦労たるやいかばかりのものか。視覚伝達デザイン学科の卒業・修了制作展はそこをも含めての展覧会なのである。</p></div><p class="by">視覚伝達デザイン学科<br>主任教授　白井 敬尚</p></div>
+      <div class="gc" id="gc">
+      <div id="stage" role="button" tabindex="0" aria-expanded="false" aria-controls="letter" aria-label="ご挨拶の便箋を開く">
+        <div class="back" aria-hidden="true"></div>
+        <div class="flap" aria-hidden="true">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <polygon points="0,100 50,4 100,100" class="in" vector-effect="non-scaling-stroke" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <article class="letter" id="letter">
+          <div class="sheet">
+            <div class="head"><h2>ご挨拶</h2></div><!-- 見出しの上の「Greeting」は外した（2026-10-28） -->
+            <div class="body"><p>視覚伝達デザイン学科はその名称の冠に「視覚」と付くが、視デの教育は視覚のみに特化したものでなく、聴覚、嗅覚、味覚、触覚と五感にもとづく伝達（コミュニケーション）をその基盤としてきた。なかでも学生自身の肉体から導き出される身体性、そして調査・体験・観察・発見・分析へと進むステップから導き出される理は最も重要視されてきた。ここ数年その成果は顕著に表れている。これもひとえに視デ中興の祖、勝井三雄教授をはじめとする歴代の主任教授陣の存在もさることながら、30年以上にわたって影に日向に視デを支えてきた前主任教授の寺山祐策教授の理念と信念の賜物だといえよう。</p><p>近年、視デの専任教員の陣容は若手を中心に大きく様変わりをした。それに伴い卒業制作の領域は拡張と厚みを増し、同時に、その枠組みに留まるだけでなく、そこから飛躍（逸脱）するという新たな芽も出始めている。ここに掲載された卒業制作はいずれもその末端であり最先端に位置するものだ。そこには知と美と技は無論のこと、主観と客観を行き来する感情、感覚、感性、そして精神性という豊かなものが存在する。そして学事に業務に生活に具体的にAIが導入され浸透……その進化の度合いは凄まじく学生諸氏も皆、何らかのカタチで恩恵に預かっている。しかしながら視デの培った理念との関係性において、なにを許容し、しないのか、またどこに境界を置くのか、はたまた境界などと呼べるものが存在するのかどうかも怪しく、判断しづらい悩ましい時代に入った。</p><p>卒業制作は4年間の、そして1年間のゼミの集積である。学部生117名、院生9名が何を学び、何を考え、何を捉えてきたのか、我々教員は目を凝らし注意深く読み取らなくてはならない。現れ出でた形と色だけが全てではない。その背後にある126名の1460日の内と外の何がしかを。そこには彼らの苦しみと楽しみがギチギチに詰まっているはずなのだから。</p><p>2026年度、寺山教授の後を継ぎ、主任を仰せつかることとなった。関係者にとってはなんとも心許なく頼りないことであっただろう。しかし、専任、非常勤、助教・助手、なにより学生諸君のおかげで、なんとか体裁を保つことができた（のだろうか?）。まずはひとまず、この場を借りて御礼申し上げたい。</p><p>最後に<span class="greeting-dash">―</span>。毎年ではあるが、この卒業・修了制作展の運営、展示、図録・WEB制作を自らの制作と併行して進めた制作展委員の皆々に改めてご苦労様、ありがとうと伝えたい。その苦労たるやいかばかりのものか。視覚伝達デザイン学科の卒業・修了制作展はそこをも含めての展覧会なのである。</p></div>
+            <div class="sign"><span class="dept">視覚伝達デザイン学科</span><span class="prof">主任教授　白井 敬尚</span></div>
+          </div>
+        </article>
+        <div class="pocket" aria-hidden="true">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <polygon points="0,0 47,58 0,100" class="fold" vector-effect="non-scaling-stroke"/>
+            <polygon points="100,0 53,58 100,100" class="fold" vector-effect="non-scaling-stroke"/>
+            <polygon points="0,100 50,46 100,100" class="base" vector-effect="non-scaling-stroke"/>
+          </svg>
+          <!-- 封筒の表には文字を書かない（2026-10-10「Greeting / ご挨拶」を外す → 2026-10-21 開き方の案内も外す） -->
+        </div>
+      </div>
+      </div>
+      <div id="studio-deco-gap" hidden></div>
+      <script>
+      (() => {
+        if (window.top !== window) { try { const p = new URL(document.getElementById("q-url").value.trim()).searchParams, gap = document.getElementById("studio-deco-gap"), fit = () => { const mobile = screen.width <= 690 || innerWidth <= 560, v = p.get(mobile ? "mobile-fruit-deco" : "fruit-deco"), show = v === "1" || (!v && (mobile || ["3", "4"].includes(p.get("template")))); gap.hidden = !show; gap.style.height = (mobile ? 190 : innerWidth > 690 && screen.width >= 1300 ? 480 : 260) + "px"; }; fit(); addEventListener("resize", fit); } catch (e) {} }
+        // 白の案（?white=1〜3。STUDIO が textarea に入れる。ローカルは ENV）
+        { let w = (document.getElementById('q-white') || {}).value || ''; try { const p = new URL(document.getElementById('q-url').value.trim()).searchParams; if (!/^[123]$/.test(w.trim())) w = p.get('white') || (['3', '4'].includes(p.get('template')) ? '2' : '1'); } catch (e) {} if (/^[123]$/.test(w.trim())) document.documentElement.dataset.white = w.trim(); }
+        // ご挨拶 1・2 は封筒を出さない
+        // 既定は 1（文字だけ。2026-10-29 に 3 から変えた）。?template=2 なら 2。ローカルの index.html の head と同じ
+        const GREET = (() => { try { const p = new URL(document.getElementById('q-url').value.trim()).searchParams; const k = p.get('heading-size') || 'normal'; document.documentElement.style.setProperty('--heading-scale', ({tiny:.65,small:.8,normal:1,large:1.2})[k] || 1); return document.documentElement.dataset.greet || p.get('greeting') || (['3', '4'].includes(p.get('template')) ? '2' : '1'); } catch (e) { return ''; } })();
+        if (GREET === '1' || GREET === '2') { document.getElementById('gc').style.display = 'none'; document.getElementById(GREET === '1' ? 'gp' : 'gl').classList.add('is-on'); return; }
+        const html = document.getElementById('gc'); // 状態のクラスはここに付ける（html ではない）
+        const stage = document.getElementById('stage');
+        const back = stage.querySelector('.back'), flap = stage.querySelector('.flap'), pocket = stage.querySelector('.pocket');
+        const letter = stage.querySelector('.letter'), sheet = stage.querySelector('.sheet');
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const ms = (v) => parseFloat(getComputedStyle(html).getPropertyValue(v));
+
+        // 0 = 封筒に入っている / 1 = 便箋が開いた（下端は封筒に差し込んだまま）
+        let state = 0;
+        const PAD = 48;  // 封筒の影のぶん、下に空ける
+
+        const place = () => {
+          const SW = stage.clientWidth;
+          if (!SW) return;
+          const mobile = SW < 560;
+          const SIDE = mobile ? 14 : 24;                    // 影が iframe の端で切れないよう、封筒の左右に空ける
+          const W = SW - SIDE * 2;                          // 封筒の幅
+          const envH = Math.round(W * (mobile ? .62 : .44)); // 封筒の高さ
+          const flapH = Math.round(envH * .62);             // 開いたふたの高さ（封筒の上に立っている）
+          const peek = Math.round(envH * (mobile ? .3 : .34)); // 便箋がのぞいている高さ
+          const inset = SIDE + Math.round(W * (mobile ? .05 : .045));
+          const lw = SW - inset * 2;
+          const lt = flapH - peek;                          // 便箋の上端（動かさない）
+          const inner = peek + Math.round(envH * .85);      // 封筒に入っているときの便箋の見えている＋隠れている高さ
+          sheet.style.width = lw + 'px';
+          const full = sheet.offsetHeight;
+
+          let ey = 0, lh = inner;                           // ey = 封筒を下へずらす量
+          if (state === 1) {
+            // 便箋の下端を封筒に差し込んだまま止める。差し込む深さは便箋の下の余白まで（署名の文字は隠さない）
+            const tuck = Math.max(0, parseFloat(getComputedStyle(sheet).paddingBottom) - 20);
+            lh = full; ey = lt + full - tuck - flapH;
+          }
+
+          flap.style.cssText = `left:${SIDE}px;width:${W}px;height:${flapH}px;transform:translateY(${ey}px)`;
+          back.style.cssText = pocket.style.cssText = `top:${flapH}px;left:${SIDE}px;width:${W}px;height:${envH}px;transform:translateY(${ey}px)`;
+          letter.style.left = inset + 'px'; letter.style.top = lt + 'px'; letter.style.width = lw + 'px'; letter.style.height = lh + 'px';
+          stage.style.height = Math.ceil(flapH + ey + envH + PAD) + 'px';
+        };
+
+        const open = () => {
+          if (state) return;
+          stage.setAttribute('aria-expanded', 'true'); stage.removeAttribute('tabindex'); stage.removeAttribute('role');
+          if (reduce) { html.classList.add('is-open'); state = 1; place(); return; }
+          html.classList.add('is-anim', 'is-open');
+          state = 1; place();
+          setTimeout(() => html.classList.remove('is-anim'), ms('--t-open'));
+        };
+
+        stage.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') open(); });
+        stage.addEventListener('click', open);
+        stage.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+
+        // 幅が変わったら置き直す（動いている途中なら、そのまま transition に任せる）
+        let lastW = 0;
+        new ResizeObserver(() => { const W = stage.clientWidth; if (W !== lastW) { lastW = W; place(); } }).observe(stage);
+        if (document.fonts) document.fonts.ready.then(place);
+        place();
+      })();
+      </script>
+
+    </div>
+    <!-- greeting-c:end -->
+    <div class="section__body reveal">
+      <p>視覚伝達デザイン学科はその名称の冠に「視覚」と付くが、視デの教育は視覚のみに特化したものでなく、聴覚、嗅覚、味覚、触覚と五感にもとづく伝達（コミュニケーション）をその基盤としてきた。なかでも学生自身の肉体から導き出される身体性、そして調査・体験・観察・発見・分析へと進むステップから導き出される<ruby>理<rt>ことわり</rt></ruby>は最も重要視されてきた。ここ数年その成果は顕著に表れている。これもひとえに視デ中興の祖、勝井三雄教授をはじめとする歴代の主任教授陣の存在もさることながら、30年以上にわたって影に日向に視デを支えてきた前主任教授の寺山祐策教授の理念と信念の賜物だといえよう。</p>
+      <p>近年、視デの専任教員の陣容は若手を中心に大きく様変わりをした。それに伴い卒業制作の領域は拡張と厚みを増し、同時に、その枠組みに留まるだけでなく、そこから飛躍（逸脱）するという新たな芽も出始めている。ここに掲載された卒業制作はいずれもその末端であり最先端に位置するものだ。そこには知と美と技は無論のこと、主観と客観を行き来する感情、感覚、感性、そして精神性という豊かなものが存在する。そして学事に業務に生活に具体的にAIが導入され浸透……その進化の度合いは凄まじく学生諸氏も皆、何らかのカタチで恩恵に預かっている。しかしながら視デの培った理念との関係性において、なにを許容し、しないのか、またどこに境界を置くのか、はたまた境界などと呼べるものが存在するのかどうかも怪しく、判断しづらい悩ましい時代に入った。</p>
+      <p>卒業制作は4年間の、そして1年間のゼミの集積である。学部生117名、院生9名が何を学び、何を考え、何を捉えてきたのか、我々教員は目を凝らし注意深く読み取らなくてはならない。現れ出でた形と色だけが全てではない。その背後にある126名の1460日の内と外の何がしかを。そこには彼らの苦しみと楽しみがギチギチに詰まっているはずなのだから。</p>
+      <p>2026年度、寺山教授の後を継ぎ、主任を仰せつかることとなった。関係者にとってはなんとも心許なく頼りないことであっただろう。しかし、専任、非常勤、助教・助手、なにより学生諸君のおかげで、なんとか体裁を保つことができた（のだろうか?）。まずはひとまず、この場を借りて御礼申し上げたい。</p>
+      <p>最後に<span class="greeting-dash">―</span>。毎年ではあるが、この卒業・修了制作展の運営、展示、図録・WEB制作を自らの制作と併行して進めた制作展委員の皆々に改めてご苦労様、ありがとうと伝えたい。その苦労たるやいかばかりのものか。視覚伝達デザイン学科の卒業・修了制作展はそこをも含めての展覧会なのである。</p>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       5. 開催概要
+       ========================================================== -->
+  <section class="section" id="outline">
+    <div class="deco deco--right" data-deco="sawada" style="--top:-10%; --w:340px; --r:6deg"
+         data-wide="between #outline #access" data-narrow="between #outline #access"></div>
+    <div class="section__head reveal">
+      <h2 class="section__title">開催概要</h2>
+    </div>
+    <dl class="deflist reveal">
+      <div class="deflist__row">
+        <dt>会期</dt>
+        <dd class="is-lead"><time datetime="2027-01-14">2027年1月14日<span class="weekday-mark">木</span></time>から<time datetime="2027-01-17">17日<span class="weekday-mark">日</span></time></dd>
+      </div>
+      <div class="deflist__row">
+        <dt>開館時間</dt>
+        <dd class="is-lead">9時から17時（最終入場16時）</dd>
+      </div>
+    </dl>
+    <div class="layout1-only layout1-grid layout1-outline reveal">
+      <div class="layout1-row">
+        <h3>会期</h3>
+        <div><p>2027年1月14日<span class="weekday-mark">木</span>から17日<span class="weekday-mark">日</span></p><p>9時開場－17時閉場（最終入場16時）</p></div>
+      </div>
+      <div class="layout1-row">
+        <h3>会場</h3>
+        <div><p>武蔵野美術大学 鷹の台キャンパス</p><p>〒187－8505 東京都小平市小川町1－736</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       6. アクセス
+       ========================================================== -->
+  <section class="section" id="access">
+    <div class="deco deco--left" data-deco="nakano" style="--w:230px; --r:14deg"
+         data-wide="between #access #exhibition-places" data-narrow="between #access #exhibition-places"></div>
+    <div class="section__head reveal">
+      <h2 class="section__title">アクセス</h2>
+    </div>
+
+    <div class="section__body reveal">
+      <dl class="deflist">
+        <div class="deflist__row">
+          <dt>会場</dt>
+          <dd class="is-lead">武蔵野美術大学 鷹の台キャンパス</dd>
+        </div>
+        <div class="deflist__row">
+          <dt>住所</dt>
+          <dd class="is-lead">〒187-8505 東京都小平市小川町1丁目736</dd>
+        </div>
+      </dl>
+
+      <dl class="deflist deflist--compact">
+        <div class="deflist__row">
+          <dt>鷹の台駅から</dt>
+          <dd>徒歩20分</dd>
+        </div>
+        <div class="deflist__row">
+          <dt>国分寺駅から</dt>
+          <dd>北口より西武バス「武蔵野美術大学」行き、または「小平営業所」行き 約30分</dd>
+        </div>
+        <div class="deflist__row">
+          <dt>立川駅から</dt>
+          <dd>北口より立川バス「武蔵野美術大学」行き 約25分</dd>
+        </div>
+      </dl>
+
+      <figure class="map" data-fallback="会場案内図を assets/img/map.png に配置">
+        <!-- 会場案内図：STUDIO で使用中の画像を assets/img/ に置いて差し替え -->
+        <img src="assets/img/map-v4.png?v=20261111" alt="鷹の台駅から武蔵野美術大学 鷹の台キャンパスまでの案内図"
+             loading="lazy" width="1260" height="1149"
+             onerror="this.closest('.map').classList.add('is-empty'); this.remove();">
+      </figure>
+
+      <ul class="linklist">
+        <li><a href="https://www.google.com/maps/search/?api=1&query=%E6%AD%A6%E8%94%B5%E9%87%8E%E7%BE%8E%E8%A1%93%E5%A4%A7%E5%AD%A6%20%E9%B7%B9%E3%81%AE%E5%8F%B0%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%91%E3%82%B9" target="_blank" rel="noopener">Googleマップで見る</a></li>
+        <li><a href="https://www.musabi.ac.jp/access/" target="_blank" rel="noopener">詳しいアクセス方法（大学公式サイト）</a></li>
+      </ul>
+    </div>
+    <div class="layout1-only layout1-grid layout1-access reveal">
+      <div class="layout1-row layout1-row--media">
+        <h3>鷹の台駅から</h3>
+        <div class="layout1-access__content">
+          <figure class="layout1-map">
+            <img src="assets/img/map-v4.png?v=20261111" alt="鷹の台駅から武蔵野美術大学 鷹の台キャンパスまでの案内図" loading="lazy" width="1260" height="1149">
+          </figure>
+          <p>徒歩20分</p>
+          <ul class="layout1-linklist">
+            <li><a href="https://www.google.com/maps/search/?api=1&query=%E6%AD%A6%E8%94%B5%E9%87%8E%E7%BE%8E%E8%A1%93%E5%A4%A7%E5%AD%A6%20%E9%B7%B9%E3%81%AE%E5%8F%B0%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%91%E3%82%B9" target="_blank" rel="noopener">Googleマップで見る</a></li>
+            <li><a href="https://www.musabi.ac.jp/access/" target="_blank" rel="noopener">詳しいアクセス方法（大学公式サイト）</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="layout1-row"><h3>国分寺駅から</h3><p>北口より西武バス「武蔵野美術大学」行き、または「小平営業所」行き 約30分</p></div>
+      <div class="layout1-row"><h3>立川駅から</h3><p>北口より立川バス「武蔵野美術大学」行き 約25分</p></div>
+    </div>
+  </section>
+
+  <!-- ==========================================================
+       4. 作品一覧（ゼミごとの入口）
+       ゼミ名は今は 2024年度モックのもの。2026年度の名簿が出たら差し替え。
+       リンク先の works/ は ?seminar= で絞り込んだ状態で開く
+       ========================================================== -->
+  <section class="section" id="exhibition-places">
+    <!-- 展示場所案内 -->
+    <!-- campus-map:start -->
+    <figure class="home-campus place__overview" id="home-campus">
+      <figcaption><h2 class="place__lead">展示場所</h2></figcaption>
+      <div class="place__mapbox">
+        <img id="home-campus-img" src="assets/img/map/campus-1106-clear.png?v=1109" width="1026" height="1227" alt="キャンパス全体図" loading="lazy">
+        <button type="button" class="place__bld" data-building="12号館" style="left:60.5%;top:26%;width:13%;height:11.5%" aria-label="12号館のフロアマップ"></button>
+        <button type="button" class="place__bld" data-building="8号館" style="left:60.5%;top:40%;width:13%;height:21%" aria-label="8号館のフロアマップ"></button>
+        <button type="button" class="place__bld" data-building="9号館" style="left:50.5%;top:65.4%;width:22.5%;height:7.3%" aria-label="9号館のフロアマップ"></button>
+        <button type="button" class="place__bld" data-building="10号館" style="left:60.5%;top:74.3%;width:13%;height:15.5%" aria-label="10号館のフロアマップ"></button>
+        <button type="button" class="place__bld" data-building="10号館前芝生" style="left:50.5%;top:83%;width:9.4%;height:7%" aria-label="10号館前芝生の位置を見る"></button>
+        <button type="button" class="place__bld" data-building="美術館前芝生" style="left:30.5%;top:39.5%;width:18%;height:11%" aria-label="美術館前芝生の位置を見る"></button>
+      </div>
+      <div class="floor-guide-buildings" aria-label="場所を選択">
+        <!-- 地図の上から順（今の地図で。向きを変えても並びは変えない。2026-11-08） --><button type="button" data-building="12号館">12号館</button><button type="button" data-building="美術館前芝生">美術館前芝生</button><button type="button" data-building="8号館">8号館</button><button type="button" data-building="9号館">9号館</button><button type="button" data-building="10号館">10号館</button><button type="button" data-building="10号館前芝生">10号館前芝生</button>
+      </div>
+    </figure>
+    <script>
+    // 展示場所マップの向き（?campus-map=north / west。既定 west。no は非表示（index.html の head）。2026-11-08）。
+    // 画像は別に作る。置き場所は SRC のパス。w・h は画像の px。pos は建物ボタンの位置（地図の幅・高さに対する %：[left, top, width, height]）。
+    // pos を null にした建物は上の button の style のまま。画像が無いあいだは今の地図（campus-1106-clear.png）を出す。
+    (function () {
+      var DIRS = {
+        north: { src: 'assets/img/map/campus-north.png?v=1109y', w: 1307, h: 1026, baseW: 1227, baseH: 1026, pos: {
+          '12号館': [26, 25.4, 10.4, 15], '8号館': [61.7, 26.6, 2.6, 12.3], '9号館': [65.4, 27, 7.3, 22.5], '10号館': [74.3, 26.5, 15.5, 13], '10号館前芝生': [74.5, 39.9, 15.1, 9.7], '美術館前芝生': [39.5, 51.5, 11, 18] } },
+        west: { src: 'assets/img/map/campus-west.png?v=1109u', w: 1106, h: 1307, baseW: 1026, baseH: 1227, pos: {
+          '12号館': [60.5, 26, 13, 11.5], '8号館': [61.2, 61.7, 12.2, 2.6], '9号館': [50.5, 65.4, 22.5, 7.3], '10号館': [60.5, 74.3, 13, 15.5], '10号館前芝生': [50.5, 74.5, 9.5, 15.1], '美術館前芝生': [30.5, 39.5, 18, 11] } }
+      };
+      var FALLBACK = 'assets/img/map/campus-1106-clear.png?v=1109';
+      var mapChoice = new URLSearchParams(location.search).get('campus-map');
+      var dir = mapChoice === 'north' || mapChoice === '1' ? 'north' : 'west';
+      var d = DIRS[dir], fig = document.getElementById('home-campus'), img = document.getElementById('home-campus-img');
+      if (!fig || !img) return;
+      fig.dataset.dir = dir;
+      img.onerror = function () { img.onerror = null; img.src = FALLBACK; img.width = 1026; img.height = 1227; };
+      img.width = d.w; img.height = d.h; img.src = d.src;
+      fig.querySelectorAll('.place__bld').forEach(function (b) {
+        var p = d.pos[b.dataset.building];
+        if (p) { b.style.left = (p[0] * d.baseW / d.w) + '%'; b.style.top = (p[1] * d.baseH / d.h) + '%'; b.style.width = (p[2] * d.baseW / d.w) + '%'; b.style.height = (p[3] * d.baseH / d.h) + '%'; }
+      });
+    })();
+    </script>
+    <!-- campus-map:end -->
+  </section>
+
+  <section class="section" id="handouts">
+    <div class="deco deco--right" data-deco="in" style="--w:270px; --r:-6deg"
+         data-wide="between #exhibition-places #handouts" data-narrow="between #exhibition-places #handouts"></div>
+    <div class="section__head reveal">
+      <h2 class="section__title">配布物情報</h2>
+    </div>
+    <!-- 配布物の画像は仮モック。実物の写真ができたら差し替え -->
+    <div class="handouts reveal">
+      <figure class="handout handout--catalog">
+        <div class="handout__photos">
+          <img src="assets/img/handouts/catalog.jpg" alt="図録の全体（仮イメージ）" loading="lazy" width="1600" height="1200">
+          <img src="assets/img/handouts/catalog-detail-mock.jpg" alt="図録の拡大（仮イメージ）" loading="lazy" width="1600" height="1200">
+        </div>
+        <figcaption>
+          <p class="handout__name">図録</p>
+          <p class="handout__desc">今年も数量限定にて、本年度の卒業制作の作品を掲載した 展示図録を配布いたします。<br>配布場所については後日公開。</p>
+        </figcaption>
+      </figure>
+      <figure class="handout">
+        <img src="assets/img/handouts/leaflet.jpg" alt="リーフレット（仮イメージ）"
+             loading="lazy" width="1600" height="1200">
+        <figcaption>
+          <p class="handout__name">リーフレット</p>
+          <p class="handout__desc">配布場所については後日公開</p>
+        </figcaption>
+      </figure>
+      <figure class="handout">
+        <img src="assets/img/handouts/dm-mock.png" alt="DM（仮イメージ）"
+             loading="lazy" width="1448" height="1086">
+        <figcaption>
+          <p class="handout__name">DM</p>
+          <p class="handout__desc">配布場所については後日公開</p>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="layout1-only layout1-grid layout1-handouts reveal">
+      <figure class="layout1-row layout1-catalog">
+        <h3>図録</h3>
+        <figcaption><div class="handout__photos"><img src="assets/img/handouts/catalog.jpg" alt="図録の全体（仮イメージ）" loading="lazy" width="1600" height="1200"><img src="assets/img/handouts/catalog-detail-mock.jpg" alt="図録の拡大（仮イメージ）" loading="lazy" width="1600" height="1200"></div><p>今年も数量限定にて、本年度の卒業制作の作品を掲載した 展示図録を配布いたします。<br>配布場所については後日公開。</p></figcaption>
+      </figure>
+      <figure class="layout1-row">
+        <h3>リーフレット</h3>
+        <figcaption><img src="assets/img/handouts/leaflet.jpg" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>配布場所については後日公開</p></figcaption>
+      </figure>
+      <figure class="layout1-row">
+        <h3>DM</h3>
+        <figcaption><img src="assets/img/handouts/dm-mock.png" alt="DM（仮イメージ）" loading="lazy" width="1448" height="1086"><p>配布場所については後日公開</p></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="student-works">
+    <div class="section__head reveal" id="seminar-introduction">
+      <h2 class="section__title"><span class="works-heading">作品・展示場所</span><span class="fruit-intro-heading">ゼ実の紹介</span></h2>
+    </div>
+    <!-- ゼミごとのにじみ画像（ゼ実/にじみ）と線画（ゼ実/線画）を重ねて、無造作に散らす。
+         位置・幅・傾きは 1000×1350 の台紙上の px として style の変数で持つ（CSS が % に直す）。
+         齋藤ゼミは2026年度は無いので外した（2026-10-21）。
+         寺山・北崎はにじみ画像に別の線画が焼き込まれているので、線画は重ねない（重ねると二重になる） -->
+    <!-- デザイン B・C のゼミ一覧（studio-embed/seminars/embed.html。STUDIO の Home B と同じ埋め込み。付け根を軸に揺れる）。印の間は build-local.mjs が書き換える。手で直さない -->
+    <!-- seminars-b:start -->
+    <div class="seminars-b">
+      <!-- トップの「作品一覧」ブロック（ゼミ一覧）。HTML 版の .seminar-scatter と script.js の「ぷるん」を1枚にしたもの。
+           STUDIO の Image 要素では JS が動かず hover で揺らせないので、絵とラベルをまとめて Iframe に入れる。
+           Iframe は ゼミ一覧の Box（1000×1150 の縦横比）の中に 位置=絶対・上下左右 -40px（幅・高さ calc(100% + 80px)）で置く。
+           絵は seminar-<slug>.webp（build.py で にじみ＋線画を合成し傾きを焼き込んだもの）。URL は SRC（環境で違う。build が入れる）。
+           位置は STUDIO 版のゼミ一覧（Image 10枚＋テキスト11個）を実測した値（台紙に対する %）。
+           リンクは下の textarea（STUDIO が親ページの URL に置き換える。ローカルは ENV が入れる）と ROUTES から組み立てて target="_top" で開く。
+           ※ textarea 以外に波かっこ2つを書かないこと（STUDIO に置き換えられる） -->
+      <textarea id="q-url" hidden></textarea>
+      <textarea id="q-white" hidden></textarea>
+      <script>
+        // ローカル：STUDIO が置き換える値（ページの URL とクエリ）を、ページの URL から上の textarea に入れる
+        (() => { const p = new URLSearchParams(location.search); document.querySelectorAll('textarea[id^="q-"]').forEach((t) => { const k = t.id.slice(2); t.value = k === 'url' ? location.href : (p.get(k) || ''); }); })();
+      </script>
+      <style>
+        /* 台紙（ゼミ一覧の Box と同じ大きさ）の外側に PAD ずつ余白を取る。STUDIO 側は Iframe を Box から上下左右 PAD はみ出させて置く
+           （絵が台紙から少しはみ出している＋揺れでふくらむので、ぴったりだと端が切れる） */
+        /* 白（?white=1〜3。2 が既定）。STUDIO の iframe の中ではここで決める。ローカルではページの style.css と同じ値 */
+        :root { --paper-rgb: 253 252 248; }
+        :root[data-white="1"] { --paper-rgb: 255 255 255; }
+        :root[data-white="3"] { --paper-rgb: 251 248 241; }
+        .sb {
+          --white: rgb(var(--paper-rgb, 253 252 248)); /* 白：ページのトークンがあればそれ */
+          position: absolute; inset: 0;
+          .board { position: absolute; inset: 40px; }
+          .board a { position: absolute; display: block; color: var(--white); text-decoration: none; -webkit-tap-highlight-color: transparent; }
+          .board a.short-grid-fruit { aspect-ratio: 1; }
+          .board a.short-grid-fruit img { width: 100%; height: 100%; object-fit: contain; }
+          .board img {
+            display: block; width: 100%; height: auto;
+            /* 揺れ（値はばねが毎フレーム入れる）。根元（下寄り）を支点にする */
+            transform-origin: 50% 92%;
+            transform: skewX(var(--wob-skew, 0deg)) scale(var(--wob-sx, 1), var(--wob-sy, 1));
+          }
+          .label {
+            z-index: 2;
+            transform: translateX(-50%);
+            padding: 6px;
+            font-family: "Work Sans", "Zen Kaku Gothic New", sans-serif;
+            font-size: 16px; font-weight: 700; line-height: 1.4;
+            white-space: nowrap;
+            transition: background-color .25s ease, color .25s ease;
+          }
+          .label.is-hover { background: var(--white); color: #bd3124; }
+          @media (max-width: 640px) { .label { padding: 3px; font-size: 12px; } }
+        }
+        /* FLOW（STUDIO のトップ。2026-10-28）：見出し「作品・展示場所」もこの中で描き、高さは中身に合わせる（STUDIO が iframe の高さを変える）。
+           ページの ?works=no（トップの切り替え「Works」）のときは何も描かず高さ 0 にして、セクションごと消えたように見せる。
+           STUDIO 側は見出しの Text を隠し、ゼミ一覧の Box は縦横比なし・高さ auto、iframe は位置=相対・外側に -40px（PAD）のマージン */
+        .sb-h { display: none; }
+        html.is-flow, html.is-flow body { height: auto; }
+        /* セクションの上下の余白（ローカルの .section の clamp(60px, 9vh, 100px)）も、STUDIO のセクションからこの中に移した（?works=no で余白ごと消えるように。2026-10-29）。
+           iframe の中の vh は iframe の高さなので、--sec-pad は JS が端末の画面の高さから見積もる */
+        html.is-flow .sb { position: relative; inset: auto; padding: calc(40px + var(--sec-pad, 80px)) 40px; }
+        html.is-flow .sb .board { position: relative; inset: auto; aspect-ratio: 1000 / 1150; }
+        html.is-flow.is-mobile .sb .board { aspect-ratio: 1000 / 1850; }
+        html.is-flow .sb-h { display: block; margin: 0 0 48px; font-family: "Work Sans", "Zen Kaku Gothic New", sans-serif; font-size: calc(40px * var(--heading-scale,1)); font-weight: 700; line-height: 1.4; color: rgb(var(--paper-rgb)); }
+        @media (max-width: 599px) { html.is-flow .sb-h { font-size: calc(28px * var(--heading-scale,1)); } }
+        html.is-noworks .sb { display: none; }
+        .sb-all { display:none; }
+        html.is-flow .sb-all { display:block; text-align:right; margin: 24px 0 0; font: 400 16px/1.8 "Work Sans", "Zen Kaku Gothic New", sans-serif; }
+        .sb-all a { display:inline-block; color:rgb(var(--paper-rgb)); text-decoration:none; border-bottom:1px solid currentColor; }
+        .sb-all a::after { content:" →"; }
+        /* キャンパスマップ（FLOW のときだけ。ゼミ一覧の下。ローカルの style.css の body.home .home-campus と同じ。?campus-map=no で隠す。2026-10-29）
+           中身は home-b/build-seminars.mjs が .sb の末尾の印に入れる（建物ごとの作品数のバッジ。押すと作品一覧の場所ごとのその建物へ） */
+        .campus { display: grid; gap: 10px; width: 100%; margin: 48px 0 0; }
+        .campus .place__lead { margin: 0; font-size: calc(clamp(28px, 4vw, 40px) * var(--heading-scale, 1)); font-weight: 700; line-height: 1.4; }
+        html.is-nocampus .campus { display: none; }
+        .campus .place__mapbox { position: relative; width: min(400px, 100%); margin-inline: auto; }
+        .campus .place__mapbox img { display: block; width: 100%; height: auto; }
+        .campus .place__bld { position: absolute; box-sizing: border-box; display: grid; place-items: center; border: 2px solid rgb(255 225 77 / .75); background: rgb(255 225 77 / .1); text-decoration: none; transition: background-color .2s, border-color .2s; }
+        .campus .place__bld:hover, .campus .place__bld:focus-visible { border-color: #ffe14d; background: rgb(255 225 77 / .3); outline: none; }
+        .campus .place__badge { position: absolute; top: -12px; right: -12px; display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 8px; box-sizing: border-box; border-radius: 999px; background: #ffe14d; color: #6b2f22; font-family: "Work Sans", "Zen Kaku Gothic New", sans-serif; font-size: 14px; font-weight: 700; line-height: 1; }
+      </style>
+      <div class="sb"><h2 class="sb-h">作品・展示場所</h2><div class="board" id="board"></div><p class="sb-all"><a id="all-works" target="_top">すべての作品を見る</a></p></div>
+      <script>
+      (() => {
+        // 白の案（?white=1〜3。STUDIO が textarea に入れる。ローカルは ENV）
+        { let w = (document.getElementById('q-white') || {}).value || ''; try { const p = new URL(document.getElementById('q-url').value.trim()).searchParams; if (!/^[123]$/.test(w.trim())) w = p.get('white') || (['3', '4'].includes(p.get('template')) ? '2' : '1'); } catch (e) {} if (/^[123]$/.test(w.trim())) document.documentElement.dataset.white = w.trim(); }
+        // FLOW（見出しも描いて高さを中身に合わせる）。home-b/build-seminars.mjs が STUDIO のトップ用にこの行を true に書き換える
+        const FLOW = false;
+        if (FLOW) {
+          document.documentElement.classList.add('is-flow');
+          { const H = Math.max(0, (screen.availHeight || 900) - 120); document.documentElement.style.setProperty('--sec-pad', Math.round(Math.min(100, Math.max(60, H * 0.09))) + 'px'); }
+          try { if (new URL(document.getElementById('q-url').value.trim()).searchParams.get('works') === 'no') { document.documentElement.classList.add('is-noworks'); return; } } catch (e) {}
+        }
+        try { const p = new URL(document.getElementById('q-url').value.trim()).searchParams, k = p.get('heading-size') || 'normal'; document.documentElement.style.setProperty('--heading-scale', ({tiny:.65,small:.8,normal:1,large:1.2})[k] || 1); } catch (e) {}
+        // 線の密度や実の面積に合わせて大きさを見た目で揃え、絵とラベルを少しずつずらして並べる。
+        const ITEMS = [
+          ['ishizuka', '石塚ゼミ', [7.23, 8.75, 24.50], [19.48, 32.01]], // 2026-11-08 に右下へ 5% ずつ（元は [2.23, 3.75] / [14.48, 27.01]）
+          ['shirai', '白井ゼミ', [35.56, 0.00, 26.00], [48.56, 29.44]],
+          ['sawada', '沢田ゼミ', [61.00, 14.21, 26.00], [74.00, 36.56]], // 2026-11-08 に左へ 10%・下へ 6%（元は [71.00, 8.21] / [84.00, 30.56]）
+          ['terayama', '寺山ゼミ', [0.00, 35.87, 30.00], [15.00, 62.66]],
+          ['nakano', '中野ゼミ', [30.00, 32.00, 23.00], [41.50, 59.20]], // 2026-11-08 に右へ 2%（元は [28.00] / [39.50]）
+          ['goto', '後藤ゼミ', [8.26, 67.68, 22.00], [19.26, 93.16]], // 2026-11-08 に右へ 4%・下へ 4%（元は [4.26, 63.68] / [15.26, 89.16]）
+          ['furugen', '古堅ゼミ', [54.93, 43.32, 22.00], [65.93, 65.60]], // 2026-11-08 に右へ 2%・上へ 2%（元は [52.93, 45.32] / [63.93, 67.60]）
+          ['kitazaki', '北崎ゼミ', [30.13, 59.00, 30.00], [45.13, 91.05]], // 2026-11-08 に左へ 3%・上へ 5%（元は [33.13, 64.00] / [48.13, 96.05]）
+          ['ota', '大田ゼミ', [80.87, 36.23, 21.00], [91.37, 62.61]], // 2026-11-08 に右へ 2%（元は [78.87] / [89.37]）
+          ['in', '大学院', [65.90, 67.11, 25.00], [78.40, 85.83]], // 2026-11-08 に左へ 4%（元は [69.90] / [82.40]）
+        ];
+        // スマホは 2・3・2・3 の4段にして、一つひとつを大きく見せる。
+        // 2026-11-08 に間隔をそろえた（元は shirai [55, 1]・terayama [35, 25]・nakano [70, 26]・goto [7, 50]・kitazaki [0, 75]・ota [35, 75]）：
+        //   2段目の左右のすき間（58px / 123px）を寺山で、4段目（130px / 106px）を大田でならし、
+        //   白井ラベル→中野の実（7px）と後藤ラベル→北崎の実（6px）の詰まりを広げた（台紙 1000×1850 換算）
+        const MOBILE_ITEMS = {
+          ishizuka: [9, 0, 38], shirai: [55, 0, 38], // 石塚は 11-08 に右へ 2%（元は 7）
+          sawada: [0, 26, 30], terayama: [35.5, 27.5, 31], nakano: [70, 26.5, 30],
+          goto: [8, 45, 37], furugen: [51.5, 52.5, 37], // 後藤は 11-08 にさらに右上へ 3%
+          kitazaki: [2, 72, 31], ota: [34, 75, 30], in: [70, 77, 30]
+        };
+        const mobileBoard = { matches: false, listeners: [], addEventListener(_, fn) { this.listeners.push(fn); } };
+        const setMobileBoard = () => { const v = screen.width <= 690 || innerWidth <= (window.top === window ? 690 : 560); document.documentElement.classList.toggle('is-mobile', v); if (v !== mobileBoard.matches) { mobileBoard.matches = v; mobileBoard.listeners.forEach(fn => fn()); } };
+        setMobileBoard(); addEventListener('resize', setMobileBoard);
+        const SRC = {"pic":{"ishizuka":"assets/img/seminars/seminar-ishizuka.webp?v=1030","shirai":"assets/img/seminars/seminar-shirai.webp?v=1030","sawada":"assets/img/seminars/seminar-sawada.webp?v=1030","terayama":"assets/img/seminars/seminar-terayama.webp?v=1030","nakano":"assets/img/seminars/seminar-nakano.webp?v=1030","goto":"assets/img/seminars/seminar-goto.webp?v=1030","furugen":"assets/img/seminars/seminar-furugen.webp?v=1030","kitazaki":"assets/img/seminars/seminar-kitazaki.webp?v=1030","ota":"assets/img/seminars/seminar-ota.webp?v=1030","in":"assets/img/seminars/seminar-in.webp?v=1030"}};       // { pic: { slug: 絵の URL } }
+        const ROUTES = {"home":"./","works":"works/"}; // { home: サイトのトップ（このページからの相対）, works: 作品一覧（トップからの相対） }
+        // リンク先：作品一覧（既定の案 D。白は引き継ぐ）。STUDIO（MODE 'page'）はページ名の末尾、ローカル（'query'）は ?design=
+        const MODE = "query", DEFAULT = {"home":"c","works":"e","work":"d"};
+        const white = (() => { try { return new URL(document.getElementById('q-url').value.trim()).searchParams.get('white') || ''; } catch { return ''; } })();
+        const toWorks = (base, params = {}) => {
+          const d = DEFAULT.works;
+          const u = new URL(ROUTES.works, base); // STUDIO は /works が既定の案（D）のページ
+          for (const [k, v] of Object.entries(params)) if (v) u.searchParams.set(k, v);
+          if (MODE === 'query' && d !== 'a') u.searchParams.set('design', d);
+          if (/^[13]$/.test(white)) u.searchParams.set('white', white);
+          return u.href;
+        };
+
+        // 親ページの URL から作品一覧の URL を作る。/home-b など別ページに置いても、サイトのトップ基準の works を指す
+        let base = null;
+        try {
+          const pageUrl = new URL(document.getElementById('q-url').value.trim());
+          // ライブプレビューのトップは /live/<id>（末尾スラッシュなし）。通常の ./ 解決では ID が落ちる。
+          if (MODE === 'page' && /^\/live\/[^/]+$/.test(pageUrl.pathname)) pageUrl.pathname += '/';
+          base = new URL(ROUTES.home, pageUrl); base.search = ''; base.hash = '';
+        } catch { base = null; }
+        document.getElementById('all-works').href = base ? toWorks(base) : ROUTES.works;
+        const href = (slug) => (base ? toWorks(base, { seminar: slug }) : ROUTES.works + '?seminar=' + slug);
+        // キャンパスマップ（FLOW のときだけある）：作品一覧へ。押したら「場所ごと」で開いてその建物の見出しへ（designs/works-e.js が sessionStorage を読む）
+        const campus = document.querySelector('.campus');
+        if (campus) {
+          try { if (new URL(document.getElementById('q-url').value.trim()).searchParams.get('campus-map') === 'no') document.documentElement.classList.add('is-nocampus'); } catch (e) {}
+          campus.querySelectorAll('.place__bld').forEach((a) => { a.href = base ? toWorks(base) : ROUTES.works; a.target = '_top'; });
+          campus.addEventListener('click', (e) => { const a = e.target.closest('.place__bld'); if (!a) return; try { sessionStorage.removeItem('vcd2026-works-filter'); sessionStorage.setItem('vcd2026-works-order', 'place'); sessionStorage.setItem('vcd2026-works-jump', a.dataset.place); } catch (er) {} });
+        }
+
+        const board = document.getElementById('board');
+        const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // ばね（HTML 版 script.js の「4. ゼミの実」と同じ値）
+        const K = 420, C = 16, PUSH = 20, SQUASH = 0.9;
+
+        // 揺れ方の切り替え。false：形をゆがめて揺れる（HTML 版と同じ。Home）／true：形は変えず、支点を軸に回って揺れる（Home B）
+        // Home B のビルド（home-b/build-seminars.mjs）がこの行を true に書き換える
+        const SWAY = true;
+        // ページの ?fruit-anim=1（ゆがむ）/ 2（付け根で回る）が上の決め打ちより優先（2026-10-28。トップの切り替え「Fruit button anim.」）。
+        // ページの URL は q-url から読む（STUDIO がページの URL に置き換える。ローカルは ENV が入れる）。読めなければこの文書の URL
+        const FQ = (() => { try { return new URL(document.getElementById('q-url').value.trim()).searchParams.get('fruit-anim'); } catch (e) { try { return new URLSearchParams(location.search).get('fruit-anim'); } catch (e2) { return null; } } })();
+        const FRUIT = FQ === '1' ? false : FQ === '2' ? true : null;
+        // ?fruit-anim=3：揺らさず、マウスを乗せると少し大きくなるだけ（2026-10-28）
+        const GROW = FQ === '3', GROW_SCALE = 1.06;
+        // SWAY のときの支点＝実の付け根（茎・ヘタの先端）。絵に対する [x%, y%]
+        // seminars/pivots.py が画像から求めた値（向きを決めると、その向きにいちばん遠い画素を付け根とする）。向きを変えたら流し直して貼る
+        const PIVOT = { furugen: [11.7, 81.8], goto: [45.6, 13.2], in: [61.5, 92.4], ishizuka: [85.2, 4.2], kitazaki: [79.0, 38.3], nakano: [59.7, 5.0], ota: [63.2, 3.3], sawada: [45.8, 93.0], shirai: [96.7, 14.2], terayama: [5, 80] };
+        // 各画像の透明余白を除いた下端。画像サイズに追従して名前との間隔を揃える。
+        const GRID_LAYOUT = document.documentElement.dataset.fruitLayout;
+        const SHORT_GRID = ['grid3', 'grid4', 'grid5'].includes(GRID_LAYOUT);
+  document.documentElement.classList.toggle('is-scatter-board', !SHORT_GRID);
+              const VISIBLE_BOTTOM = { ishizuka: 865/900, shirai: 793/900, sawada: 840/862, terayama: 871/900, nakano: 869/900, goto: 0.92, furugen: 0.85, kitazaki: 0.80, ota: 869/900, in: 725/746 };
+        // SWAY のばね：硬めで、はじかれたように速く小刻みに振れて 1 秒ほどで止まる。KICK は最大の振れ（度）
+        // （2026-10-10：最初は SK 60 / SC 3 / KICK 6 のゆっくりした揺れ → 「もう少し弾けて硬い感じに」で変更）
+        const SK = 280, SC = 8, KICK = 5;
+        // SWAY でも形のゆがみ（Home の揺れ）をかすかに重ねる。1 で Home と同じ強さ、0 で回転だけ
+        const DEFORM = 0.3;
+
+        // 無造作配置は No.01 から左→右、上→下。座標は元の散らし方を維持する。
+  const SCATTER_ORDER = ['ishizuka', 'ota', 'kitazaki', 'goto', 'sawada', 'shirai', 'terayama', 'nakano', 'furugen', 'in'];
+  const DESKTOP_SLOTS = ['ishizuka', 'shirai', 'sawada', 'terayama', 'nakano', 'furugen', 'ota', 'goto', 'kitazaki', 'in'];
+  const MOBILE_SLOTS = ['ishizuka', 'shirai', 'sawada', 'terayama', 'nakano', 'goto', 'furugen', 'kitazaki', 'ota', 'in'];
+  const displayItems = SHORT_GRID ? ITEMS : [...ITEMS].sort((a, b) => SCATTER_ORDER.indexOf(a[0]) - SCATTER_ORDER.indexOf(b[0]));
+  displayItems.forEach(([slug, name, originalPic, originalLab]) => {
+    const rank = SCATTER_ORDER.indexOf(slug);
+    const desktopCenters = [23, 52, 81, 12, 37, 62, 87, 21, 52, 83];
+    const desktopRows = [10, 8, 10, 35, 36, 40, 39, 61, 65, 64];
+    const desktopWidth = rank >= 3 && rank <= 6 ? Math.min(originalPic[2], 22) : originalPic[2];
+    const pic = SHORT_GRID ? originalPic : [desktopCenters[rank] - desktopWidth / 2, desktopRows[rank], desktopWidth];
+    const lab = SHORT_GRID ? originalLab : [desktopCenters[rank], desktopRows[rank]];
+          const file = SRC.pic[slug];
+          const link = (cls) => {
+            const a = document.createElement('a');
+            a.href = href(slug); a.target = '_top';
+            if (cls) a.className = cls;
+            board.appendChild(a);
+            return a;
+          };
+          const label = link('label');
+          label.textContent = name; // 矢印（→）は外した（2026-11-08）
+          label.style.left = lab[0] + '%'; label.style.top = lab[1] + '%';
+
+          const hover = (on) => label.classList.toggle('is-hover', on);
+          label.addEventListener('pointerenter', () => hover(true));
+          label.addEventListener('pointerleave', () => hover(false));
+          if (!pic || !file) return;
+
+          const a = link();
+                if (SHORT_GRID) a.classList.add('short-grid-fruit');
+          a.setAttribute('aria-hidden', 'true'); a.tabIndex = -1;  // ラベルと同じリンクなので読み上げ・Tab はラベルだけ
+          a.style.left = pic[0] + '%'; a.style.top = pic[1] + '%'; a.style.width = pic[2] + '%';
+          const img = document.createElement('img');
+          img.src = file; img.alt = '';
+          a.appendChild(img);
+          const placeLabel = () => { if (a.offsetHeight) label.style.top = (a.offsetTop + a.offsetHeight * (SHORT_GRID ? 1 : VISIBLE_BOTTOM[slug]) + 2) + 'px'; };
+          const position = () => {
+            const order = ['ishizuka', 'shirai', 'sawada', 'terayama', 'nakano', 'goto', 'furugen', 'kitazaki', 'ota', 'in'];
+                  const i = order.indexOf(slug);
+                  const cols = GRID_LAYOUT === 'grid3' ? 3 : GRID_LAYOUT === 'grid4' ? 4 : 5;
+                  const rows = Math.ceil(order.length / cols), width = ({ 3: 28, 4: 21, 5: 18 })[cols];
+                  const mobileWidth = rank === 5 ? 28 : MOBILE_ITEMS[slug][2] * ((rank >= 2 && rank <= 4) || rank >= 7 ? .9 : 1);
+      const mobileCenters = [31, 69, 17, 50, 83, 30, 70, 17, 50, 83];
+      const mobileRows = [7, 8, 30, 31, 31, 50, 50, 67, 73, 69];
+      const mobileCenter = mobileCenters[rank];
+      const p = SHORT_GRID ? [(i % cols + .5) * 100 / cols - width / 2, Math.floor(i / cols) * 100 / rows, width] : mobileBoard.matches ? [mobileCenter - mobileWidth / 2, mobileRows[rank], mobileWidth] : pic;
+            a.style.left = p[0] + '%'; a.style.top = p[1] + '%'; a.style.width = p[2] + '%';
+            label.style.left = (SHORT_GRID || mobileBoard.matches ? p[0] + p[2] / 2 : lab[0]) + '%';
+            placeLabel();
+          };
+          mobileBoard.addEventListener('change', position);
+          position();
+          img.addEventListener('load', placeLabel);
+          new ResizeObserver(placeLabel).observe(a);
+
+          if (GROW) {
+            img.style.transformOrigin = '50% 50%';
+            img.style.transition = 'transform .35s cubic-bezier(.2, .8, .2, 1)';
+            img.style.transform = 'scale(var(--grow, 1))';
+            const grow = (on) => { hover(on); if (!reduceMotion) img.style.setProperty('--grow', on ? GROW_SCALE : 1); a.style.zIndex = on ? 1 : ''; };
+            a.addEventListener('pointerenter', () => grow(true));
+            a.addEventListener('pointerleave', () => grow(false));
+            label.addEventListener('pointerenter', () => grow(true));
+            label.addEventListener('pointerleave', () => grow(false));
+            return;
+          }
+
+          if (FRUIT ?? SWAY) {
+            const [ox, oy] = PIVOT[slug] || [50, 50];
+            img.style.transformOrigin = `${ox}% ${oy}%`;
+            img.style.transform = 'rotate(var(--wob-rot, 0deg)) skewX(var(--wob-skew, 0deg)) scale(var(--wob-sx, 1), var(--wob-sy, 1))';
+            let rot = 0, vRot = 0, skew = 0, vSkew = 0, sq = 0, vSq = 0, raf = 0, prev = 0;
+            const step = (now) => {
+              const dt = Math.min((now - prev) / 1000, 1 / 30);
+              prev = now;
+              vRot += (-SK * rot - SC * vRot) * dt; rot += vRot * dt;
+              vSkew += (-K * skew - C * vSkew) * dt; skew += vSkew * dt;
+              vSq   += (-K * 1.4 * sq - C * vSq) * dt; sq += vSq * dt;
+              img.style.setProperty('--wob-rot', rot.toFixed(3) + 'deg');
+              img.style.setProperty('--wob-skew', skew.toFixed(3) + 'deg');
+              img.style.setProperty('--wob-sx', (1 + sq).toFixed(4));
+              img.style.setProperty('--wob-sy', (1 - sq).toFixed(4));
+              if (Math.abs(rot) + Math.abs(vRot) / 10 + Math.abs(skew) + Math.abs(vSkew) / 20 + Math.abs(sq) * 50 + Math.abs(vSq) > 0.01) {
+                raf = requestAnimationFrame(step);
+              } else {
+                raf = 0;
+                ['--wob-rot', '--wob-skew', '--wob-sx', '--wob-sy'].forEach((k) => img.style.removeProperty(k));
+              }
+            };
+            // 触れた点を中心へ向かって押したとして、支点まわりのトルクの向き・強さで回す（支点の真下を押しても少しは振れる）
+            const poke = (e, fromPic) => {
+              hover(true);
+              if (reduceMotion) return;
+              const r = img.getBoundingClientRect();
+              const px = r.left + r.width * ox / 100, py = r.top + r.height * oy / 100;
+              const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+              const ex = fromPic ? e.clientX : cx, ey = fromPic ? e.clientY : r.bottom;
+              const rx = ex - px, ry = ey - py, fx = cx - ex, fy = cy - ey;
+              const n = Math.hypot(rx, ry) * Math.hypot(fx, fy);
+              const tq = n ? (rx * fy - ry * fx) / n : 0;
+              const dir = Math.abs(tq) > 0.15 ? Math.sign(tq) : (Math.random() < 0.5 ? -1 : 1);
+              vRot += dir * KICK * Math.sqrt(SK) * (0.5 + 0.5 * Math.min(1, Math.abs(tq)));
+              const side = fromPic ? Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2)) : 0;
+              vSkew += -side * PUSH * 10 * DEFORM;
+              vSq += SQUASH * DEFORM;
+              if (!raf) { prev = performance.now(); raf = requestAnimationFrame(step); }
+            };
+            a.addEventListener('pointerenter', (e) => poke(e, true));
+            a.addEventListener('pointerleave', () => hover(false));
+            label.addEventListener('pointerenter', (e) => poke(e, false));
+            a.addEventListener('pointerenter', () => { a.style.zIndex = 1; });
+            a.addEventListener('pointerleave', () => { a.style.zIndex = ''; });
+            return;
+          }
+
+          let skew = 0, vSkew = 0, sq = 0, vSq = 0, raf = 0, prev = 0;
+          const step = (now) => {
+            const dt = Math.min((now - prev) / 1000, 1 / 30);
+            prev = now;
+            vSkew += (-K * skew - C * vSkew) * dt; skew += vSkew * dt;
+            vSq   += (-K * 1.4 * sq - C * vSq) * dt; sq += vSq * dt;
+            img.style.setProperty('--wob-skew', skew.toFixed(3) + 'deg');
+            // 体積を保つように：縦につぶれた分だけ横にふくらむ
+            img.style.setProperty('--wob-sx', (1 + sq).toFixed(4));
+            img.style.setProperty('--wob-sy', (1 - sq).toFixed(4));
+            if (Math.abs(skew) + Math.abs(vSkew) / 20 + Math.abs(sq) * 50 + Math.abs(vSq) > 0.01) {
+              raf = requestAnimationFrame(step);
+            } else {
+              raf = 0;
+              img.style.removeProperty('--wob-skew');
+              img.style.removeProperty('--wob-sx');
+              img.style.removeProperty('--wob-sy');
+            }
+          };
+          // 入ってきた位置が中心より左なら右へ、右なら左へ押される。ラベルから入ったときは真上から（つぶれるだけ）
+          const poke = (e, fromPic) => {
+            hover(true);
+            if (reduceMotion) return;
+            let side = 0;
+            if (fromPic) {
+              const r = a.getBoundingClientRect();
+              side = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - 0.5) * 2));
+            }
+            vSkew += -side * PUSH * 10;
+            vSq += SQUASH;
+            if (!raf) { prev = performance.now(); raf = requestAnimationFrame(step); }
+          };
+          a.addEventListener('pointerenter', (e) => poke(e, true));
+          a.addEventListener('pointerleave', () => hover(false));
+          label.addEventListener('pointerenter', (e) => poke(e, false));
+          // 重なった絵の上では手前に出す
+          a.addEventListener('pointerenter', () => { a.style.zIndex = 1; });
+          a.addEventListener('pointerleave', () => { a.style.zIndex = ''; });
+        });
+      })();
+      </script>
+
+    </div>
+    <!-- seminars-b:end -->
+    <!-- ゼ実紹介の文章は data-2026/ゼ実紹介文章_2026-11-01.txt から生成 -->
+    <div class="fruit-intro" aria-label="ゼ実の紹介">
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="ishizuka" style="--fruit-scale:0.942" aria-label="石塚ゼ実を揺らす"><img src="assets/img/seminars/seminar-ishizuka.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.01</span> 石塚ゼ実</h3><p>ものごとが触れ合うことで、思いもよらない色や表情が生まれていく。
+　石塚ゼ実は、淡く透き通るような花弁が幾重にも重なり、それぞれの色がにじみ合いながらひとつのかたちをつくる実です。
+　石塚ゼミでは、ものごとの姿を丁寧に観測し、その重なりや変化を通して、目の前にあるものを自分の目で確かめることを大切にします。
+　同じものを見つめ続ける中で、これまでの思い込みからこぼれ落ちていた色や見え方が、ふいに姿をあらわしていく。
+　ものごとを先入観で捉えるのではなく、一つひとつの変化を見つめ、ありのままの姿を掬い上げていく眼差しを学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="shirai" style="--fruit-scale:1" aria-label="白井ゼ実を揺らす"><img src="assets/img/seminars/seminar-shirai.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.06</span> 白井ゼ実</h3><p>一つひとつの小さな要素が連なり、ひとつのかたちをつくる。
+　白井ゼ実は、無数の粒が規則的に並びながら、ところどころに異なる表情を見せる実です。
+　白井ゼミでは、文字や記号を構成する点や線、余白、濃淡、規則と逸脱に目を向けながら、情報を伝える「かたち」を考えます。
+　整然と並ぶ要素の中に生まれるわずかな揺らぎが、文字の表情やリズムをつくっていく。
+　小さな要素をひとつずつ見つめ、組み合わせ、育てていくことで、文字の奥に広がる構造と美しさを学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="sawada" style="--fruit-scale:1" aria-label="沢田ゼ実を揺らす"><img src="assets/img/seminars/seminar-sawada.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.05</span> 沢田ゼ実</h3><p>ひとつの「好き」を起点に、さまざまな可能性が枝分かれし、新しいかたちへ広がっていく。
+　沢田ゼ実は、鮮やかな色を抱えた中心から、鋭く尖った花弁が放射状に広がる、自由な動きのある実です。
+　沢田ゼミでは、一人ひとりの「好き」から出発し、正解をひとつに定めるのではなく、それぞれの可能性を広げながら、自分自身の表現を探していきます。
+　異なる興味や個性がひとつの場所に集まり、互いに影響し合うことで、思いもよらない化学反応が生まれていく。
+　自分の「好き」を信じて可能性に手を伸ばし、そこから新しい選択肢をつくりながら、世界へ踏み出していく力を学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="terayama" style="--fruit-scale:1.154" aria-label="寺山ゼ実を揺らす"><img src="assets/img/seminars/seminar-terayama.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.07</span> 寺山ゼ実</h3><p>知るほどに、次の問いが生まれる。調べた先には、いつも「では、自分は何をするのか」が待っている。
+　寺山ゼ実は、異なる色やかたちの実が複雑に重なり、それぞれの表情を残しながらひとつのかたちをつくる実です。
+　寺山ゼミでは、対象を深く調べ、その背景や文脈を知るだけでなく、そこから自分は何をしたいのかを問い直し、表現へとつなげていきます。
+　調べたことがそのまま答えになるのではなく、知識と自分自身の関心が交わることで、新たな問いやアイデアが生まれていく。
+　深く調べ、考えたその先で、自分自身の問いを見つけ、そこからつくるものを考えていく姿勢を学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="nakano" style="--fruit-scale:0.885" aria-label="中野ゼ実を揺らす"><img src="assets/img/seminars/seminar-nakano.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.08</span> 中野ゼ実</h3><p>小さな要素が連なり、離れたもの同士をつなぐことで、ひとつの全体像が浮かび上がる。
+　中野ゼ実は、細長いかたちの中に大小さまざまな色の粒が散らばり、それぞれが関係し合うように並んだ実です。
+　中野ゼミでは、情報を一つひとつの粒として捉えながら、モノとモノとのつながりや、そこから生まれる関係を可視化していきます。
+　一見すると別々に見える小さな要素も、つながり方を捉え直すことで、広い世界の中にあるひとつの構造として見えてくる。
+　情報の海の中から要素を拾い上げ、それらの関係を見つめることで、自分自身の世界への眼差しをつくっていくことを学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="goto" style="--fruit-scale:0.846" aria-label="後藤ゼ実を揺らす"><img src="assets/img/seminars/seminar-goto.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.04</span> 後藤ゼ実</h3><p>ひとつのかたちの中に、好奇心や探究心、そしてこの世界をどう捉え、どう生きていくかという問いが重なり合っている。
+　後藤ゼ実は、深い青を基調とした不定形の実で、表面には大小さまざまな層や粒が重なり、見る角度によって異なる表情を見せます。
+　後藤ゼミでは、日々の暮らしや身のまわりの現象、まだ言葉になっていない感覚に目を向け、一人ひとりの関心を手がかりに探りながら、かたちにしていきます。
+　小さな気づきや試みが積み重なることで、やがて世界の新しい見え方が立ち上がっていく。
+　かたちにすることは、自分が世界とどう向き合い、どう生きていくかを確かめていくこと。そのことを、私たちは学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="furugen" style="--fruit-scale:0.846" aria-label="古堅ゼ実を揺らす"><img src="assets/img/seminars/seminar-furugen.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.09</span> 古堅ゼ実</h3><p>異なる色や面がひとつの構造の中に組み込まれ、それぞれの要素が支え合いながらひとつのかたちをつくる。
+　古堅ゼ実は、いくつもの面が規則的に連なり、色や質感の異なる部分がひとつの大きな構造を形づくる実です。
+　古堅ゼミでは、デザインを「情報」「数理」「構造」といった視点から捉え直し、異なる原理や感性を組み合わせながら新たなデザインの可能性を探ります。
+　一つひとつの要素が異なる役割を持ちながら、それらが組み合わさることで、全体として新しい秩序が生まれていく。
+　異なる考え方や感性を重ね合わせ、そこから新たな構造や表現をつくり出していく視点を学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="kitazaki" style="--fruit-scale:1.154" aria-label="北崎ゼ実を揺らす"><img src="assets/img/seminars/seminar-kitazaki.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.03</span> 北崎ゼ実</h3><p>ひとつの実が風を受け、遠くへ運ばれるように、かたちは誰かのもとへ届いていく。
+　北崎ゼ実は、翼を持つ実が連なり、それぞれがさまざまな方向へ飛んでいくようなかたちをした実です。
+　北崎ゼミでは、目の前のものをつくるだけではなく、それが社会の中でどのように受け取られ、どのような関係を生み出していくのかを考えながら、デザインと向き合います。
+　デザインは、つくった瞬間に完結するものではなく、人や社会との関わりの中で新たな意味を持ち、次の場所へと広がっていく。
+　自分のつくったものを社会へとひらき、その先にいる人や環境との関係まで考えながら、デザインをつくっていく姿勢を学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="ota" style="--fruit-scale:0.808" aria-label="大田ゼ実を揺らす"><img src="assets/img/seminars/seminar-ota.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.02</span> 大田ゼ実</h3><p>同じかたちが連なりながら、一つひとつの存在が全体のかたちをつくっていく。
+　大田ゼ実は、縦に連なる3つの実が、それぞれ同じ模様を持ちながらひとつのかたちをつくる実です。
+　大田ゼミでは、目の前にあるものに対して自分が何を感じたのか、その素直な感覚を大切にしながら、そこから生まれた「なぜ？」を手がかりに、ものごとの見方を探っていきます。
+　一つひとつの感覚を見つめ、考えを重ねていくことで、同じものの中にも、自分だからこそ見つけられる意味や可能性が見えてくる。
+　答えをすぐに決めるのではなく、自分の中に生まれた感覚や問いを持ち続けながら考えを深め、自分なりのものの見方をつくっていくことを学びました。</p></div></article>
+      <article class="fruit-intro__item"><button class="fruit-intro__fruit" type="button" data-fruit="in" style="--fruit-scale:0.962" aria-label="院の実を揺らす"><img src="assets/img/seminars/seminar-in.webp?v=1030" alt="" loading="lazy"></button><div><h3><span class="fruit-number">No.10</span> 院の実</h3><p>硬い殻の内側に、大きな種を抱えながら、時間をかけて育っていく。
+　院の実は、硬い殻を持つ2つの実が寄り添い、それぞれの内側に大きな種を抱える実です。
+　大学院では、それぞれが自分自身の問いを持ち、時間をかけて調査や制作を重ねながら、その問いを深く掘り下げていきます。
+　外からは見えない殻の内側で、ひとつの問いを何度も見つめ直し、考え、試すことを繰り返すことで、少しずつ自分なりの答えが育っていく。
+　すぐに答えを求めるのではなく、時間をかけてひとつの問いと向き合い、研究や制作を積み重ねながら、自分自身の考えを育てていく姿勢を学びました。</p></div></article>
+    </div>
+
+    <ul class="seminar-scatter reveal">
+      <li style="--x:60; --y:40; --w:280; --r:-8deg;"><a href="works/?seminar=%E7%9F%B3%E5%A1%9A%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/ishizuka-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/ishizuka-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">石塚ゼミ</span>
+      </a></li>
+      <li style="--x:400; --y:0; --w:170; --r:12deg;"><a href="works/?seminar=%E7%99%BD%E4%BA%95%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/shirai-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/shirai-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">白井ゼミ</span>
+      </a></li>
+      <li style="--x:610; --y:60; --w:360; --r:-4deg;"><a href="works/?seminar=%E6%B2%A2%E7%94%B0%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/sawada-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/sawada-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">沢田ゼミ</span>
+      </a></li>
+      <li style="--x:0; --y:420; --w:250; --r:6deg;"><a href="works/?seminar=%E5%AF%BA%E5%B1%B1%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/terayama-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/terayama-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">寺山ゼミ</span>
+      </a></li>
+      <li style="--x:300; --y:320; --w:190; --r:-14deg;"><a href="works/?seminar=%E4%B8%AD%E9%87%8E%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/nakano-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/nakano-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">中野ゼミ</span>
+      </a></li>
+      <li style="--x:150; --y:690; --w:250; --r:-6deg;"><a href="works/?seminar=%E5%BE%8C%E8%97%A4%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/goto-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/goto-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">後藤ゼミ</span>
+      </a></li>
+      <li style="--x:520; --y:450; --w:330; --r:3deg;"><a href="works/?seminar=%E5%8F%A4%E5%A0%85%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/furugen-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/furugen-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">古堅ゼミ</span>
+      </a></li>
+      <li style="--x:470; --y:820; --w:360; --r:9deg;"><a href="works/?seminar=%E5%8C%97%E5%B4%8E%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/kitazaki-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/kitazaki-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">北崎ゼミ</span>
+      </a></li>
+      <li style="--x:860; --y:330; --w:140; --r:-10deg;"><a href="works/?seminar=%E5%A4%A7%E7%94%B0%E3%82%BC%E3%83%9F">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/ota-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/ota-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">大田ゼミ</span>
+      </a></li>
+      <li style="--x:30; --y:1000; --w:230; --r:4deg;"><a href="works/?seminar=%E5%A4%A7%E5%AD%A6%E9%99%A2">
+        <img class="seminar-scatter__nijimi" src="assets/img/seminars/in-nijimi.webp?v=1030" alt="" loading="lazy">
+        <img class="seminar-scatter__line" src="assets/img/seminars/in-line.webp?v=1030" alt="" loading="lazy">
+        <span class="seminar-scatter__label">大学院</span>
+      </a></li>
+    </ul>
+    <p class="seminar-links__all reveal"><a href="works/">すべての作品を見る</a></p>
+  </section>
+
+  <!-- ==========================================================
+       7. 配布物情報
+       ========================================================== -->
+
+
+</main>
+
+<!-- ============================================================
+     Footer
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <dl class="deflist deflist--compact">
+      <div class="deflist__row">
+        <dt><i class="fa-brands fa-instagram ico-ig" aria-hidden="true"></i>Instagram</dt>
+        <dd><a href="https://www.instagram.com/vcd_mau/" target="_blank" rel="noopener">@vcd_mau</a></dd>
+      </div>
+      <div class="deflist__row">
+        <dt><i class="fa-brands fa-x-twitter ico-ig" aria-hidden="true"></i>X</dt>
+        <dd><a href="https://x.com/vcd_mau" target="_blank" rel="noopener">@vcd_mau</a></dd>
+      </div>
+      <div class="deflist__row">
+        <dt>学科サイト</dt>
+        <dd><a href="https://vcd.musabi.ac.jp/web/" target="_blank" rel="noopener">視覚伝達デザイン学科 公式ホームページ</a></dd>
+      </div>
+    </dl>
+    <p class="copyright">© 2026 Musashino Art University, Department of Visual Communication Design</p>
+  </div>
+  <div class="layout1-only layout1-footer">
+    <dl class="layout1-grid">
+      <div class="layout1-row"><dt>Instagram</dt><dd><a href="https://www.instagram.com/vcd_mau/" target="_blank" rel="noopener">@vcd_mau</a></dd></div>
+      <div class="layout1-row"><dt>X</dt><dd><a href="https://x.com/vcd_mau" target="_blank" rel="noopener">@vcd_mau</a></dd></div>
+      <div class="layout1-row"><dt>学科サイト</dt><dd><a href="https://vcd.musabi.ac.jp/web/" target="_blank" rel="noopener">視覚伝達デザイン学科 公式ホームページ</a></dd></div>
+      <div class="layout1-row"><dt>大学サイト</dt><dd><a href="https://www.musabi.ac.jp/" target="_blank" rel="noopener">武蔵野美術大学 公式ホームページ</a></dd></div>
+    </dl>
+    <p class="copyright">© 2026 Musashino Art University, Department of Visual Communication Design</p>
+  </div>
+</footer>
+
+<script src="assets/kv.js?v=202611081240" defer></script>
+<script src="assets/deco.js?v=202611081240" defer></script>
+<script src="assets/script.js?v=202611081240" defer></script>
+<script src="assets/fruit-features.js?v=20261109" defer></script>
+<script src="assets/fruit-intro.js?v=20261111d" defer></script>
+<script src="assets/fruit-linked.js?v=20261115l" defer></script>
+  <dialog class="motion-intro" id="motion-intro" aria-label="オープニング動画">
+    <span class="motion-intro__focus" tabindex="-1" aria-label="オープニング動画"></span>
+    <button class="motion-intro__close" type="button" aria-label="動画を閉じる">×</button>
+    <button class="motion-intro__sound" type="button" aria-pressed="false" aria-label="音をオン"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6a8 8 0 0 1 0 12" class="sound-waves"/><path d="M16 9l5 6m0-6-5 6" class="sound-muted"/></svg></button>
+    <button class="motion-intro__restart" type="button" aria-label="最初から再生"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5v6h6M4.5 11a8 8 0 1 1 .7 5"/></svg></button>
+    <video class="motion-intro__video" playsinline muted preload="none" tabindex="-1" aria-label="卒業・修了制作展のモーション動画">
+      <source src="assets/video/web-motion-20261111.mp4?v=20261111" type="video/mp4">
+    </video>
+    <input class="motion-intro__seek" type="range" min="0" max="1000" value="0" aria-label="動画の再生位置">
+    <button class="motion-intro__play" type="button" hidden>動画を再生</button>
+  </dialog>
+  <script>
+    (() => {
+      const consumeSeminarReturn = () => {
+        try {
+          const returning = sessionStorage.getItem('vcd2026-return-from-seminar') === '1';
+          sessionStorage.removeItem('vcd2026-return-from-seminar');
+          return returning;
+        } catch (e) { return false; }
+      };
+      const skipOpening = consumeSeminarReturn();
+      if (document.documentElement.dataset.motionVideo !== '1') return;
+      const dialog = document.getElementById('motion-intro');
+      const video = dialog.querySelector('video');
+      const playButton = dialog.querySelector('.motion-intro__play');
+      const soundButton = dialog.querySelector('.motion-intro__sound');
+      const seek = dialog.querySelector('.motion-intro__seek');
+      const updateSound = () => { soundButton.setAttribute('aria-label', video.muted ? '音をオン' : '音をオフ'); soundButton.setAttribute('aria-pressed', String(!video.muted)); };
+      soundButton.addEventListener('click', () => { video.muted = !video.muted; updateSound(); });
+      dialog.querySelector('.motion-intro__restart').addEventListener('click', () => { video.currentTime = 0; video.play().then(() => { playButton.hidden = true; }).catch(() => { playButton.hidden = false; }); });
+      video.addEventListener('volumechange', updateSound);
+      const close = () => { if (dialog.open) dialog.close(); };
+      dialog.querySelector('button').addEventListener('click', close);
+      video.addEventListener('click', close);
+      dialog.addEventListener('click', (event) => { if (event.target === dialog) close(); });
+      dialog.addEventListener('close', () => video.pause());
+      video.addEventListener('timeupdate', () => {
+        if (!Number.isFinite(video.duration) || !video.duration) return;
+        seek.value = Math.round(video.currentTime / video.duration * 1000);
+        seek.style.setProperty('--progress', (Number(seek.value) / 10) + '%');
+        dialog.classList.toggle('is-ending', video.duration - video.currentTime <= .7);
+      });
+      seek.addEventListener('input', () => { seek.style.setProperty('--progress', (Number(seek.value) / 10) + '%'); if (Number.isFinite(video.duration)) video.currentTime = video.duration * Number(seek.value) / 1000; });
+      video.addEventListener('ended', close);
+      playButton.addEventListener('click', () => video.play().then(() => { playButton.hidden = true; }).catch(() => {}));
+      video.addEventListener('error', close);
+      const start = () => {
+        dialog.classList.remove('is-ending');
+        video.muted = true;
+        updateSound();
+        playButton.hidden = true;
+        seek.value = 0;
+        seek.style.setProperty('--progress', '0%');
+        if (!dialog.open) dialog.showModal();
+        dialog.querySelector('.motion-intro__focus').focus({ preventScroll: true });
+        video.currentTime = 0;
+        video.play().catch(() => { playButton.hidden = false; }); // 自動再生できない場合のみ再生ボタンを表示
+      };
+      if (!skipOpening) start();
+      addEventListener('pageshow', (event) => {
+        if (!event.persisted) return;
+        if (consumeSeminarReturn()) { close(); return; }
+        start();
+      });
+    })();
+  </script>
+<script src="assets/catalog-carousel.js?v=20261109"></script>
+<script src="assets/floor-guide.js?v=20261109f"></script>
+<script src="assets/latin-baseline.js?v=20261111c" defer></script>
+</body>
+</html>

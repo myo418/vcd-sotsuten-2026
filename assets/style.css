@@ -1,0 +1,1646 @@
+@charset "UTF-8";
+
+/* ============================================================
+   卒展サイト / STUDIO 実装の HTML・CSS・JS 版
+   設計方針
+   - 色・余白・タイプは :root のカスタムプロパティに集約
+   - セクションは .section（見出し＋本文の2カラム）で共通化
+   - レスポンシブは 1000px（small）/ 690px（mobile）の2ブレークポイント（STUDIO 版と同じ）。左右の実だけ 1300px でも切り替える
+   ============================================================ */
+
+:root {
+  /* --- color --------------------------------------------- */
+  --c-bg-rgb:        189 49 36;
+  --c-bg:            rgb(var(--c-bg-rgb)); /* ページ背景（STUDIO 実装値） */
+  --c-sidebar:       var(--c-bg); /* サイドバー（2026-10-29 にページ背景と同じ色に。それまで #a32718） */
+  --c-red-dark:      #a32a1f;   /* 暗い赤（2026-10-28 パレットに追加。作品一覧 r2〈デザイン G〉の見出しの箱の色）。フッターと、赤地の上のラベル（見出しの箱など）に使う */
+  --c-footer:        var(--c-red-dark); /* フッター（2026-10-28 まで #a63f34） */
+  /* 白（文字・白地）。純白は強いので明度を少し落として暖色に。index.html?white=1〜3 で比べられる（下の html[data-white]）。
+     値は STUDIO の埋め込み（studio-embed の works/work の embed.template.html・design-switch/embed.html）と同じにする */
+  --paper-rgb:       253 252 248;
+  --c-paper:         rgb(var(--paper-rgb));
+  --c-text:          var(--c-paper);
+  --c-text-dim:      rgb(var(--paper-rgb) / .72);
+  --c-rule:          rgb(var(--paper-rgb) / .28);
+
+  /* --- layout -------------------------------------------- */
+  /* 画面サイズの設計（STUDIO 版と同じ）：default 1280px〜 / small 〜1000px / mobile 〜690px
+     コンテナは幅 --container の中に左右 --gutter（mobile は 20px）。中身の幅が --col */
+  --container:       1000px;
+  --gutter:          40px;
+  --col:             calc(var(--container) - var(--gutter) * 2);
+  --sidebar-w:       320px;
+  --head-w:          160px;     /* 見出しカラム */
+  --split-gap:       100px;     /* 見出し↔本文 */
+
+  /* --- typography ---------------------------------------- */
+  --ff-jp:           "Work Sans", "Zen Kaku Gothic New", "Yu Gothic", sans-serif;
+  --ff-en:           "Work Sans", var(--ff-jp);
+
+  --fs-title:        clamp(32px, 6.2vw, 60px);
+  --fs-title-en:     clamp(22px, 3.9vw, 38px);
+  --fs-kv-univ:      clamp(15px, 2.7vw, 26px);
+  --fs-section:      clamp(28px, 4vw, 40px);
+  --fs-lead:         clamp(15px, 1.9vw, 18px);
+  --fs-body:         16px;
+  --fs-value:        clamp(18px, 2.2vw, 24px);
+
+  /* --- motion -------------------------------------------- */
+  --ease:            cubic-bezier(.22, .61, .36, 1);
+  --dur:             .45s;
+}
+
+/* 左上の設定欄「背景色」で切り替える比較用の赤。 */
+html[data-bg="1"] { --c-bg-rgb: 189 49 36; --site-red: #bd3124; }
+html[data-bg="2"] { --c-bg-rgb: 218 57 21; --site-red: #da3915; }
+html[data-bg="3"] { --c-bg-rgb: 229 52 25; --site-red: #e53419; }
+
+html[data-white="1"] { --paper-rgb: 255 255 255; }
+html[data-white="3"] { --paper-rgb: 251 248 241; }
+
+/* ============================================================
+   Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+html, body { background: var(--c-bg); }
+
+body {
+  margin: 0;
+  color: var(--c-text);
+  font-family: var(--ff-jp);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 2.2;
+  letter-spacing: .02em;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+body.is-locked { overflow: hidden; }
+
+h1, h2, p, dl, dd, figure { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: .25em;
+  transition: opacity .25s var(--ease);
+}
+a:hover { opacity: .65; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+:focus-visible {
+  outline: 2px solid var(--c-paper);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px; left: 16px; z-index: 200;
+  padding: 10px 16px;
+  background: var(--c-paper); color: var(--c-bg);
+  font-size: 14px;
+  transition: top .2s var(--ease);
+}
+.skip-link:focus { top: 16px; }
+
+/* ============================================================
+   Header / ハンバーガー
+   ============================================================ */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto auto;
+  z-index: 60;
+  padding: 18px var(--gutter);
+}
+
+.menu-btn {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.menu-btn__icon { font-size: 22px; }
+
+/* 開いている間はハンバーガーを隠す（サイドバー側に × がある） */
+.menu-btn[aria-expanded="true"] { opacity: 0; pointer-events: none; }
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(0, 0, 0, .35);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+.scrim.is-open { opacity: 1; }
+
+.sidebar {
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 80;
+  width: min(var(--sidebar-w), 86vw);
+  padding: 18px 40px 40px;
+  background: var(--c-sidebar);
+  transform: translateX(100%);
+  transition: transform var(--dur) var(--ease), visibility var(--dur);
+  visibility: hidden;
+  overscroll-behavior: contain;
+  overflow-y: auto;
+}
+.sidebar.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.sidebar__close {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  margin-left: -10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.sidebar__close svg {
+  width: 20px; height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+
+.sidebar__list {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+}
+.sidebar__list a {
+  display: block;
+  font-size: 20px;
+  line-height: 1.4;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+/* トップ配下のセクション（ご挨拶など） */
+.sidebar__sub {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+  padding-left: 1em;
+}
+.sidebar__sub a { font-size: 16px; }
+
+/* ============================================================
+   Key visual
+   ============================================================ */
+.kv {
+  position: relative;
+  min-height: 100svh;
+  padding: clamp(40px, 8vh, 96px) var(--gutter) clamp(60px, 12vh, 120px);
+  display: flex;
+  overflow: hidden;
+}
+
+/* 埋め込み（STUDIO のコードを差し込むレイヤー） */
+.kv__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.kv__canvas > canvas,
+.kv__canvas > iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+/* WebGL が使えない環境では地の赤だけを見せる */
+.kv__canvas.is-static > canvas { display: none; }
+
+.kv__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* 開催情報：KV の下、1000px の枠。上を少しだけ KV に重ねる */
+/* KV の下の文字は KV 内にあった頃の 60% 程度（スマホで小さくなりすぎないよう下限は少し上げている） */
+.kv-info {
+  --fs-kv-univ:  clamp(13px, 1.62vw, 16px);
+  --fs-title:    clamp(22px, 3.72vw, 36px);
+  --fs-title-en: clamp(15px, 2.34vw, 23px);
+  position: relative;
+  z-index: 2;
+  width: min(var(--container), 100%);
+  margin: calc(var(--kv-info-overlap) * -1) auto 0;
+  padding: 0 var(--gutter);
+  --kv-info-overlap: clamp(48px, 9vh, 96px);
+}
+
+.kv__univ {
+  font-size: var(--fs-kv-univ);
+  line-height: 1.5;
+}
+
+.kv__title {
+  display: grid;
+  margin-top: .5em;
+  font-size: var(--fs-title);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.kv__title-en {
+  display: grid;
+  margin-top: .6em;
+  font-size: var(--fs-title-en);
+  line-height: 1.25;
+}
+
+/* ポスターのアウトラインを使い、読み上げ用の文字は残す。 */
+.kv-info__poster-title {
+  display: block;
+  width: min(100%, 600px);
+  aspect-ratio: 2093.74 / 679.49;
+  background: currentColor;
+  -webkit-mask: url('img/poster-title.svg') center / contain no-repeat;
+  mask: url('img/poster-title.svg') center / contain no-repeat;
+}
+.kv-info__inner > :is(.kv__univ, .kv__title, .kv__title-en) {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+
+/* MAU ロゴ：KV の右上。右端は 1000px の枠に揃え、高さは固定のハンバーガー（.site-header）と揃える。
+   枠がハンバーガーに近づく幅では、ハンバーガーの左に逃がす */
+.kv__logo {
+  position: absolute;
+  z-index: 1;
+  top: calc(18px + (44px - 28px) / 2);
+  right: max(calc((100% - var(--col)) / 2), calc(var(--gutter) + 44px + 20px));
+}
+.kv__logo svg {
+  display: block;
+  width: auto;
+  height: 28px;
+}
+
+/* KV の下をグラデーションで地の赤へ消す（?fade=2。html[data-kvfade]。2026-10-28。長めの 3〈下 55%〉は強すぎたので外した）。絵（canvas）の上、ロゴ・文字の下 */
+html[data-kvfade] body.home .kv::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;
+  height: var(--kv-fade-h, 18%); /* 30% → 18%・途中を薄く（2026-10-28「強い。きれいなところが隠れる」） */
+  background: linear-gradient(to bottom, rgb(var(--c-bg-rgb) / 0), rgb(var(--c-bg-rgb) / .25) 50%, rgb(var(--c-bg-rgb) / .75) 85%, var(--c-bg));
+}
+/* スマホ（690px 以下）は KV fade の切り替えにかかわらず常にあり（スクロールで KV から本文へ移るときに絵の下端が切れて見えないように。2026-10-31） */
+@media (max-width: 690px) {
+  body.home .kv::after, html[data-kvfade] body.home .kv::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none;
+    height: 8%;
+    background: linear-gradient(to bottom, rgb(var(--c-bg-rgb) / 0) 30%, rgb(var(--c-bg-rgb) / .08) 65%, rgb(var(--c-bg-rgb) / .35) 90%, var(--c-bg));
+  }
+}
+/* 1 列（layout 1a・1b。html[data-kv1]）は絵の下端が枠の下端より上で終わり、枠の下に掛けたフェードが絵の無い赤に乗って効いて見えなかった（2026-10-28）。
+   絵の下端（--kv-art-bottom。kv.js が入れる）で終わるように置き、長さは絵の高さの 35%（下の方は実がまばらなので、18% だと効いて見えない） */
+html[data-kv1] body.home .kv.has-art-pos::after { top: calc(min(var(--kv-art-bottom), 100%) - var(--kv-art-h) * .35); bottom: auto; height: calc(var(--kv-art-h) * .35); }
+@media (max-width: 690px) {
+  html[data-kv1] body.home .kv.has-art-pos::after { top: calc(min(var(--kv-art-bottom), 100%) - var(--kv-art-h) * .12); height: calc(var(--kv-art-h) * .12); }
+}
+
+/* キャッチを KV の画像で描いているとき（kv.js が .kv に has-catch-img を付ける）は、HTML の文字は読み上げ用に残して見た目だけ隠す（2026-10-28） */
+.kv.has-catch-img .kv__catch { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); margin: 0; }
+
+/* キャッチコピー（縦組み） */
+.kv__catch {
+  writing-mode: vertical-rl;
+  margin-top: clamp(40px, 22vh, 220px);
+  font-size: var(--fs-kv-univ);
+  line-height: 1.4;
+  letter-spacing: .12em;
+  white-space: nowrap;
+}
+.weekday-mark {
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  display: inline-grid;
+  width: 1.16em;
+  aspect-ratio: 1;
+  place-items: center;
+  margin-inline: .08em;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: .76em;
+  line-height: 1;
+  vertical-align: .08em;
+}
+
+/* KV のアニメーションが終わってから下からスライド＋フェードで出す（タイミングは kv.js の CATCH_DELAY） */
+.js-intro .kv__catch {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s var(--ease), transform 1.2s var(--ease);
+}
+.js-intro .kv.is-catch-in .kv__catch,
+.intro-fallback .kv__catch {
+  opacity: 1;
+  transform: none;
+}
+/* KV 下の大学名・タイトルと MAU ロゴも、キャッチのあとに同じ動きで（タイミングは kv.js の INFO_DELAY） */
+.js-intro .kv__logo,
+.js-intro .kv-info__inner {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1s var(--ease), transform 1.2s var(--ease);
+}
+.js-intro .kv.is-info-in .kv__logo,
+.js-intro .kv-info.is-in .kv-info__inner,
+.intro-fallback .kv__logo,
+.intro-fallback .kv-info__inner {
+  opacity: 1;
+  transform: none;
+}
+
+/* デスクトップでは絵の右端にかかる位置へ（--kv-art-right は kv.js が入れる）。
+   WebGL が無いときは flex の右端のまま */
+@media (min-width: 691px) {
+  .kv.has-art-pos .kv__catch {
+    position: absolute;
+    top: 0;
+    left: calc(var(--kv-art-right) - var(--gutter) - var(--kv-catch-overlap, 2.4em));
+  }
+}
+
+
+/* ============================================================
+   Lead
+   ============================================================ */
+.lead {
+  padding: clamp(180px, 33vh, 360px) var(--gutter);
+  display: grid;
+  place-items: center;
+}
+.lead__img {
+  /* ステートメントは画像（STUDIO 版と同じ。元は web/studio-embed/home/statement.html）。PC・スマホ共通の1枚で大きさだけ合わせる */
+  display: block;
+  width: min(500px, 82%);
+  max-width: 100%;
+  height: auto;
+}
+/* ステートメント左端（html[data-statement="edge"]。2026-10-30。10-31 から既定）：左揃えの画像を、セクションの左端（見出しの左端）に置く。
+   1a・1b は幅 --container の中の --gutter の内側、2a〜2e は右の列の --gutter の内側。画像の中の 4px の余白は左と同じく戻す */
+html[data-statement="edge"] body.home .lead { justify-items: start; }
+html[data-statement="edge"] body.home .lead__img { left: -4px; }
+html[data-statement="edge"]:not([data-design="d"]) body.home .lead { width: min(var(--container), 100%); margin-inline: auto; }
+.lead__text {
+  max-width: 46em;
+  font-size: var(--fs-lead);
+  line-height: 3;
+  text-align: center;
+}
+
+/* ============================================================
+   Section（見出し＋本文）
+   ============================================================ */
+.section {
+  /* 幅 --container の中に左右 --gutter（フッターと揃える） */
+  width: min(var(--container), 100%);
+  margin-inline: auto;
+  padding: clamp(60px, 9vh, 100px) var(--gutter);
+  display: grid;
+  gap: 48px;
+}
+
+.section--split {
+  grid-template-columns: var(--head-w) 1fr;
+  column-gap: var(--split-gap);
+  align-items: start;
+}
+
+.section__head {
+  display: grid;
+  gap: 18px;
+}
+.section__title {
+  font-size: var(--fs-section);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+.section__byline {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--c-text-dim);
+}
+
+.section__body {
+  display: grid;
+  gap: 40px;
+  line-height: 2.2;
+}
+.section__body > p { text-align: justify; }
+
+/* ============================================================
+   定義リスト（概要・アクセス・配布物・フッター共通）
+   ============================================================ */
+.deflist { display: grid; gap: 18px; }
+.deflist--compact { gap: 10px; }
+
+.deflist__row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  column-gap: 24px;
+  align-items: baseline;
+}
+
+.deflist dt {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.8;
+  color: var(--c-text-dim);
+}
+.deflist dd {
+  font-size: var(--fs-body);
+  line-height: 1.8;
+}
+.deflist dd.is-lead {
+  font-family: var(--ff-en), var(--ff-jp);
+  font-size: var(--fs-value);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   地図・リンクリスト
+   ============================================================ */
+.map {
+  max-width: 420px;
+  border: 1px solid var(--c-rule);
+}
+/* 画像未配置時のプレースホルダー */
+.map.is-empty::before {
+  content: attr(data-fallback);
+  display: grid;
+  place-items: center;
+  aspect-ratio: 6 / 5;
+  padding: 1em;
+  font-size: 13px;
+  text-align: center;
+  color: var(--c-text-dim);
+  background: rgba(0, 0, 0, .08);
+}
+
+/* ============================================================
+   配布物（図録・リーフレット・DM）
+   ============================================================ */
+.handouts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.handout img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.handout figcaption { display: grid; gap: 4px; margin-top: 16px; }
+.handout__name { font-size: var(--fs-body); font-weight: 700; }
+.handout__desc { font-size: 14px; color: var(--c-text); }
+
+.linklist { display: grid; gap: 8px; }
+.linklist a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  margin-top: clamp(60px, 10vh, 120px);
+  padding: 30px 0 100px;
+  background: var(--c-footer);
+}
+.site-footer__inner {
+  width: min(var(--container), 100%);
+  margin-inline: auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  gap: 50px;
+}
+.site-footer a { text-decoration: underline; text-decoration-thickness: 1px; }
+
+/* ============================================================
+   Top layout 1 — 対象4セクションだけを切り替える比較用レイアウト
+   大見出し／小見出し／コンテンツの左端は、section の開始位置と
+   下記2列グリッドに集約する。今後の案は data-top-layout の値を増やす。
+   ============================================================ */
+.layout1-only { display: none; }
+
+html[data-top-layout="1"] body.home {
+  --layout1-section-space: clamp(72px, 10vh, 120px);
+  --layout1-heading-space: 32px;
+  /* 小見出しを16pxに揃え、学科名が1行に収まる列幅を確保する。 */
+  --layout1-label-size: 16px;
+  --layout1-label-col: 162px;
+  --layout1-column-gap: 20px;
+  --layout1-item-space: 28px;
+  --layout1-body-leading: 1.6;
+  --layout1-media-width: 420px;
+  --layout1-media-space: 8px;
+  --layout1-caption-space: 10px;
+  --layout1-figure-top: 5px;
+  /* ご挨拶本文に合わせた、新レイアウト共通の最大コンテンツ幅。 */
+  --layout1-content-max: calc(100% + 2em);
+}
+html[data-top-layout="1"] body.home .layout1-only { display: block; }
+html[data-top-layout="1"] body.home .layout1-grid { display: grid; gap: var(--layout1-item-space); }
+html[data-top-layout="1"] body.home .layout1-row {
+  display: grid;
+  grid-template-columns: var(--layout1-label-col) minmax(0, 1fr);
+  column-gap: var(--layout1-column-gap);
+  align-items: start;
+}
+html[data-top-layout="1"] body.home .layout1-row :is(h3, dt) {
+  margin: 0;
+  font-size: var(--layout1-label-size);
+  font-weight: 700;
+  /* 見出しと本文の文字面の上端を合わせる。 */
+  line-height: 1.64;
+  color: var(--c-text);
+}
+html[data-top-layout="1"] body.home .layout1-row > :is(p, div, figcaption, dd) {
+  min-width: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: var(--layout1-body-leading);
+}
+html[data-top-layout="1"] body.home :is(#outline, #access, #handouts) {
+  gap: var(--layout1-heading-space);
+  padding-block: var(--layout1-section-space);
+}
+html[data-top-layout="1"] body.home :is(#outline, #access, #handouts) .section__title {
+  font-size: 24px;
+  line-height: 1.4;
+}
+html[data-top-layout="1"] body.home #outline > .deflist,
+html[data-top-layout="1"] body.home #access > .section__body,
+html[data-top-layout="1"] body.home #handouts > .handouts,
+html[data-top-layout="1"] body.home .site-footer__inner { display: none; }
+
+html[data-top-layout="1"] body.home .layout1-outline .layout1-row > div { display: grid; gap: 2px; }
+html[data-top-layout="1"] body.home .layout1-access__content { display: grid; gap: 4px; }
+html[data-top-layout="1"] body.home .layout1-map {
+  width: min(100%, var(--layout1-media-width));
+  margin: 0;
+  border: 1px solid var(--c-rule);
+}
+html[data-top-layout="1"] body.home .layout1-map img { display: block; width: 100%; height: auto; }
+html[data-top-layout="1"] body.home .layout1-linklist { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+html[data-top-layout="1"] body.home .layout1-linklist a,
+html[data-top-layout="1"] body.home .layout1-footer a {
+  font-size: 13px;
+  line-height: 1.8;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .15em;
+}
+html[data-top-layout="1"] body.home .layout1-linklist a { line-height: 1.6; }
+html[data-top-layout="1"] body.home .layout1-handouts .layout1-row { margin: 0; }
+html[data-top-layout="1"] body.home .layout1-handouts figcaption { display: grid; gap: var(--layout1-caption-space); padding-top: var(--layout1-figure-top); }
+html[data-top-layout="1"] body.home .layout1-handouts img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+html[data-top-layout="1"] body.home .layout1-handouts figcaption p {
+  margin: 0;
+  font-size: 16px;
+  line-height: var(--layout1-body-leading);
+  color: var(--c-text);
+}
+html[data-top-layout="1"] body.home .layout1-footer {
+  width: min(var(--container), 100%);
+  margin-inline: auto;
+  padding: 0 var(--gutter);
+}
+html[data-top-layout="1"] body.home .layout1-footer .layout1-grid { gap: 14px; }
+html[data-top-layout="1"] body.home .layout1-footer .copyright { margin-top: 36px; }
+
+.ico-ig {
+  margin-right: 6px;
+}
+
+.copyright {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--c-text-dim);
+}
+
+/* ============================================================
+   スクロール連動フェードイン
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================================================
+   作品一覧（トップのゼミ一覧 → works/?seminar=）
+   ============================================================ */
+/* ゼミごとの入口：にじみ＋線画を無造作に散らす。
+   各 li の --x / --y / --w は 1000×1350 の台紙上の px、--r は傾き（index.html 側で指定） */
+.seminar-scatter {
+  position: relative;
+  aspect-ratio: 1000 / 1350;
+  max-width: 1000px;
+}
+.seminar-scatter li {
+  position: absolute;
+  left: calc(var(--x) / 1000 * 100%);
+  top: calc(var(--y) / 1350 * 100%);
+  width: calc(var(--w) / 1000 * 100%);
+  transform: rotate(var(--r));
+}
+.seminar-scatter li:hover { z-index: 1; }
+.seminar-scatter a {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.seminar-scatter a:hover { opacity: 1; }
+.seminar-scatter img {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: auto;
+  /* hover で実がぷるんと揺れる（値は script.js のばねが毎フレーム入れる）。
+     にじみと線画は同じ動きにして、線が二重に見えないようにする */
+  transform-origin: 50% 92%;
+  transform: skewX(var(--wob-skew, 0deg)) scale(var(--wob-sx, 1), var(--wob-sy, 1));
+}
+.seminar-scatter__label {
+  grid-area: 1 / 1;
+  align-self: end;
+  justify-self: start;
+  position: relative;
+  padding: 2px 10px;
+  font-size: var(--fs-value);
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-shadow: 0 0 6px var(--c-bg), 0 0 12px var(--c-bg);
+  transform: rotate(calc(var(--r) * -1));
+  transition: background-color .25s var(--ease), color .25s var(--ease);
+}
+.seminar-scatter__label::after {
+  content: " →";
+  font-family: var(--ff-en);
+  font-weight: 400;
+}
+.seminar-scatter a:hover .seminar-scatter__label {
+  background: var(--c-text);
+  color: var(--c-bg);
+  text-shadow: none;
+}
+/* 画像の無いゼミ（文字だけ） */
+.seminar-scatter li:not(:has(img)) .seminar-scatter__label {
+  border: 1px solid var(--c-rule);
+}
+
+.seminar-links__all { justify-self: end; }
+.seminar-links__all a {
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.seminar-links__all a::after { content: " →"; }
+
+/* ============================================================
+   左右に散らす「線画＋にじみ」の絵（deco.js）
+   各 section の中に置き、画面の左右の端から少しはみ出させる
+   ============================================================ */
+main { overflow-x: clip; }
+.lead,
+.section { position: relative; }
+.deco {
+  position: absolute;
+  top: var(--top, 0%);
+  --deco-w: min(calc(var(--w, 280px) * 1.2), 28vw); /* 全体の大きさは 1.2 で調整 */
+  width: var(--deco-w);
+  aspect-ratio: 3 / 4; /* 画像を読んだら deco.js が実際の比率に置き換える */
+  transform: rotate(var(--r, 0deg));
+  pointer-events: none;
+  z-index: 0;
+}
+/* 1300px 未満は本文に被るので、ブロックの間（上下のすきま）に置く。縦位置は deco.js が data-narrow から計算する。
+   幅は 1001〜1299px 280px / small 240px / mobile 160px（STUDIO 版と同じ） */
+@media (max-width: 1299px) {
+  .deco { --deco-w: 280px; }
+  #handouts { padding-bottom: 320px; } /* 大学院の実を置くすきま */
+}
+/* 古堅ゼミの実がご挨拶の後と開催概要の見出しの間に収まる余白。 */
+@media (min-width: 691px) and (max-width: 1299px) {
+  html:not([data-pc-deco="no"]) body.home #greeting { margin-bottom: 260px; }
+}
+@media (min-width: 1300px) {
+  html:not([data-pc-deco="no"]) body.home #greeting { margin-bottom: 480px; }
+  html[data-design="d"]:not([data-pc-deco="no"]) body.home #greeting { margin-bottom: 260px; }
+}
+@media (max-width: 690px) {
+  html:not([data-mobile-deco="no"]) body.home #greeting { margin-bottom: 190px; }
+  html:not([data-mobile-deco="no"]) body.home #handouts { margin-top: 180px; }
+}
+/* 画面の端から絵の幅の2割がはみ出す（--bleed で個別に変えられる）。--page-w は本文の列の幅（通常は画面幅。トップのデザイン D では右半分） */
+.deco--left  { left:  calc(50% - var(--page-w, 100vw) / 2 - var(--deco-w) * var(--bleed, .2)); }
+.deco--right { right: calc(50% - var(--page-w, 100vw) / 2 - var(--deco-w) * var(--bleed, .2)); }
+.deco canvas,
+.deco img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* トップのキャンパスマップ（ゼミ一覧の下。build-local.mjs が index.html の campus-map の印の間に入れる。2026-10-28）
+   見た目は作品一覧の場所ごと（studio-embed/designs/works-e.css の .place__*）と同じ。?campus-map=no で隠す */
+body.home .home-campus { grid-column: 1 / -1; display: grid; gap: 10px; width: 100%; margin: 48px 0 0; } /* 見出しは左、地図は中央 */
+/* 場所ボタンの列は地図の左（2026-11-08）。見出しは2列にまたがる */
+body.home .home-campus { grid-template-columns: 1fr max-content minmax(0, 400px) 1fr; column-gap: 0; } /* 見出しは全幅で左揃え、ボタン列＋地図は外側の 1fr で中央に寄せる */
+body.home .home-campus > figcaption { grid-column: 1 / -1; }
+body.home .home-campus .place__mapbox { grid-column: 3; grid-row: 2; }
+body.home .home-campus .floor-guide-buildings { grid-column: 2; grid-row: 2; align-self: center; margin-right: 24px !important; }
+@media (max-width: 690px) { body.home .home-campus .floor-guide-buildings { margin-right: 12px !important; } body.home .home-campus .floor-guide-buildings button { font-size: 13px; padding: .4em .8em; } }
+body.home .home-campus .place__lead { margin: 0; font-size: calc(var(--fs-section) * var(--heading-scale)); font-weight: 700; line-height: 1.4; }
+body.home .home-campus .place__mapbox { position: relative; width: min(400px, 100%); margin-inline: auto; }
+body.home .home-campus .place__mapbox img { display: block; width: 100%; height: auto; }
+body.home .home-campus .place__bld { position: absolute; box-sizing: border-box; display: grid; place-items: center; border: 2px solid rgb(255 225 77 / .75); background: rgb(255 225 77 / .1); text-decoration: none; transition: background-color .2s, border-color .2s; }
+body.home .home-campus .place__bld:hover, body.home .home-campus .place__bld:focus-visible { border-color: #ffe14d; background: rgb(255 225 77 / .3); outline: none; opacity: 1; }
+body.home .home-campus .place__badge { display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 8px; box-sizing: border-box; border-radius: 999px; background: #ffe14d; color: #6b2f22; font-family: var(--ff-en), var(--ff-jp); font-size: 14px; font-weight: 700; line-height: 1; }
+/* バッジは建物の右上の角に（2026-10-28） */
+body.home .home-campus .place__badge { position: absolute; top: -12px; right: -12px; }
+html[data-nocampus] body.home .home-campus { display: none; }
+/* 作品・展示場所のセクションをなくす（?works=no。html[data-noworks]。トップの切り替え「Works」。2026-10-28）。サイドバーのリンク先はそのまま */
+html[data-noworks] body.home #student-works { display: none; }
+/* 装飾の実をなくす（?deco=2。html[data-nodeco]。トップの切り替え「Deco」。2026-10-28） */
+@media (min-width: 691px) { html[data-pc-deco="no"] body.home .deco { display: none; } }
+/* 本文を絵より手前に */
+.lead > :not(.deco),
+.section > :not(.deco) { position: relative; z-index: 1; }
+
+/* ============================================================
+   作品一覧・作品詳細（works/index.html・works/work.html）
+   中身は STUDIO の埋め込みと同じコード（web/studio-embed/works, work の embed.template.html ＋ designs/。build-local.mjs が書き出す）で、
+   スタイルもその中に持っている。ここにはページの枠側の分だけ
+   ============================================================ */
+/* STUDIO の iframe の代わり。デザイン B の白地の帯（画面幅いっぱい・とても長い）のはみ出しを切る */
+.embed-frame { overflow: clip; }
+/* iframe の中（STUDIO）と同じ条件にする：body の文字詰めとリンクの hover（埋め込みの中で決めている）をページ側から持ち込まない */
+.embed-frame { letter-spacing: 0; }
+:where(.embed-frame) a:hover { opacity: 1; }
+/* デザイン案の切り替え（studio-embed/design-switch/embed.html）。左上に固定、上と左はページの余白（40px、スマホ 20px）。STUDIO と同じ位置 */
+.design-switch { position: fixed; top: var(--gutter); left: var(--gutter); z-index: 60; }
+/* デザイン B〜（html に data-design が付く。作品詳細の A＝赤地は除く）：白地のすぐ下にフッターを付け、色はページと同じ赤。
+   白地の上では白いハンバーガーが見えなくなるので、ページと同じ赤の丸を敷く（STUDIO の B〜D のページと同じ） */
+html[data-design]:not([data-design="a"]) body:not(.home) .site-footer { margin-top: 0; background: var(--c-bg); }
+html[data-design]:not([data-design="a"]) body:not(.home) .menu-btn { background: var(--c-bg); border-radius: 50%; }
+/* 1列の赤地ではフッターを濃い赤に戻す */
+html[data-ground="red"]:not([data-design="a"]) body:not(.home) .site-footer,
+html[data-design="g"]:not([data-design="a"]) body:not(.home) .site-footer { margin-top: clamp(60px, 10vh, 120px); background: var(--c-footer); }
+/* 2列では本文と同じ赤のまま、上の線で区切る */
+html[data-works-layout="2"][data-ground="red"]:not([data-design="a"]) body:not(.home) .site-footer { position: relative; z-index: 1; background: var(--c-bg); }
+html[data-works-layout="2"] body:not(.home) .site-footer__inner::before { content: ""; height: 1px; background: var(--c-rule); }
+@media (min-width: 1001px) {
+  html[data-works-layout="2"] body:not(.home) .site-footer { width: 50%; margin-left: 50%; }
+  html[data-works-layout="2"] body:not(.home) .site-footer__inner { width: 100%; }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1000px) {
+  .deco { --deco-w: 240px; }
+  :root { --head-w: 140px; --split-gap: 56px; }
+  html[data-top-layout="1"] body.home { --layout1-label-col: 162px; --layout1-column-gap: 20px; }
+}
+
+@media (max-width: 690px) {
+  :root { --gutter: 20px; }
+  /* KV：スマホでは絵が横幅いっぱいで高さが余るので、枠を絵の高さに寄せて開催情報との間を詰める（絵は枠に収まるように描かれる。2026-10-21） */
+  .kv { min-height: 0; height: min(100svh, 112vw); }
+  /* ステートメントの上：大田ゼミの実（above .lead__img。高さ 280px ほど）が開催情報に寄りすぎないよう、上の余白を広く取る */
+  .lead { padding-top: clamp(380px, 48vh, 440px); }
+  .deco { --deco-w: 160px; }
+  #handouts { padding-bottom: 240px; }
+  /* ご挨拶：スマホでは少し小さく、行間を詰める（STUDIO 版と同じ） */
+  #greeting .section__body { font-size: 15px; line-height: 1.9; letter-spacing: .02em; }
+  #greeting .section__byline { font-size: 14px; line-height: 1.8; }
+  .handouts { grid-template-columns: 1fr; gap: 32px; }
+  .kv-info { --kv-info-overlap: 40px; }
+  /* 狭い画面では散らすと小さくなりすぎるので、2列に流して少しだけ傾ける */
+  .seminar-scatter {
+    aspect-ratio: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+  .seminar-scatter li { position: static; width: auto; }
+  .seminar-scatter li:nth-child(even) { margin-top: 32px; }
+  .seminar-scatter__label { font-size: 14px; }
+
+  body { line-height: 2; }
+
+  .section,
+  .section--split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  /* MAU ロゴ：スマホでは右上に置かず、展覧会名（.kv-info）の下に小さく（2026-10-28）。
+     .kv-info__meta の中のロゴだけを出す（会期・時間・場所は出さない） */
+  .kv__logo { display: none; }
+  .kv-info .kv-info__meta { display: block; margin-top: 20px; } /* 後ろの .kv-info__meta { display: none } より強く */
+  .kv-info__meta > :not(.kv-info__logo) { display: none; }
+  .kv-info__logo svg { display: block; width: auto; height: 18px; }
+
+  .kv__inner {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end; /* キャッチは右端（2026-10-28。左だと切り替えの下に隠れ、絵にも被っていた） */
+    gap: 28px;
+  }
+  .kv__catch {
+    margin-top: 0;
+    writing-mode: vertical-rl;
+    letter-spacing: .12em;
+  }
+  .kv-info .weekday-mark {
+    border-color: currentColor;
+  }
+
+  .lead__text { line-height: 2.6; text-align: left; }
+
+  .deflist__row {
+    grid-template-columns: 1fr;
+    row-gap: 2px;
+  }
+  /* フッターだけはスマホでも 2 列：左にラベル（アイコン＋Instagram など。中身の幅）、右に値（2026-10-21） */
+  .site-footer .deflist { grid-template-columns: max-content minmax(0, 1fr); column-gap: 16px; }
+  .site-footer .deflist__row { grid-column: 1 / -1; grid-template-columns: subgrid; column-gap: 16px; row-gap: 0; }
+  .site-footer .deflist dt { white-space: nowrap; }
+
+  .sidebar { padding: 18px 28px 40px; }
+  .site-footer__inner { gap: 32px; }
+
+  html[data-top-layout="1"] body.home {
+    --layout1-section-space: 64px;
+    --layout1-heading-space: 24px;
+    --layout1-item-space: 24px;
+  }
+  html[data-top-layout="1"] body.home .layout1-row { grid-template-columns: 1fr; row-gap: 6px; }
+  html[data-top-layout="1"] body.home .layout1-footer .layout1-grid { grid-template-columns: max-content minmax(0, 1fr); column-gap: 16px; }
+  html[data-top-layout="1"] body.home .layout1-footer .layout1-row { grid-column: 1 / -1; grid-template-columns: subgrid; column-gap: 16px; row-gap: 0; }
+  html[data-layout-label="right"][data-top-layout="1"] body.home .layout1-footer .layout1-row > dt { text-align: right; }
+  html[data-top-layout="1"] body.home :is(#outline, #access, #handouts) .section__title { font-size: 24px; }
+  html[data-top-layout="1"] body.home .layout1-map,
+  html[data-top-layout="1"] body.home .layout1-handouts img { width: 100%; }
+}
+
+/* ============================================================
+   トップのデザイン D（index.html?design=d。PC だけ）
+   KV（絵・キャッチ・ロゴ）と開催情報を左半分に固定し、右半分だけがスクロールする。1000px 以下は A と同じ。
+   切り替えは左上の「Design」（studio-embed/design-switch/embed.html。build-local.mjs が index.html に入れる）。
+   STUDIO 版の Home D はまだ無い（作るときはこれと同じ形にする）
+   ============================================================ */
+/* デザイン D のトップ：フッターはページと同じ赤にして、中身の幅の横線で本文と分ける（2026-10-28。STUDIO の /home-d も同じ） */
+html[data-design="d"] body.home .site-footer { padding-top: 0; background: var(--c-bg); }
+html[data-design="d"] body.home .site-footer__inner::before { content: ""; height: 1px; background: var(--c-rule); }
+html[data-design="d"][data-top-layout="1"] body.home .layout1-footer::before { content: ""; display: block; height: 1px; margin-bottom: 50px; background: var(--c-rule); }
+
+/* 会期・場所・ロゴは D の PC だけ */
+.kv-info__meta { display: none; }
+
+/* D1〜D4（?d=1〜4。html[data-kvd]。Miro の d1〜d4、2026-10-28）。5 は 2026-10-31 に足した Layout 2c（1 の開催情報を左端へ）
+   1・2：絵を左半分に固定して右の列がスクロール。右の列の最初の画面に大学名〜ロゴ。1 は絵が大きく文字が下め、2 は絵を収めて文字が真ん中（キャッチと上をそろえる）
+   3・4：左右を入れ替え。絵を右に固定して左の列がスクロール。キャッチは右端（ハンバーガーの下）。4 は絵が大きく右へはみ出す
+   絵の大きさ・ずらしは --kv-zoom / --kv-shift（kv.js が読む） */
+@media (min-width: 1001px) {
+  html[data-design="d"] body.home { --kvd-col: 50vw; }
+  html[data-design="d"] body.home .kv { position: fixed; top: 0; left: 0; z-index: 0; width: var(--kvd-col); height: 100dvh; min-height: 0; }
+  html[data-design="d"] body.home .kv__logo { display: none; }
+  /* 右半分を使い、内側の余白と合わせて右端に約 100px 空ける。 */
+  html[data-design="d"] body.home main { padding-left: var(--kvd-col); padding-right: 60px; }
+  html[data-design="d"] body.home .site-footer { margin-left: var(--kvd-col); margin-right: 60px; }
+  /* 右列そのものをコンテナとし、各セクションで幅制限を重ねない。 */
+  html[data-design="d"] body.home .section,
+  html[data-design="d"] body.home .site-footer__inner { width: 100%; margin-inline: 0; }
+
+  /* 開催情報：スクロールする列の最初の画面 */
+  html[data-design="d"] body.home .kv-info {
+    --fs-kv-univ: clamp(14px, 1.1vw, 18px);
+    --fs-title: clamp(28px, 2.35vw, 40px);
+    --fs-title-en: clamp(20px, 1.6vw, 28px);
+    position: relative; z-index: 1; width: auto; min-height: 100dvh; margin: 0;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: var(--kvd-drop, 0px) var(--gutter) 0 clamp(40px, 5vw, 96px);
+  }
+  html[data-design="d"] body.home .kv__title { font-weight: 700; }
+  html[data-design="d"] body.home .kv-info__meta { display: grid; justify-items: start; margin-top: clamp(40px, 6vh, 72px); font-size: clamp(14px, 1.05vw, 17px); line-height: 1.6; letter-spacing: .04em; }
+  html[data-design="d"] body.home .kv-info__meta .weekday-mark { background: var(--c-text); border-color: var(--c-text); color: var(--c-bg); font-weight: 700; }
+  html[data-design="d"] body.home .kv-info__meta small { font-size: .8em; }
+  html[data-design="d"] body.home .kv-info__place { margin-top: .5em; font-size: .82em; font-weight: 700; }
+  html[data-design="d"] body.home .kv-info__logo { margin-top: .6em; }
+  html[data-design="d"] body.home .kv-info__logo svg { display: block; width: auto; height: 18px; }
+
+  /* キャッチ：絵の列の右端寄せ */
+  html[data-design="d"] body.home .kv.has-art-pos .kv__catch,
+  html[data-design="d"] body.home .kv__catch { position: absolute; left: auto; right: var(--kvd-catch-right, 0px); top: 0; margin-top: var(--kvd-catch-top, 22vh); }
+
+  html[data-design="d"][data-kvd="1"] body.home,
+  html[data-design="d"][data-kvd="5"] body.home { --kvd-drop: 20vh; }
+  html[data-design="d"][data-kvd="1"] body.home .kv,
+  html[data-design="d"][data-kvd="5"] body.home .kv { --kv-zoom: 1.2; --kv-shift: -40; --kvd-catch-top: 18vh; }
+  /* 5（Layout 2c。2026-10-31）：1 と同じで、開催情報（大学名〜ロゴ）を右の列の左端に寄せる。左の余白を下のセクションと同じ --gutter にして、見出し・ステートメントの左端とそろえる */
+  html[data-design="d"][data-kvd="5"] body.home .kv-info { padding-left: var(--gutter); }
+  /* 右列の左端は分割線に揃え、余白は右端だけに設ける。 */
+  html[data-design="d"]:not([data-kvd="3"]):not([data-kvd="4"]) body.home :is(.kv-info, .lead, .section, .site-footer__inner) { padding-left: 0; }
+  html[data-design="d"][data-kvd="2"] body.home .kv { --kv-zoom: 1; --kv-shift: -130; --kvd-catch-top: 24vh; --kvd-catch-right: 2vw; }
+
+  /* 3・4：左右を入れ替え。絵の枠は列より少し広く（左へ 5vw）取り、左の列の文字の後ろまでにじませる */
+  html[data-design="d"][data-kvd="3"] body.home .kv,
+  html[data-design="d"][data-kvd="4"] body.home .kv { left: auto; right: 0; width: calc(var(--kvd-col) + 5vw); --kvd-catch-top: 18vh; --kvd-catch-right: 64px; }
+  html[data-design="d"][data-kvd="3"] body.home main,
+  html[data-design="d"][data-kvd="4"] body.home main { padding-left: 0; padding-right: var(--kvd-col); }
+  html[data-design="d"][data-kvd="3"] body.home .site-footer,
+  html[data-design="d"][data-kvd="4"] body.home .site-footer { margin-left: 0; margin-right: var(--kvd-col); }
+  html[data-design="d"]:is([data-kvd="3"], [data-kvd="4"]) body.home :is(.kv-info, .lead, .section, .site-footer__inner) { padding-left: 100px; }
+  html[data-design="d"][data-kvd="3"] body.home,
+  html[data-design="d"][data-kvd="4"] body.home { --kvd-drop: 6vh; }
+  /* 左の列の実（.deco。z-index 0）は KV の下へ。KV を 1 にする（本文は .section > * の z-index 1 で、DOM が後なので KV より手前のまま） */
+  html[data-design="d"][data-kvd="3"] body.home .kv,
+  html[data-design="d"][data-kvd="4"] body.home .kv { z-index: 1; --kv-transparent: 1; } /* 絵の赤い地は透かす（実が赤い地で切れないように。kv.js） */
+  html[data-design="d"][data-kvd="3"] body.home .kv { --kv-zoom: 1.1; --kv-shift: 0; }
+  html[data-design="d"][data-kvd="4"] body.home .kv { --kv-zoom: 1.25; --kv-shift: 90; --kv-catch-dx: -80; } /* キャッチが右に寄りすぎるので左へ */
+
+  /* ステートメントの上は、大田ゼミの実（above .lead__img）が入る高さを空ける */
+  html[data-design="d"] body.home .lead { padding-top: clamp(300px, 40vh, 420px); }
+  /* 右半分は幅が半分（1280px で 640px）なので、見出しと本文は縦に積む */
+  html[data-design="d"] body.home .section--split { grid-template-columns: 1fr; gap: 28px; }
+  /* 左右の実：列は常に 1300px 未満の置き方（ブロックの間に置き、列の端から 2 割はみ出す。deco.js も D では narrow 扱い） */
+  html[data-design="d"] body.home .deco { --deco-w: 240px; --page-w: 50vw; }
+  /* 左の実は列の左端（＝KV の枠の境）からはみ出させない */
+  html[data-design="d"] body.home .deco--left { --bleed: 0; }
+  html[data-design="d"] body.home #handouts { padding-bottom: 320px; }
+  /* 右の列（本文・フッター）は KV のイントロが終わってから（kv.js が html に is-kv-done を付ける。10 秒の保険は intro-fallback）フェードで出す。実の再生も同じ合図を待つ（deco.js） */
+  html[data-design="d"].js-intro body.home main > :not(.kv):not(.kv-info),
+  html[data-design="d"].js-intro body.home .site-footer { opacity: 0; transition: opacity 1.2s var(--ease); }
+  html[data-design="d"].is-kv-done body.home main > :not(.kv):not(.kv-info),
+  html[data-design="d"].is-kv-done body.home .site-footer,
+  html[data-design="d"].intro-fallback body.home main > :not(.kv):not(.kv-info),
+  html[data-design="d"].intro-fallback body.home .site-footer { opacity: 1; }
+}
+
+/* ============================================================
+   トップのデザイン B・C（index.html?design=b / c。STUDIO の Home B・Home C と同じ）。トップ（body.home）だけに当てる
+   B：便箋のご挨拶・KV を 130svh（PC）・埋め込み版のサイドバー（ゼミの線画アイコン＋演出）・付け根を軸に揺れるゼミ一覧
+   C：B のご挨拶を封筒（下の .greeting-c）にしたもの
+   ============================================================ */
+/* KV：PC では枠を 130svh にして絵を大きく。開催情報は伸ばした分も持ち上げて、最初の画面の下に置く */
+@media (min-width: 1001px) {
+  html[data-design="b"] body.home .kv, html[data-design="c"] body.home .kv { min-height: 130svh; }
+  html[data-design="b"] body.home .kv-info, html[data-design="c"] body.home .kv-info { margin-top: calc(-30svh - var(--kv-info-overlap)); }
+  /* Layout 1a（?d=1a）：1 列で KV は A と同じ大きさ（100svh） */
+  html[data-kv1="a"] body.home .kv { min-height: 100svh; }
+  html[data-kv1="a"] body.home .kv-info { margin-top: calc(var(--kv-info-overlap) * -1); }
+}
+/* サイドバー：全ページ・全デザインで埋め込み版（.sidebar-b。index.html と works/ のページの印の間に build-local.mjs が入れる。2026-10-27〜）。
+   A のハンバーガー（.site-header）とサイドバー（.sidebar）は使わない（隠す） */
+.sidebar-b { position: fixed; top: 0; left: 0; width: 100%; z-index: 50; }
+.site-header, .sidebar, .scrim { display: none; }
+/* ゼミ一覧：埋め込み版（.seminars-b）。台紙は散らした絵と同じ 1000×1350、絵は台紙から 40px はみ出す */
+body.home .seminars-b { display: none; position: relative; aspect-ratio: 1000 / 1150; max-width: 1000px; }
+@media (max-width: 690px) { body.home .seminars-b { aspect-ratio: 1000 / 1850; } }
+body.home .seminars-b .sb { inset: -40px; }
+/* D の揺れ方も C と同じ（2026-10-27） */
+html[data-design="b"] body.home .seminars-b, html[data-design="c"] body.home .seminars-b, html[data-design="d"] body.home .seminars-b { display: block; }
+html[data-design="b"] body.home .seminar-scatter, html[data-design="c"] body.home .seminar-scatter, html[data-design="d"] body.home .seminar-scatter { display: none; }
+/* ご挨拶 2（B の便箋）：赤地の上に白い便箋を 1 枚。文字は赤茶（見出しの上の「Greeting」は 2026-10-28 に外した）。罫線は本文の背面（行送りと同じ間隔） */
+html[data-greet="2"] body.home #greeting {
+  --ink: #6b2f22; --lh: 36px;
+  width: min(var(--col), calc(100% - var(--gutter) * 2));
+  grid-template-columns: 1fr; gap: 48px;
+  padding: 88px 100px 96px;
+  background: var(--c-paper); color: var(--ink);
+  border-top: 6px solid var(--c-bg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .22); /* 影は黒の透過（赤みは付けない。2026-10-21） */
+}
+@media (min-width: 1001px) {
+  html[data-design="d"]:is([data-kvd="3"], [data-kvd="4"])[data-greet="2"] body.home #greeting {
+    width: 100%; margin-inline: 0; padding-left: 100px;
+  }
+}
+html[data-greet="2"] body.home #greeting .section__head { display: contents; }
+html[data-greet="2"] body.home #greeting .section__title { order: 1; display: grid; gap: 10px; font-size: 32px; line-height: 1.4; }
+html[data-greet="2"] body.home #greeting .section__body {
+  order: 2; gap: var(--lh);
+  font-size: 16px; line-height: var(--lh); letter-spacing: .05em; text-align: justify;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--lh) - 1px), rgba(189, 49, 36, .22) calc(var(--lh) - 1px), rgba(189, 49, 36, .22) var(--lh));
+}
+html[data-greet="2"] body.home #greeting .section__byline { order: 3; justify-self: end; text-align: right; color: var(--ink); /* 地の白と同じ色（--c-text-dim）になって消えていた（2026-10-28） */ font-size: 15px; line-height: 1.8; letter-spacing: .05em; }
+@media (max-width: 1000px) { html[data-greet="2"] body.home #greeting { padding: 72px 64px 80px; } }
+@media (max-width: 690px) {
+  html[data-greet="2"] body.home #greeting { --lh: 28px; padding: 48px 24px 56px; gap: 32px; }
+  html[data-greet="2"] body.home #greeting .section__title { font-size: 24px; }
+  html[data-greet="2"] body.home #greeting .section__body { font-size: 14px; letter-spacing: .02em; }
+}
+
+/* ご挨拶は html[data-greet]（1 文字だけ・2 便箋・3 封筒）で切り替える。既定は 1（2026-10-29 に「A→1・B→2・C/D→3」から変えた）、?greeting=1〜3 で上書き（index.html の head。2026-10-28〜）
+   ご挨拶 3：Home C の封筒（.greeting-c。index.html の印の間に build-local.mjs が入れる）。幅に関係なく */
+body.home .greeting-c { display: none; }
+html[data-greet="3"] body.home .greeting-c { display: block; grid-column: 1 / -1; width: 100%; }
+html[data-greet="3"] body.home #greeting > .section__head,
+html[data-greet="3"] body.home #greeting > .section__body { display: none; }
+
+/* ============================================================
+   アクセシビリティ：モーションの抑制
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ============================================================
+   印刷
+   ============================================================ */
+@media print {
+  .site-header, .sidebar, .scrim, .kv__canvas { display: none !important; }
+  html, body { background: #fff; color: #000; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ゼ実は同じ枠に収め、形による大きさの差を抑える。 */
+html[data-design="a"] body.home .seminar-scatter {
+  aspect-ratio: auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px 24px;
+}
+html[data-design="a"] body.home .seminar-scatter li {
+  position: static;
+  width: auto;
+  transform: none;
+  margin: 0;
+}
+html[data-design="a"] body.home .seminar-scatter li:last-child { grid-column: 2; }
+html[data-design="a"] body.home .seminar-scatter li:nth-child(3n + 1) { transform: translate(-5%, 0); }
+html[data-design="a"] body.home .seminar-scatter li:nth-child(3n + 2) { transform: translate(3%, 6%); }
+html[data-design="a"] body.home .seminar-scatter li:nth-child(3n) { transform: translate(-2%, 2%); }
+html[data-design="a"] body.home .seminar-scatter a { grid-template-rows: 1fr auto; }
+html[data-design="a"] body.home .seminar-scatter img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+html[data-design="a"] body.home .seminar-scatter__label {
+  grid-area: 2 / 1;
+  justify-self: center;
+  transform: none;
+}
+@media (max-width: 690px) {
+  html[data-design="a"] body.home .seminar-scatter { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
+  html[data-design="a"] body.home .seminar-scatter li:last-child { grid-column: auto; }
+  html[data-design="a"] body.home .seminar-scatter li:nth-child(n) { transform: none; }
+  html[data-design="a"] body.home .seminar-scatter li:nth-child(even) { transform: translateY(6%); }
+}
+
+/* スマホではポスターのように実が画面の端で切れる構図にする。 */
+@media (max-width: 690px) {
+  body.home .kv { height: 140vw; --kv-zoom: 1.15; --kv-crop-top: .075; }
+}
+
+/* スマホのフェードは枠ではなく、描画した絵の下端に合わせる。 */
+@media (max-width: 690px) {
+  body.home .kv.has-art-pos::after,
+  html[data-kvfade] body.home .kv.has-art-pos::after,
+  html[data-kv1] body.home .kv.has-art-pos::after {
+    top: calc(min(var(--kv-art-bottom), 100%) - var(--kv-art-h) * .14);
+    bottom: auto;
+    height: calc(100% - min(var(--kv-art-bottom), 100%) + var(--kv-art-h) * .14);
+    z-index: 1;
+    background: linear-gradient(to bottom, rgb(var(--c-bg-rgb) / 0), rgb(var(--c-bg-rgb) / .25) calc(var(--kv-art-h) * .055), var(--c-bg) calc(var(--kv-art-h) * .1));
+  }
+}
+
+
+/* ご挨拶：段落間を空けず、段落の頭を一字下げる */
+body.home #greeting .section__body { gap: 0; }
+body.home #greeting .section__body > p { text-indent: 1em; }
+html[data-greet="2"] body.home #greeting .section__body { gap: 0; }
+
+#greeting .greeting-dash { display: inline-block; transform: scaleX(2); transform-origin: left; margin-right: 1em; text-indent: 0; }
+
+/* ご挨拶本文の行送りを従来の90%に */
+html[data-greet="1"] body.home #greeting .section__body { line-height: 1.98; }
+html[data-greet="2"] body.home #greeting { --lh: 32.4px; }
+@media (max-width: 690px) {
+  html[data-greet="1"] body.home #greeting .section__body { line-height: 1.71; }
+  html[data-greet="2"] body.home #greeting { --lh: 25.2px; }
+}
+
+/* ご挨拶本文の右側に余白 */
+body.home #greeting .section__body { padding-right: clamp(16px, 3vw, 48px); }
+
+body.home #greeting .section__body > p:first-child { text-indent: 0; }
+
+/* 本文中のルビは標準的な本文サイズの半分で上に組む。 */
+body.home #greeting ruby { ruby-position: over; }
+body.home #greeting rt { font-size: .5em; }
+
+/* ご挨拶の学科名と署名の間 */
+html body.home #greeting .section__byline { line-height: 1.6; }
+
+/* トップのセクション見出しサイズ（?heading-size=small / normal / large） */
+html { --heading-scale: 1; }
+html[data-heading-size="tiny"] { --heading-scale: .65; }
+html[data-heading-size="small"] { --heading-scale: .8; }
+html[data-heading-size="large"] { --heading-scale: 1.2; }
+html body.home .section__title { font-size: calc(var(--fs-section) * var(--heading-scale)); }
+html[data-greet="2"] body.home #greeting .section__title { font-size: calc(32px * var(--heading-scale)); }
+html body.home #greeting .gc .head h2 { font-size: calc(32px * var(--heading-scale)); }
+@media (max-width: 690px) {
+  html[data-greet="2"] body.home #greeting .section__title { font-size: calc(24px * var(--heading-scale)); }
+}
+@media (max-width: 650px) {
+  html body.home #greeting .gc .head h2 { font-size: calc(24px * var(--heading-scale)); }
+}
+
+/* 図録写真なしのレイアウト */
+html[data-catalog-photo="no"] body.home .handout--catalog img { display: none; }
+html[data-catalog-photo="no"] body.home .handout--catalog figcaption { margin-top: 0; padding-top: 16px; border-top: 1px solid currentColor; }
+
+/* オープニング動画 */
+.motion-intro { box-sizing: border-box; width: min(100vw, 56.25dvh); height: 100dvh; max-width: none; max-height: none; padding: 0; border: 0; background: transparent; overflow: visible; }
+.motion-intro { transition: opacity .65s ease; }
+.motion-intro::backdrop { background: rgb(0 0 0 / .78); transition: background-color .65s ease; }
+.motion-intro.is-ending { opacity: 0; }
+.motion-intro.is-ending::backdrop { background: rgb(0 0 0 / 0); }
+.motion-intro__video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.motion-intro__close { position: absolute; z-index: 1; top: 8px; right: -36px; width: 26px; height: 26px; border: 0; background: transparent; color: rgb(255 255 255 / .7); font: 600 18px/1 sans-serif; cursor: pointer; }
+.motion-intro__close:focus-visible { outline: 1px solid rgb(255 255 255 / .5); outline-offset: 2px; }
+.motion-intro__sound { position: absolute; z-index: 1; top: 12px; left: 12px; display: grid; place-items: center; width: 36px; height: 36px; padding: 7px; border: 0; border-radius: 999px; background: rgb(0 0 0 / .45); color: #fff; cursor: pointer; }
+.motion-intro__sound svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.motion-intro__sound[aria-pressed="false"] .sound-waves, .motion-intro__sound[aria-pressed="true"] .sound-muted { display: none; }
+.motion-intro__restart { position: absolute; z-index: 1; top: 12px; left: 54px; display: grid; place-items: center; width: 36px; height: 36px; padding: 7px; border: 0; border-radius: 999px; background: rgb(0 0 0 / .45); color: #fff; cursor: pointer; }
+.motion-intro__restart svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.motion-intro__restart:focus-visible { outline: 1px solid #fff; outline-offset: 2px; }
+.motion-intro__sound:focus-visible { outline: 1px solid #fff; outline-offset: 2px; }
+
+
+/* スマホだけ装飾の実を切り替える（PC側の設定はそのまま） */
+@media (max-width: 690px) {
+  html[data-mobile-deco="no"] body.home .deco { display: none; }
+  html[data-mobile-deco="1"] body.home .deco { display: block; }
+  html[data-mobile-deco="no"] body.home #handouts { padding-bottom: clamp(60px, 9vh, 100px); }
+}
+
+/* スマホではキャッチを少し大きく */
+@media (max-width: 690px) { body.home .kv { --kv-catch-scale: 1.25; } }
+
+/* スイッチャーは画面内でスクロールし、開閉ボタンを常に見せる */
+.design-switch .sws.is-open { max-height: calc(100dvh - var(--gutter) * 2); overflow-y: auto; overscroll-behavior: contain; padding-right: 8px; scrollbar-width: thin; scrollbar-color: rgb(253 252 248 / .7) transparent; }
+.design-switch .sws.is-open .sw-toggle { position: sticky; top: 0; z-index: 1; }
+
+
+/* 図録は写真2枚を横一列に、他の配布物はその下に並べる */
+.handouts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.handout--catalog { grid-column: 1 / -1; }
+.handout__photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.handout__photos img { display: block; }
+.catalog-carousel { position: relative; }
+.catalog-carousel__controls { position: absolute; z-index: 1; top: 8px; right: 8px; display: flex; align-items: center; gap: 8px; padding: 3px 7px; border-radius: 999px; background: rgb(0 0 0 / .55); color: #fff; font-size: 13px; line-height: 1.3; }
+.catalog-carousel__controls button { padding: 2px 5px; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.catalog-carousel__controls button:disabled { opacity: .35; cursor: default; }
+@media (min-width: 691px) {
+  .catalog-carousel .handout__photos { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
+  .catalog-carousel .handout__photos::-webkit-scrollbar { display: none; }
+  .catalog-carousel .handout__photos img { flex: 0 0 86%; min-width: 0; width: 86% !important; scroll-snap-align: start; }
+  .catalog-carousel__controls { right: calc(14% + 8px); }
+}
+html[data-catalog-photo="no"] body.home .catalog-carousel { display: none; }
+html[data-catalog-photo="no"] body.home .handout--catalog .handout__photos { display: none; }
+@media (max-width: 690px) {
+  .handouts { grid-template-columns: 1fr; }
+  .handout--catalog { grid-column: auto; }
+  .handout__photos { gap: 8px; }
+}
+
+.motion-intro__focus { position: absolute; width: 1px; height: 1px; overflow: hidden; outline: none; }
+
+@media (max-width: 690px), (max-aspect-ratio: 7/10) { .motion-intro__close { right: 8px; } }
+
+/* ステートメント画像の中サイズは小と大の中間 */
+html[data-statement-size="small"] body.home .lead__img { width: min(443.75px, 72.775%); }
+
+html[data-statement-size="smallest"] body.home .lead__img { width: min(387.5px, 63.55%); }
+
+/* スマホは本文の読みやすさに合わせてサイズを調整 */
+@media (max-width: 690px) {
+  html[data-statement-size="smallest"] body.home .lead__img { width: min(387.5px, 74%); }
+  html[data-statement-size="small"] body.home .lead__img { width: min(443.75px, 78%); }
+}
+
+.motion-intro__play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 10px 16px; border: 1px solid white; border-radius: 999px; background: rgb(0 0 0 / .65); color: white; font: inherit; cursor: pointer; }
+.motion-intro__play[hidden] { display: none; }
+
+/* 動画はシークバーだけを表示 */
+.motion-intro__seek { position: absolute; z-index: 1; left: 0; bottom: -9px; width: 100%; height: 20px; margin: 0; padding: 0; appearance: none; -webkit-appearance: none; background: transparent; cursor: pointer; opacity: .55; }
+.motion-intro__seek::-webkit-slider-runnable-track { height: 2px; border-radius: 0; background: linear-gradient(to right, white 0 var(--progress, 0%), rgb(255 255 255 / .3) var(--progress, 0%) 100%); }
+.motion-intro__seek::-webkit-slider-thumb { -webkit-appearance: none; width: 0; height: 0; margin-top: 1px; border: 0; background: transparent; }
+.motion-intro__seek::-moz-range-track { height: 2px; border-radius: 2px; background: rgb(255 255 255 / .65); }
+.motion-intro__seek::-moz-range-thumb { width: 0; height: 0; border: 0; background: transparent; }
+.motion-intro__seek:hover, .motion-intro__seek:focus-visible { opacity: .9; }
+.motion-intro__seek:focus-visible { outline: 1px solid rgb(255 255 255 / .7); outline-offset: 2px; }
+
+/* Top layout 1 のご挨拶（通常本文版）：対象4セクションと同じ3本の基準線に合わせる。 */
+html[data-top-layout="1"][data-greet="1"] body.home #greeting {
+  grid-template-columns: var(--layout1-label-col) minmax(0, 1fr);
+  column-gap: var(--layout1-column-gap);
+  row-gap: var(--layout1-heading-space);
+  align-items: start;
+}
+html[data-top-layout="1"][data-greet="1"] body.home #greeting > .section__head { display: contents; }
+html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__title {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  font-size: 24px;
+  line-height: 1.4;
+}
+html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__byline {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  color: var(--c-text);
+  font-size: var(--layout1-label-size);
+  font-weight: 700;
+  line-height: 1.64;
+  /* 2行間は詰めたまま、16px本文（line-height 1.8）の1行目と上端を合わせる。 */
+  padding-top: 2px;
+  white-space: nowrap;
+}
+html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__body {
+  grid-column: 2;
+  grid-row: 2;
+  min-width: 0;
+  padding-right: 0;
+  font-size: 16px;
+  line-height: 1.8;
+}
+@media (min-width: 691px) {
+  html[data-top-layout="1"] body.home .layout1-row > :is(p, div, figcaption, dd),
+  html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__body { width: var(--layout1-content-max); }
+}
+@media (max-width: 690px) {
+  html[data-top-layout="1"][data-greet="1"] body.home #greeting { grid-template-columns: 1fr; row-gap: 6px; }
+  html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__title { grid-column: 1; grid-row: auto; font-size: 24px; }
+  html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__byline { grid-column: 1; grid-row: auto; }
+  html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__body { grid-column: 1; grid-row: auto; font-size: 15px; }
+}
+
+/* 左揃えステートメントは、現在選択中の大きさを基準に左端を動かさず15%拡大する。 */
+html[data-statement="edge"] body.home .lead__img { width: min(575px, 94.3%); }
+html[data-statement="edge"][data-statement-size="small"] body.home .lead__img { width: min(510.3125px, 83.691%); }
+html[data-statement="edge"][data-statement-size="smallest"] body.home .lead__img { width: min(445.625px, 73.0825%); }
+@media (max-width: 690px) {
+  html[data-statement="edge"][data-statement-size="small"] body.home .lead__img { width: min(510.3125px, 89.7%); }
+  html[data-statement="edge"][data-statement-size="smallest"] body.home .lead__img { width: min(445.625px, 85.1%); }
+}
+
+/* 新レイアウトでも図録写真と見出しの設定を共通にする。 */
+html[data-catalog-photo="no"] body.home .layout1-catalog :is(.handout__photos, .catalog-carousel) { display: none; }
+html[data-catalog-photo="no"][data-top-layout="1"] body.home .layout1-catalog figcaption { padding-top: 0; }
+html[data-top-layout="1"] body.home :is(#outline, #access, #handouts, #greeting) .section__title { font-size: calc(24px * var(--heading-scale)); }
+@media (max-width: 690px) { html[data-top-layout="1"] body.home :is(#outline, #access, #handouts, #greeting) .section__title { font-size: calc(24px * var(--heading-scale)); } }
+
+/* トップのゼ実ブロック：作品一覧への入口と紹介文を切り替える */
+.fruit-intro, .fruit-intro-heading { display: none; }
+html[data-works-intro] body.home #student-works :is(.seminars-b, .seminar-scatter, .seminar-links__all, .works-heading) { display: none; }
+html[data-works-intro] body.home #student-works .fruit-intro-heading { display: inline; }
+html[data-works-intro] body.home #student-works .fruit-intro { display: grid; gap: clamp(40px, 6vw, 72px); }
+html[data-fruit-layout="scatter"] body.home #student-works .seminars-b { margin-top: -72px; }
+@media (max-width: 690px) {
+  html[data-fruit-layout="scatter"] body.home #student-works .seminars-b { margin-top: 0; box-sizing: content-box; padding-bottom: 20px; }
+  html[data-fruit-layout="scatter"] body.home #student-works .seminars-b .sb { bottom: -20px; }
+}
+html[data-fruit-layout="longshort"] body.home #student-works .fruit-intro { gap: 24px; }
+.fruit-intro__item { display: grid; grid-template-columns: minmax(0, var(--layout1-label-col, 162px)) minmax(0, 1fr); gap: var(--layout1-column-gap, 20px); align-items: start; }
+.fruit-intro__item img { display: block; width: 90%; max-width: 100%; height: auto; margin-inline: auto; }
+.fruit-intro__item h3 { margin: 0 0 12px; font-size: 18px; line-height: 1.5; }
+.fruit-intro__item p { margin: 0; font-size: 15px; line-height: 1.9; text-align: justify; }
+html[data-fruit-layout="longshort"] .fruit-intro__item div > p:not(.fruit-intro__short) { display: none; }
+html[data-fruit-layout="longshort"] .fruit-intro__item > div { align-self: center; }
+@media (min-width: 691px) { html[data-top-layout="1"] body.home .fruit-intro__item > div { width: var(--layout1-content-max); } }
+@media (max-width: 690px) { .fruit-intro__item { grid-template-columns: minmax(0, 28%) minmax(0, 1fr); gap: 16px; } .fruit-intro__item h3 { font-size: 16px; } .fruit-intro__item p { font-size: 14px; line-height: 1.8; } }
+.fruit-intro__fruit { display: block; width: 100%; align-self: center; padding: 0; border: 0; background: none; color: inherit; cursor: default; touch-action: manipulation; }
+.fruit-intro__fruit:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+html:is([data-fruit-click="works"], [data-fruit-click="short"], [data-fruit-click="seminar"], [data-fruit-click="mobile"]) .fruit-intro__fruit { cursor: pointer; }
+html[data-fruit-click="none"] body.home #student-works :is(.board a, .seminar-scatter a) { cursor: default; }
+/* ゼ実に触れている間、KVの列に紹介を表示する。 */
+.fruit-preview { display: none; }
+@media (min-width: 1001px) {
+  .fruit-preview { position: fixed; inset: 0 auto 0 0; width: 50vw; box-sizing: border-box; z-index: 10; display: flex; flex-direction: column; justify-content: center; padding: clamp(12px, 4vh, 48px) clamp(24px, 6vw, 96px); background: var(--c-bg); color: var(--c-text); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s, visibility .22s; overflow-y: auto; }
+  .fruit-preview.is-visible { opacity: 1; visibility: visible; }
+  .fruit-preview img { width: min(340px, 70%); max-height: 32vh; min-height: 0; flex: 0 1 auto; align-self: center; object-fit: contain; object-position: center; margin-bottom: clamp(8px, 2vh, 24px); }
+  .fruit-preview__header, .fruit-preview__feature:not([hidden]) { display: grid; grid-template-columns: clamp(54px, 6vw, 86px) minmax(0, 1fr); align-items: start; }
+  .fruit-preview__header { flex-shrink: 0; margin-bottom: clamp(10px, 2vh, 20px); }
+  .fruit-preview__number, .fruit-preview__feature-label { font-size: clamp(11px, 1.5vh, 14px); line-height: 1.7; }
+  .fruit-preview__number { font-weight: 600; }
+  .fruit-preview h2 { margin: 0; font-size: clamp(15px, 2.5vh, 22px); line-height: 1.3; }
+  .fruit-preview__english { display: block; font-size: clamp(11px, 1.5vh, 14px); font-style: italic; font-weight: 600; line-height: 1.3; }
+  .fruit-preview p { flex-shrink: 0; width: 100%; margin: 0; font-size: clamp(10px, 1.7vh, 15px); line-height: 1.7; }
+  .fruit-preview .fruit-preview__description { box-sizing: border-box; padding-left: clamp(54px, 6vw, 86px); font-size: clamp(10px, 1.6vh, 14px); }
+  .fruit-preview .fruit-preview__feature:not([hidden]) { flex-shrink: 0; margin-bottom: clamp(12px, 3vh, 32px); }
+}
+@media (prefers-reduced-motion: reduce) { .fruit-preview { transition: none; } }
+html[data-works-linked] body.home #student-works .seminar-links__all { display: none; }
+@media (min-width: 1001px) and (hover: hover) {
+  html[data-fruit-click="mobile"] body.home #student-works :is(.board a, .seminar-scatter a, .fruit-intro__fruit) { cursor: default; }
+}
+/* 2列のトップでは、フッターも本文と同じ左端に揃える。 */
+@media (min-width: 1001px) {
+  html[data-top-layout="1"][data-design="d"] body.home .layout1-footer { width: 100%; margin-inline: 0; padding-left: 0; }
+  html[data-top-layout="1"][data-design="d"]:is([data-kvd="3"], [data-kvd="4"]) body.home .layout1-footer { padding-left: 100px; }
+}
+
+/* 短文案：散らした実の近くに説明を重ねる。 */
+html[data-works-short] body.home #student-works .seminar-links__all { display: none; }
+.fruit-short-overlay { position: fixed; z-index: 80; width: min(240px, calc(100vw - 32px)); box-sizing: border-box; padding: 13px 15px; border-radius: 10px; background: var(--c-red-dark); color: rgb(var(--paper-rgb)); box-shadow: 0 4px 16px rgb(0 0 0 / .16); pointer-events: none; font: 500 14px/1.65 var(--ff-jp); }
+.fruit-short-overlay[hidden] { display: none; }
+.fruit-short-overlay strong { display: block; margin-bottom: 3px; font-size: 13px; }
+
+/* 整列案：指定した列数に合わせて台紙の高さを変える。 */
+html[data-works-grid] body.home .seminars-b { aspect-ratio: 1000 / 540; }
+html[data-fruit-layout="grid3"] body.home .seminars-b { aspect-ratio: 1000 / 1400; }
+html[data-fruit-layout="grid4"] body.home .seminars-b { aspect-ratio: 1000 / 900; }
+
+/* トップの展示場所案内 */
+body.home .home-campus .place__bld { cursor: pointer; border: 0; border-radius: 0; background: transparent; }
+body.home .home-campus .place__bld:hover { border: 0; background: rgb(255 255 255 / .15); }
+body.home .home-campus .place__bld:focus-visible { border: 0; outline: 2px solid #fff; outline-offset: 3px; background: rgb(255 255 255 / .15); }
+body.home .home-campus .floor-guide-buildings { display: flex; flex-direction: column; align-items: stretch; gap: 8px; margin: 0; }
+body.home .home-campus .floor-guide-buildings button { border: 1px solid currentColor; border-radius: 999px; padding: .45em 1em; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+.floor-guide-dialog { box-sizing: border-box; width: min(680px, calc(100% - 32px)); max-height: min(90dvh, 900px); padding: 0; border: 0; background: var(--c-bg); color: var(--c-text); }
+.floor-guide-dialog::backdrop { background: rgb(0 0 0 / .6); }
+.floor-guide-card { padding: clamp(18px, 4vw, 32px); }
+.floor-guide-card header { position: sticky; top: 0; z-index: 1; display: flex; justify-content: flex-end; align-items: center; gap: 1rem; padding: 8px 0; background: var(--c-bg); }
+.floor-guide-card h3 { margin: 0; font-size: 1.25rem; }
+.floor-guide-close { border: 0; background: transparent; color: inherit; font-size: 2rem; line-height: 1; cursor: pointer; }
+.floor-guide-floor { margin-top: 24px; }
+.floor-guide-floor + .floor-guide-floor { margin-top: 40px; }
+.floor-guide-floor h4 { margin: 0 0 12px; font-size: 1rem; }
+.floor-guide-image { display: block; max-width: 100%; width: 100%; height: auto; margin: auto; object-fit: contain; }
+
+.floor-guide-map { position: relative; width: fit-content; max-width: 100%; margin-inline: auto; }
+.floor-guide-marker:not([hidden]) { position: absolute; width: 24px; height: 24px; box-sizing: border-box; border: 3px solid #ffe14d; border-radius: 50%; background: rgb(255 225 77 / .3); transform: translate(-50%, -50%); pointer-events: none; }
+
+@media (min-width: 901px) {
+  .floor-guide-dialog:has(.floor-guide-floor + .floor-guide-floor) { width: min(1280px, calc(100% - 64px)); }
+  .floor-guide-floors { display: flex; gap: 32px; align-items: flex-start; }
+  .floor-guide-floor { flex: 1 1 0; min-width: 0; }
+  .floor-guide-floor + .floor-guide-floor { margin-top: 24px; }
+  .floor-guide-image { width: auto; max-height: calc(min(90dvh, 900px) - 170px); }
+}
+
+/* 展示場所ダイアログはフェードインで開く（2026-11-08）。動きを減らす設定のときは出さない */
+@keyframes floor-guide-fade { from { opacity: 0; } to { opacity: 1; } }
+.floor-guide-dialog[open], .floor-guide-dialog[open]::backdrop { animation: floor-guide-fade .3s ease-out; }
+@media (prefers-reduced-motion: reduce) { .floor-guide-dialog[open], .floor-guide-dialog[open]::backdrop { animation: none; } }
+
+/* 文字組み「2列整理・右揃え」（?top-layout=3。2026-11-08）：2列整理のまま、左の列のラベルを右揃えにして本文に寄せる。
+   ラベルと本文のあいだ（--layout1-column-gap）が詰まって見えるので少し広げる。スマホ（1列）では左揃えのまま */
+@media (min-width: 691px) {
+  html[data-layout-label="right"] body.home { --layout1-column-gap: 28px; }
+  html[data-layout-label="right"][data-top-layout="1"] body.home .layout1-row > :is(h3, dt),
+  html[data-layout-label="right"][data-top-layout="1"] body.home .layout1-row > figcaption > h3,
+  html[data-layout-label="right"][data-top-layout="1"][data-greet="1"] body.home #greeting .section__byline { text-align: right; }
+}
+
+/* 見出しサイズの切り替え（?heading-size=）で、どの設定でも見出しとラベルの大きさがそろうようにする（文字組み 2列整理・右揃え。2026-11-08）。
+   見出し：ご挨拶・開催概要・アクセス・配布物と同じ 24px × 倍率（スマホも24px × 倍率）に、作品・展示場所とキャンパスマップの見出しもそろえる。
+   ラベル：倍率をかけず、どの設定でも --layout1-label-size（16px） */
+html[data-top-layout="1"] body.home :is(.section__title, .home-campus .place__lead, #greeting .gp h2) { font-size: calc(24px * var(--heading-scale)); line-height: 1.4; }
+@media (max-width: 690px) { html[data-top-layout="1"] body.home :is(.section__title, .home-campus .place__lead, #greeting .gp h2) { font-size: calc(24px * var(--heading-scale)); } }
+html[data-layout-label="right"][data-top-layout="1"] body.home #greeting .gp .by { text-align: right; }
+@media (max-width: 690px) { html[data-layout-label="right"][data-top-layout="1"] body.home #greeting .gp .by { text-align: left; } }
+
+/* 展示場所のボタン列（?campus-btn=。2026-11-08）
+   no：ボタン列を出さず、地図だけを中央に（建物は地図の上を押す）
+   round：角丸のボタン列＋地図を中央に
+   grid：ページの2列（ラベルの列＋本文の列）に合わせる。ボタン列はラベルの列に右揃え、地図は本文の列の左端から（中央に寄せない）。
+         ボタンは左の角だけ丸く、右の角は四角。スマホ（1列）では round と同じ
+   fill：grid と同じ配置で白く塗る（2列の既定） */
+html[data-campus-btn="no"] body.home .home-campus .floor-guide-buildings { display: none; }
+html[data-campus-btn="no"] body.home .home-campus .place__mapbox { grid-column: 2 / 4; }
+@media (min-width: 691px) {
+  html:is([data-campus-btn="grid"], [data-campus-btn="grid-fit"], [data-campus-btn="fill-full"], [data-campus-btn="fill"], [data-campus-btn="edge"]) body.home .home-campus { grid-template-columns: var(--layout1-label-col, 162px) minmax(0, 400px); column-gap: var(--layout1-column-gap, 20px); justify-content: start; }
+  html:is([data-campus-btn="grid"], [data-campus-btn="grid-fit"], [data-campus-btn="fill-full"], [data-campus-btn="fill"], [data-campus-btn="edge"]) body.home .home-campus .floor-guide-buildings { grid-column: 1; align-self: center; align-items: stretch; margin-right: 0 !important; }
+  /* 左の角は丸くしてボタンらしく、右の角は列の端（地図の側）にそろえて四角のまま。ボタンのあいだは空ける */
+  html:is([data-campus-btn="grid"], [data-campus-btn="grid-fit"], [data-campus-btn="fill-full"], [data-campus-btn="fill"], [data-campus-btn="edge"]) body.home .home-campus .floor-guide-buildings { gap: 10px; }
+  html:is([data-campus-btn="grid"], [data-campus-btn="grid-fit"], [data-campus-btn="fill-full"], [data-campus-btn="fill"], [data-campus-btn="edge"]) body.home .home-campus .floor-guide-buildings button { border-radius: 999px 0 0 999px; text-align: right; padding: .45em .9em .45em 1.2em; }
+  html:is([data-campus-btn="grid"], [data-campus-btn="grid-fit"], [data-campus-btn="fill-full"], [data-campus-btn="fill"], [data-campus-btn="edge"]) body.home .home-campus .place__mapbox { grid-column: 2; margin-inline: 0; }
+}
+
+/* 横長の北上マップは、文字が小さくなりすぎないよう少し広く表示する。 */
+body.home .home-campus[data-dir="north"] .place__mapbox { width: min(480px, 100%); }
+@media (min-width: 691px) {
+  body.home .home-campus[data-dir="north"] { grid-template-columns: 1fr max-content minmax(0, 480px) 1fr; }
+  html:is([data-campus-btn="grid"], [data-campus-btn="grid-fit"], [data-campus-btn="fill-full"], [data-campus-btn="fill"], [data-campus-btn="edge"]) body.home .home-campus[data-dir="north"] { grid-template-columns: var(--layout1-label-col, 162px) minmax(0, 480px); }
+}
+
+/* 展示場所のボタン列：スマホ（690px 以下）では縦1列にせず、地図の下に横に並べて折り返す。ボタンも小さく（2026-11-08） */
+@media (max-width: 690px) {
+  body.home .home-campus .place__mapbox { grid-column: 1 / -1; grid-row: 2; }
+  body.home .home-campus .floor-guide-buildings { grid-column: 1 / -1; grid-row: 3; flex-direction: row; flex-wrap: wrap; justify-content: center; align-self: auto; gap: 6px; margin: 4px 0 0 !important; }
+  body.home .home-campus .floor-guide-buildings button { font-size: 12px; padding: .3em .8em; }
+}
+
+/* 図録の写真：スマホ（690px 以下）では横にスワイプするカルーセル。次の写真を右端に少しのぞかせる（2026-11-08） */
+@media (max-width: 690px) {
+  body.home .handout__photos { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  body.home .handout__photos::-webkit-scrollbar { display: none; }
+  body.home .handout__photos img { flex: 0 0 86%; width: 86% !important; scroll-snap-align: start; }
+  body.home .catalog-carousel__controls { right: calc(14% + 8px); }
+  html[data-catalog-photo="no"] body.home .handout__photos { display: none; }
+}
+
+/* 展示場所のボタン：マウスを乗せる・キーで選ぶと白地に（文字は地の赤）。2026-11-08 */
+body.home .home-campus .floor-guide-buildings button { transition: background-color .15s, color .15s; }
+@media (hover: hover) { body.home .home-campus .floor-guide-buildings button:hover { background: rgb(var(--paper-rgb)); border-color: rgb(var(--paper-rgb)); color: var(--c-bg); } }
+body.home .home-campus .floor-guide-buildings button:focus-visible { background: rgb(var(--paper-rgb)); border-color: rgb(var(--paper-rgb)); color: var(--c-bg); outline: none; }
+
+/* スマホの本文とテキストリンクは14pxに揃える。 */
+@media (min-width: 691px) {
+  html[data-top-layout="1"] body.home :is(.layout1-linklist a, .layout1-footer a),
+  body.home :is(.linklist a, .site-footer__inner a) { font-size: 16px; }
+}
+@media (max-width: 690px) {
+  html[data-top-layout="1"] body.home .layout1-access { gap: 36px; }
+  body.home :is(.section__body, .section__byline, .deflist dd, .handout__desc, .linklist a, .fruit-intro__item p, .copyright) { font-size: 14px; }
+  html[data-top-layout="1"] body.home .layout1-row > :is(p, div, figcaption, dd),
+  html[data-top-layout="1"] body.home .layout1-handouts figcaption p,
+  html[data-top-layout="1"] body.home :is(.layout1-linklist a, .layout1-footer a),
+  html[data-top-layout] body.home #greeting .section__body,
+  html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__body,
+  html body.home #greeting :is(.gp .b, .gc .body, .gl .b) { font-size: 14px; }
+}
+
+/* ブロック間の余白は、隣接する上下の padding の合計で揃える。 */
+body.home { --home-block-gap: clamp(120px, 14vh, 160px); }
+body.home .kv-info { padding-block: calc(var(--home-block-gap) * 3) 0; }
+body.home .lead { padding-block: calc(clamp(200px, 24vh, 260px) + 96px); }
+html[data-top-layout="1"] body.home :is(#outline, #access, #handouts),
+body.home #student-works { padding-block: 0 var(--home-block-gap); }
+body.home #exhibition-places .home-campus { margin-bottom: 0; }
+html[data-greet="1"] body.home #greeting { padding-block: 0 calc(var(--home-block-gap) * 2); }
+body.home .site-footer { margin-top: 0; }
+@media (min-width: 1001px) {
+  html[data-design="d"] body.home .kv-info { min-height: 0; justify-content: flex-start; padding-block: calc(var(--home-block-gap) * 3) 0; }
+  html[data-design="d"] body.home .lead { padding-top: calc(clamp(200px, 24vh, 260px) + 96px); }
+}
+@media (max-width: 690px) {
+  body.home { --home-block-gap: 192px; }
+  body.home #student-works { padding-bottom: 48px; }
+  body.home .kv-info { margin-top: 0; padding-top: 0; }
+  body.home .lead { padding-block: 256px; }
+  html[data-greet="1"] body.home #greeting { padding-bottom: calc(var(--home-block-gap) + 96px); }
+  html:not([data-mobile-deco="no"]) body.home :is(#greeting, #handouts) { margin-block: 0; }
+}
+
+/* 装飾を表示するときは、対応するブロックの下に実が入る余白を取る。 */
+@media (min-width: 691px) {
+  html:not([data-pc-deco="no"]) body.home #access { padding-bottom: max(var(--home-block-gap), 500px); }
+  body.home .lead .deco { max-width: 160px; }
+}
+@media (max-width: 690px) {
+  html:not([data-mobile-deco="no"]) body.home :is(#outline, #access) { padding-bottom: 300px; }
+}
+
+/* 展示場所の塗りボタン。地図の線画と区別し、操作できる項目として見せる。 */
+html:is([data-campus-btn="fill"], [data-campus-btn="fill-full"]) body.home .home-campus .floor-guide-buildings button {
+  background: rgb(var(--paper-rgb)); border-color: rgb(var(--paper-rgb)); color: var(--c-bg); font-weight: 700;
+}
+@media (hover: hover) {
+  html:is([data-campus-btn="fill"], [data-campus-btn="fill-full"]) body.home .home-campus .floor-guide-buildings button:hover { background: transparent; color: rgb(var(--paper-rgb)); }
+}
+html:is([data-campus-btn="fill"], [data-campus-btn="fill-full"]) body.home .home-campus .floor-guide-buildings button:focus-visible {
+  background: transparent; color: rgb(var(--paper-rgb)); outline: 2px solid rgb(var(--paper-rgb)); outline-offset: 3px;
+}
+
+/* 塗りボタンは文字に合わせた幅で、地図側に揃える。 */
+@media (min-width: 691px) {
+  html[data-campus-btn="fill"] body.home .home-campus .floor-guide-buildings { align-items: flex-end; }
+}
+
+/* 右線案：地図側の短い線と文字で、建物の輪郭と区別する。 */
+html[data-campus-btn="edge"] body.home .home-campus .floor-guide-buildings button {
+  border: 0; border-right: 3px solid currentColor; border-radius: 0; background: transparent; text-align: right; padding: .45em .9em;
+}
+@media (min-width: 691px) {
+  html[data-campus-btn="edge"] body.home .home-campus .floor-guide-buildings { align-items: flex-end; }
+}
+html[data-campus-btn="edge"] body.home .home-campus .floor-guide-buildings button:focus-visible { outline: 2px solid rgb(var(--paper-rgb)); outline-offset: 3px; }
+@media (hover: hover) {
+  html[data-campus-btn="edge"] body.home .home-campus .floor-guide-buildings button:hover {
+    background: rgb(var(--paper-rgb)); color: var(--c-bg); border-right-color: rgb(var(--paper-rgb));
+  }
+}
+
+@media (min-width: 691px) {
+  html[data-campus-btn="grid-fit"] body.home .home-campus .floor-guide-buildings { align-items: flex-end; }
+}
+
+/* 紹介文の改行をトップとプレビューに反映。 */
+.fruit-intro__item p, .fruit-preview p { white-space: pre-line; }
+
+/* 展示場所の地図はボタン列を除いた利用可能な幅いっぱいに表示する。 */
+body.home .home-campus .place__mapbox,
+body.home .home-campus[data-dir="north"] .place__mapbox { width: 100%; }
+@media (min-width: 691px) {
+  body.home .home-campus,
+  body.home .home-campus[data-dir="north"] { grid-template-columns: max-content minmax(0, 1fr); }
+  body.home .home-campus .floor-guide-buildings { grid-column: 1; }
+  body.home .home-campus .place__mapbox { grid-column: 2; }
+  html:is([data-campus-btn="grid"], [data-campus-btn="grid-fit"], [data-campus-btn="fill-full"], [data-campus-btn="fill"], [data-campus-btn="edge"]) body.home .home-campus,
+  html:is([data-campus-btn="grid"], [data-campus-btn="grid-fit"], [data-campus-btn="fill-full"], [data-campus-btn="fill"], [data-campus-btn="edge"]) body.home .home-campus[data-dir="north"] { grid-template-columns: var(--layout1-label-col, 162px) minmax(0, 1fr); }
+  html[data-campus-btn="no"] body.home .home-campus .place__mapbox { grid-column: 1 / -1; }
+}
+@media (max-width: 690px) {
+  html[data-campus-btn="no"] body.home .home-campus .place__mapbox { grid-column: 1 / -1; }
+}
+
+
+/* 欧文・数字をわずかに持ち上げる。 */
+.latin-baseline { position: relative; top: -0.05em; }
+
+/* ティザーと共通の開催情報画像。内容は読み上げ用の HTML に残す。 */
+body.home .kv-info__art { position: relative; width: min(100%, 600px); }
+body.home .kv-info__image { display: block; width: 100%; height: auto; clip-path: inset(53.1% 0 0); }
+body.home .kv-info__title-vector { position: absolute; top: 11.724%; left: 4.7884%; width: 91.62%; height: auto; }
+body.home .kv-info__meta, html[data-design="d"] body.home .kv-info__meta { display: block; position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+body.home .kv-info__meta > :not(.kv-info__logo) { display: block; }
+
+.latin-baseline--letters { font-size: 105%; }
+
+@media (max-width: 690px) {
+  body.home .home-campus .floor-guide-buildings button, body.home .catalog-carousel__controls, body.home .fruit-short-overlay strong { font-size: 14px; }
+}
+
+@media (max-width: 690px) { html body .design-switch :is(.sw .label, .sw .pill, .sw-toggle) { font-size: 14px; } }
+
+/* 実ごとの大きさのバランスを解説にも引き継ぐ。 */
+.fruit-intro__fruit img { width: calc(100% * var(--fruit-scale, 1)); max-width: none; margin-inline: auto; }
+@media (min-width: 1001px) { .fruit-preview img { width: min(calc(340px * var(--fruit-scale, 1)), calc(70% * var(--fruit-scale, 1))); } }
+
+/* 番号はゼミ名の上に小さく置く。 */
+.fruit-number { display: block; font-size: 14px; font-weight: 400; line-height: 1.4; margin-bottom: 4px; }
+
+/* 番号順の無造作配置には、絵と名前が重ならない高さを確保する。 */
+html[data-fruit-layout="scatter"] body.home .seminars-b { aspect-ratio: 1000 / 1250; }
+@media (max-width: 690px) { html[data-fruit-layout="scatter"] body.home .seminars-b { aspect-ratio: 1000 / 2300; } }
+@media (min-width: 1001px) { .fruit-preview img { flex: 0 1 auto; min-height: 0; max-width: 100%; max-height: none; } }
+
+/* 展示場所・配布物・ゼミ紹介の順に、独立した余白を取る。 */
+body.home #exhibition-places { padding-block: 0 var(--home-block-gap); }
+@media (min-width: 691px) { html:not([data-pc-deco="no"]) body.home #exhibition-places { padding-bottom: max(var(--home-block-gap), 500px); } }
+@media (max-width: 690px) { html:not([data-mobile-deco="no"]) body.home #exhibition-places { padding-bottom: 300px; } }
+html:is([data-nocampus], [data-noworks]) body.home #exhibition-places { display: none; }
+
+/* 開催情報画像の透明な左余白を補正し、ほかの見出しと揃える。 */
+body.home .kv-info__art { transform: translateX(-4.7884%); }
+
+/* キャンパスマップは表示領域の80%に。 */
+body.home .home-campus .place__mapbox,
+body.home .home-campus[data-dir="north"] .place__mapbox { width: 80%; }
+
+/* 公開用：比較用パネルを表示しない */
+.design-switch { display: none !important; }
