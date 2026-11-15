@@ -3,7 +3,7 @@
    KV（kv.js）と同じ動き：
    1. 線画が描き進む（<slug>-time.png の輝度が描画順マップ）
    2. 中心から水彩がにじむように絵が広がる
-   画面に入ったときに1回だけ再生する。
+   画面から完全に出るとリセットし、再び入ったときに再生する。
 
    置き方（index.html）：
      <div class="deco deco--left" data-deco="furugen" style="--top:10%; --w:300px; --r:-8deg"></div>
@@ -209,12 +209,20 @@ void main(){
         if (reduced) { last = TOTAL; start = 0; draw(TOTAL); return; }
         draw(0);
         // 画面に入ったら再生。トップのデザイン D では、KV のイントロが終わる（kv.js の kv:done。保険で 12 秒）まで待ってから数える
-        const arm = () => new IntersectionObserver((es, o) => {
-          if (!es[0].isIntersecting) return;
-          o.disconnect();
-          start = performance.now();
-          raf = requestAnimationFrame(frame);
-        }, { threshold: .4 }).observe(el);
+        const arm = () => {
+          let active = false;
+          new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting) {
+              if (raf) cancelAnimationFrame(raf);
+              raf = 0; start = undefined; last = 0; active = false;
+              draw(0);
+            } else if (!active && entry.intersectionRatio >= .4) {
+              active = true;
+              start = performance.now();
+              raf = requestAnimationFrame(frame);
+            }
+          }, { threshold: [0, .4] }).observe(el);
+        };
         const html = document.documentElement;
         if (html.dataset.design === 'd' && !html.classList.contains('is-kv-done')) {
           let armed = false;
