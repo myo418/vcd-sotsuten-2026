@@ -1638,9 +1638,9 @@ html:is([data-nocampus], [data-noworks]) body.home #exhibition-places { display:
 /* 開催情報画像の透明な左余白を補正し、ほかの見出しと揃える。 */
 body.home .kv-info__art { transform: translateX(-4.7884%); }
 
-/* キャンパスマップは表示領域の80%に。 */
+/* キャンパスマップは最大480px、狭い画面では表示領域いっぱいに。 */
 body.home .home-campus .place__mapbox,
-body.home .home-campus[data-dir="north"] .place__mapbox { width: 80%; }
+body.home .home-campus[data-dir="north"] .place__mapbox { width: min(100%, 480px); }
 
 /* 公開用：比較用パネルを表示しない */
 .design-switch { display: none !important; }
