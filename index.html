@@ -234,6 +234,12 @@
       #top-items a { gap: 20px; }
       #top-items .icon { width: 16px; height: 16px; opacity: .8; }
     }
+    @media (max-width: 690px) {
+      &[data-sb="5"] {
+        #panel { padding-inline: 36px; }
+        .group > a, #top-items a { font-size: 18px; }
+      }
+    }
     /* 演出 */
     #fx { position: fixed; inset: 0; pointer-events: none; visibility: hidden; }
     #fx.on { visibility: visible; pointer-events: auto; }
