@@ -210,18 +210,28 @@ void main(){
         draw(0);
         // 画面に入ったら再生。トップのデザイン D では、KV のイントロが終わる（kv.js の kv:done。保険で 12 秒）まで待ってから数える
         const arm = () => {
-          let active = false;
-          new IntersectionObserver(([entry]) => {
-            if (!entry.isIntersecting) {
+          let active = false, pending = false;
+          const check = () => {
+            pending = false;
+            const bounds = el.getBoundingClientRect();
+            const height = window.innerHeight;
+            if (bounds.bottom <= 0 || bounds.top >= height || !bounds.height) {
               if (raf) cancelAnimationFrame(raf);
               raf = 0; start = undefined; last = 0; active = false;
               draw(0);
-            } else if (!active && entry.intersectionRatio >= .4) {
+            } else if (!active && (bounds.height > height
+              ? bounds.top <= 0 && bounds.bottom >= height
+              : bounds.top >= 0 && bounds.bottom <= height)) {
               active = true;
               start = performance.now();
               raf = requestAnimationFrame(frame);
             }
-          }, { threshold: [0, .4] }).observe(el);
+          };
+          const schedule = () => { if (!pending) { pending = true; requestAnimationFrame(check); } };
+          addEventListener('scroll', schedule, { passive: true });
+          addEventListener('resize', schedule, { passive: true });
+          new ResizeObserver(schedule).observe(el);
+          schedule();
         };
         const html = document.documentElement;
         if (html.dataset.design === 'd' && !html.classList.contains('is-kv-done')) {
