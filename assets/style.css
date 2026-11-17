@@ -1651,3 +1651,7 @@ body.home .home-campus[data-dir="north"] .place__mapbox { width: min(100%, 480px
 /* DMはリーフレットより小さく見せる。 */
 body.home .handout img[data-dm-mock],
 html[data-top-layout="1"] body.home .layout1-handouts img[data-dm-mock] { width: 78%; }
+
+/* 透過・整列のリーフレットは、画像内の余白を考慮して大きく表示する。 */
+html[data-handout-mock="aligned"] body.home .handout img[data-leaflet-mock],
+html[data-handout-mock="aligned"][data-top-layout="1"] body.home .layout1-handouts img[data-leaflet-mock] { width: 130%; max-width: none; }
