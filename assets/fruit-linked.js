@@ -42,6 +42,21 @@
     });
     measure.remove();
     panel.style.setProperty('--preview-description-height', `${Math.ceil(height)}px`);
+    const labelWidth = featureLabel.getBoundingClientRect().width;
+    const featureMeasure = featureText.cloneNode();
+    Object.assign(featureMeasure.style, { position: 'absolute', visibility: 'hidden', top: '0', width: `${Math.max(1, width - labelWidth)}px` });
+    panel.append(featureMeasure);
+    let featureHeight = 0;
+    for (const value of Object.values(window.fruitFeatures || {})) {
+      featureMeasure.textContent = value;
+      featureHeight = Math.max(featureHeight, featureMeasure.getBoundingClientRect().height);
+    }
+    featureMeasure.remove();
+    panel.style.setProperty('--preview-feature-height', `${Math.ceil(featureHeight)}px`);
+    const margin = el => parseFloat(getComputedStyle(el).marginBottom) || 0;
+    const remaining = panel.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom)
+      - header.getBoundingClientRect().height - margin(header) - featureHeight - margin(feature) - height - margin(art);
+    panel.style.setProperty('--preview-art-size', `${Math.max(100, Math.min(390, innerHeight * .43, remaining))}px`);
   };
   new ResizeObserver(measureDescription).observe(panel);
   document.fonts.ready.then(measureDescription);
@@ -79,6 +94,7 @@
     featureText.textContent = window.fruitFeatures?.[slug] || '';
     feature.hidden = !featureText.textContent;
     description.textContent = item.querySelector('p').textContent;
+    measureDescription();
     panel.classList.add('is-visible');
   };
   if (hoverAction === 'linked') {

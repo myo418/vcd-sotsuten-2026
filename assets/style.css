@@ -1380,8 +1380,8 @@ html[data-fruit-click="none"] body.home #student-works :is(.board a, .seminar-sc
   .fruit-preview p { flex-shrink: 0; width: 100%; margin: 0; font-size: clamp(10px, 1.7vh, 15px); line-height: 1.7; }
   .fruit-preview .fruit-preview__description { box-sizing: border-box; min-height: var(--preview-description-height, 0px); padding-left: clamp(54px, 6vw, 86px); font-size: clamp(10px, 1.6vh, 14px); }
   .fruit-preview .fruit-preview__feature:not([hidden]) { flex-shrink: 0; margin-bottom: clamp(12px, 3vh, 32px); }
-  .fruit-preview__feature { min-height: 3.4em; }
-  .fruit-preview__art { flex: 0 0 min(29vh, 260px); display: flex; align-items: center; justify-content: center; margin-bottom: clamp(8px, 2vh, 24px); }
+  .fruit-preview__feature { min-height: var(--preview-feature-height, 3.4em); }
+  .fruit-preview__art { flex: 0 0 var(--preview-art-size, min(43vh, 390px)); display: flex; align-items: center; justify-content: center; margin-bottom: clamp(8px, 2vh, 24px); }
   .fruit-preview__art img { margin: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .fruit-preview { transition: none; } }
@@ -1630,7 +1630,7 @@ body.home .kv-info__meta > :not(.kv-info__logo) { display: block; }
 /* 番号順の無造作配置には、絵と名前が重ならない高さを確保する。 */
 html[data-fruit-layout="scatter"] body.home .seminars-b { aspect-ratio: 1000 / 1250; }
 @media (max-width: 690px) { html[data-fruit-layout="scatter"] body.home .seminars-b { aspect-ratio: 1000 / 2300; } }
-@media (min-width: 1001px) { .fruit-preview img { flex: 0 1 auto; width: auto; height: auto; min-height: 0; max-width: min(100%, calc(260px * var(--preview-scale, 1))); max-height: min(calc(29vh * var(--preview-scale, 1)), calc(260px * var(--preview-scale, 1))); } }
+@media (min-width: 1001px) { .fruit-preview img { flex: 0 1 auto; width: auto; height: auto; min-height: 0; max-width: min(100%, calc(var(--preview-art-size, 390px) * var(--preview-scale, 1))); max-height: calc(var(--preview-art-size, 390px) * var(--preview-scale, 1)); } }
 
 /* 展示場所・配布物・ゼミ紹介の順に、独立した余白を取る。 */
 body.home #exhibition-places { padding-block: 0 var(--home-block-gap); }
