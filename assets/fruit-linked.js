@@ -21,7 +21,7 @@
   const english = document.createElement('span'); english.className = 'fruit-preview__english';
   const englishTitles = { ishizuka: 'Seminarium ishizukae', ota: 'Seminarium otae', kitazaki: 'Seminarium kitazakiae', goto: 'Seminarium gotoi', sawada: 'Seminarium sawadae', shirai: 'Seminarium shiraii', terayama: 'Seminarium terayamae', nakano: 'Seminarium nakanoi', furugen: 'Seminarium furukatae', in: 'Seminarium graduate' };
   // 線画の内側も塗った領域として数えた、正規化済み画像の面積。
-  const artworkAreas = { furugen: 495998, goto: 314827, in: 341383, ishizuka: 326809, kitazaki: 145074, nakano: 158649, ota: 181300, sawada: 268387, shirai: 119049, terayama: 291451 };
+  const artworkAreas = { furugen: 495998, goto: 314827, in: 341383, ishizuka: 326809, kitazaki: 145074, nakano: 158649, ota: 181300, sawada: 268387, shirai: 265254, terayama: 291451 };
   feature.className = 'fruit-preview__feature';
   description.className = 'fruit-preview__description';
   featureLabel.className = 'fruit-preview__feature-label'; featureLabel.textContent = '特徴';
