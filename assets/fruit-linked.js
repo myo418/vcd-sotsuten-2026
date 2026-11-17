@@ -19,6 +19,8 @@
   const title = document.createElement('h2'); const feature = document.createElement('div'); const featureLabel = document.createElement('span'); const featureText = document.createElement('p'); const description = document.createElement('p');
   const english = document.createElement('span'); english.className = 'fruit-preview__english';
   const englishTitles = { ishizuka: 'Seminarium ishizukae', ota: 'Seminarium otae', kitazaki: 'Seminarium kitazakiae', goto: 'Seminarium gotoi', sawada: 'Seminarium sawadae', shirai: 'Seminarium shiraii', terayama: 'Seminarium terayamae', nakano: 'Seminarium nakanoi', furugen: 'Seminarium furukatae', in: 'Seminarium graduate' };
+  // 一覧の画像幅に対する、透明余白を除いた実の長辺の比率。
+  const artworkRatios = { ishizuka: 865 / 850, ota: 856 / 640, kitazaki: 787 / 749, goto: 794 / 695, sawada: 867 / 900, shirai: 689 / 708, terayama: 860 / 900, nakano: 846 / 680, furugen: 873 / 798, in: 852 / 900 };
   feature.className = 'fruit-preview__feature';
   description.className = 'fruit-preview__description';
   featureLabel.className = 'fruit-preview__feature-label'; featureLabel.textContent = '特徴';
@@ -35,6 +37,13 @@
   const show = (slug) => {
     const item = intro(slug); if (!item) return;
     image.src = `assets/img/seminars/normalized/seminar-${slug}.webp?v=20261118b`;
+    const sizes = [...board.querySelectorAll('a')].filter(a => a.querySelector('img')).map(a => {
+      const key = getSlug(a);
+      return { slug: key, size: a.querySelector('img').offsetWidth * (artworkRatios[key] || 1) };
+    });
+    const largest = Math.max(...sizes.map(entry => entry.size), 1);
+    const selected = sizes.find(entry => entry.slug === slug);
+    image.style.setProperty('--preview-scale', selected ? selected.size / largest : 1);
     const sourceTitle = item.querySelector('h3');
     number.textContent = sourceTitle.querySelector('.fruit-number')?.textContent || '';
     title.textContent = Array.from(sourceTitle.childNodes).filter(node => node.nodeType === Node.TEXT_NODE).map(node => node.textContent).join('').trim();
