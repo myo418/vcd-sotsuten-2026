@@ -54,8 +54,22 @@
     panel.classList.add('is-visible');
   };
   if (hoverAction === 'linked') {
-    root.addEventListener('pointerover', (e) => { if (!matchMedia('(min-width: 1001px) and (hover: hover)').matches) return; const slug = getSlug(e.target); if (slug && slug !== getSlug(e.relatedTarget)) show(slug); });
-    root.addEventListener('pointerout', (e) => { const slug = getSlug(e.target); if (slug && slug !== getSlug(e.relatedTarget)) panel.classList.remove('is-visible'); });
+    let hoverSlug = '';
+    board.addEventListener('pointermove', (e) => {
+      if (!matchMedia('(min-width: 1001px) and (hover: hover)').matches || e.pointerType === 'touch') return;
+      let slug = getSlug(e.target);
+      if (!slug) {
+        let nearest = Infinity;
+        board.querySelectorAll('a').forEach(a => {
+          const img = a.querySelector('img'); if (!img) return;
+          const r = img.getBoundingClientRect(); if (!r.width || !r.height) return;
+          const distance = Math.hypot(e.clientX - (r.left + r.right) / 2, e.clientY - (r.top + r.bottom) / 2);
+          if (distance < nearest) { nearest = distance; slug = getSlug(a); }
+        });
+      }
+      if (slug && (slug !== hoverSlug || !panel.classList.contains('is-visible'))) { hoverSlug = slug; show(slug); }
+    });
+    board.addEventListener('pointerleave', () => { hoverSlug = ''; panel.classList.remove('is-visible'); });
     root.addEventListener('focusin', (e) => { const slug = getSlug(e.target); if (slug && matchMedia('(min-width: 1001px)').matches) show(slug); });
     root.addEventListener('focusout', () => panel.classList.remove('is-visible'));
   }
