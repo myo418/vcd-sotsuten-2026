@@ -20,7 +20,7 @@
   const english = document.createElement('span'); english.className = 'fruit-preview__english';
   const englishTitles = { ishizuka: 'Seminarium ishizukae', ota: 'Seminarium otae', kitazaki: 'Seminarium kitazakiae', goto: 'Seminarium gotoi', sawada: 'Seminarium sawadae', shirai: 'Seminarium shiraii', terayama: 'Seminarium terayamae', nakano: 'Seminarium nakanoi', furugen: 'Seminarium furukatae', in: 'Seminarium graduate' };
   // 一覧の画像幅に対する、透明余白を除いた実の長辺の比率。
-  const artworkRatios = { ishizuka: 865 / 850, ota: 856 / 640, kitazaki: 787 / 749, goto: 794 / 695, sawada: 867 / 900, shirai: 689 / 708, terayama: 860 / 900, nakano: 846 / 680, furugen: 873 / 798, in: 852 / 900 };
+  const artworkRatios = { ishizuka: 861 / 850, ota: 826 / 640, kitazaki: 558 / 749, goto: 699 / 695, sawada: 843 / 900, shirai: 686 / 708, terayama: 856 / 900, nakano: 841 / 680, furugen: 761 / 798, in: 848 / 900 };
   feature.className = 'fruit-preview__feature';
   description.className = 'fruit-preview__description';
   featureLabel.className = 'fruit-preview__feature-label'; featureLabel.textContent = '特徴';
@@ -36,7 +36,7 @@
   const intro = (slug) => document.querySelector(`.fruit-intro__fruit[data-fruit="${CSS.escape(slug)}"]`)?.closest('article');
   const show = (slug) => {
     const item = intro(slug); if (!item) return;
-    image.src = `assets/img/seminars/normalized/seminar-${slug}.webp?v=20261118b`;
+    image.src = `assets/img/seminars/normalized/seminar-${slug}.webp?v=20261118c`;
     const sizes = [...board.querySelectorAll('a')].filter(a => a.querySelector('img')).map(a => {
       const key = getSlug(a);
       return { slug: key, size: a.querySelector('img').offsetWidth * (artworkRatios[key] || 1) };
