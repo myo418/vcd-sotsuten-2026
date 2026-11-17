@@ -1368,7 +1368,7 @@ html[data-fruit-click="none"] body.home #student-works :is(.board a, .seminar-sc
 /* ゼ実に触れている間、KVの列に紹介を表示する。 */
 .fruit-preview { display: none; }
 @media (min-width: 1001px) {
-  .fruit-preview { position: fixed; inset: 0 auto 0 0; width: 50vw; box-sizing: border-box; z-index: 10; display: flex; flex-direction: column; justify-content: flex-start; padding: clamp(12px, 4vh, 48px) clamp(24px, 6vw, 96px); background: var(--c-bg); color: var(--c-text); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s, visibility .22s; overflow-y: auto; }
+  .fruit-preview { position: fixed; inset: 0 auto 0 0; width: 50vw; box-sizing: border-box; z-index: 10; display: flex; flex-direction: column; justify-content: center; padding: clamp(12px, 4vh, 48px) clamp(24px, 6vw, 96px); background: var(--c-bg); color: var(--c-text); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .22s, visibility .22s; overflow-y: auto; }
   .fruit-preview.is-visible { opacity: 1; visibility: visible; }
   .fruit-preview img { width: min(340px, 70%); max-height: 32vh; min-height: 0; flex: 0 1 auto; align-self: center; object-fit: contain; object-position: center; margin-bottom: clamp(8px, 2vh, 24px); }
   .fruit-preview__header, .fruit-preview__feature:not([hidden]) { display: grid; grid-template-columns: clamp(54px, 6vw, 86px) minmax(0, 1fr); align-items: start; }
@@ -1378,7 +1378,7 @@ html[data-fruit-click="none"] body.home #student-works :is(.board a, .seminar-sc
   .fruit-preview h2 { margin: 0; font-size: clamp(15px, 2.5vh, 22px); line-height: 1.3; }
   .fruit-preview__english { display: block; font-size: clamp(11px, 1.5vh, 14px); font-style: italic; font-weight: 600; line-height: 1.3; }
   .fruit-preview p { flex-shrink: 0; width: 100%; margin: 0; font-size: clamp(10px, 1.7vh, 15px); line-height: 1.7; }
-  .fruit-preview .fruit-preview__description { box-sizing: border-box; padding-left: clamp(54px, 6vw, 86px); font-size: clamp(10px, 1.6vh, 14px); }
+  .fruit-preview .fruit-preview__description { box-sizing: border-box; min-height: var(--preview-description-height, 0px); padding-left: clamp(54px, 6vw, 86px); font-size: clamp(10px, 1.6vh, 14px); }
   .fruit-preview .fruit-preview__feature:not([hidden]) { flex-shrink: 0; margin-bottom: clamp(12px, 3vh, 32px); }
   .fruit-preview__feature { min-height: 3.4em; }
   .fruit-preview__art { flex: 0 0 min(29vh, 260px); display: flex; align-items: center; justify-content: center; margin-bottom: clamp(8px, 2vh, 24px); }

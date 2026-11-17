@@ -27,6 +27,24 @@
   featureLabel.className = 'fruit-preview__feature-label'; featureLabel.textContent = '特徴';
   feature.append(featureLabel, featureText); titleGroup.append(title, english); header.append(number, titleGroup);
   panel.append(header, feature, art, description); document.body.append(panel);
+  // 最も長い解説に高さを合わせ、ゼミを切り替えても中央位置を保つ。
+  const measureDescription = () => {
+    const style = getComputedStyle(panel);
+    const width = panel.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    if (width <= 0) return;
+    const measure = description.cloneNode();
+    Object.assign(measure.style, { position: 'absolute', visibility: 'hidden', top: '0', width: `${width}px`, minHeight: '0' });
+    panel.append(measure);
+    let height = 0;
+    root.querySelectorAll('.fruit-intro__item').forEach(item => {
+      measure.textContent = item.querySelector('p')?.textContent || '';
+      height = Math.max(height, measure.getBoundingClientRect().height);
+    });
+    measure.remove();
+    panel.style.setProperty('--preview-description-height', `${Math.ceil(height)}px`);
+  };
+  new ResizeObserver(measureDescription).observe(panel);
+  document.fonts.ready.then(measureDescription);
   let request = 0;
   const imageCache = Object.fromEntries(Object.keys(englishTitles).map(slug => {
     const img = new Image(); img.src = `assets/img/seminars/normalized/seminar-${slug}.webp?v=20261118c`;
