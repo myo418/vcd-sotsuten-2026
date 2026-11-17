@@ -786,7 +786,7 @@
       { const motionDefault = ['2', '4'].includes(tpl) ? 'no' : '1';
         row('sw-motion-video', ['no', '1'], 'motion-video', motionDefault, (k) => k === '1' ? 'あり' : 'なし'); }
       row('sw-catalog-photo', ['1', 'no'], 'catalog-photo', 'no', (k) => k === '1' ? 'カルーセル' : 'なし');
-      row('sw-dm-mock', ['white', 'transparent', 'aligned', 'red'], 'dm-mock', 'transparent', (k) => ({ white: '白背景', transparent: '透過・斜め重ね', aligned: '透過・整列', red: '赤背景・写真風' }[k]));
+      row('sw-dm-mock', ['white', 'red', 'aligned', 'transparent'], 'dm-mock', 'transparent', (k) => ({ white: '実写・白背景', red: '実写・赤背景', aligned: '透過・整列', transparent: '透過・斜め重ね' }[k]));
       row('sw-heading-size', ['tiny', 'small', 'normal', 'large'], 'heading-size', 'normal', (k) => ({ tiny: '最小', small: '小', normal: '標準', large: '大' }[k]));
       const tb = document.getElementById('sw-template'); tb.style.display = '';
       pills(tb, ['1', '2', '3'], off ? '' : tpl, tplHref, (k) => ({ '1': '最新', '2': '最新（待機なし）', '3': '1列案' }[k])); // 「1列案（待機なし）」（4）は 2026-11-08 にボタンを外した（?template=4 の URL はまだ動く）
@@ -1318,7 +1318,7 @@
         </figcaption>
       </figure>
       <figure class="handout">
-        <img data-leaflet-mock src="assets/img/handouts/leaflet-spreads-overlap.png" alt="リーフレット（仮イメージ）"
+        <img data-leaflet-mock src="assets/img/handouts/leaflet-webred-overlap.png" alt="リーフレット（仮イメージ）"
              loading="lazy" width="1600" height="1200">
         <figcaption>
           <p class="handout__name">リーフレット</p>
@@ -1326,7 +1326,7 @@
         </figcaption>
       </figure>
       <figure class="handout">
-        <img data-dm-mock src="assets/img/handouts/dm-overlap-transparent.png" alt="DM（仮イメージ）"
+        <img data-dm-mock src="assets/img/handouts/dm-webred-overlap.png" alt="DM（仮イメージ）"
              loading="lazy" width="1536" height="1024">
         <figcaption>
           <p class="handout__name">DM</p>
@@ -1341,21 +1341,21 @@
       </figure>
       <figure class="layout1-row">
         <h3>リーフレット</h3>
-        <figcaption><img data-leaflet-mock src="assets/img/handouts/leaflet-spreads-overlap.png" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>配布場所については後日公開</p></figcaption>
+        <figcaption><img data-leaflet-mock src="assets/img/handouts/leaflet-webred-overlap.png" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>配布場所については後日公開</p></figcaption>
       </figure>
       <figure class="layout1-row">
         <h3>DM</h3>
-        <figcaption><img data-dm-mock src="assets/img/handouts/dm-overlap-transparent.png" alt="DM（仮イメージ）" loading="lazy" width="1536" height="1024"><p>配布場所については後日公開</p></figcaption>
+        <figcaption><img data-dm-mock src="assets/img/handouts/dm-webred-overlap.png" alt="DM（仮イメージ）" loading="lazy" width="1536" height="1024"><p>配布場所については後日公開</p></figcaption>
       </figure>
     </div>
     <script>
       const handoutMock = new URLSearchParams(location.search).get('dm-mock');
       document.documentElement.dataset.handoutMock = handoutMock || 'transparent';
       const handoutFiles = {
-        white: ['dm-overlap-draft.png', 'leaflet-spreads-white.png'],
-        transparent: ['dm-overlap-transparent.png', 'leaflet-spreads-overlap.png'],
-        aligned: ['dm-aligned-shadow.png', 'leaflet-spreads-aligned.png'],
-        red: ['dm-photo-red.png', 'leaflet-spreads-red.png']
+        white: ['dm-webred-white.png', 'leaflet-webred-white.png'],
+        transparent: ['dm-webred-overlap.png', 'leaflet-webred-overlap.png'],
+        aligned: ['dm-webred-aligned.png', 'leaflet-webred-aligned.png'],
+        red: ['dm-webred-photo.png', 'leaflet-webred-photo.png']
       };
       const [dmFile, leafletFile] = handoutFiles[handoutMock] || handoutFiles.transparent;
       document.querySelectorAll('[data-dm-mock]').forEach((img) => { img.src = 'assets/img/handouts/' + dmFile; });
