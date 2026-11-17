@@ -545,7 +545,7 @@
     <div class="sw" id="sw-statement-size" style="display:none"><span class="label">ステートメントの大きさ</span></div>
     <div class="sw" id="sw-motion-video" style="display:none"><span class="label">モーション動画</span></div>
     <div class="sw" id="sw-catalog-photo" style="display:none"><span class="label">図録の写真</span></div>
-    <div class="sw" id="sw-dm-mock" style="display:none"><span class="label">DMのモック</span></div>
+    <div class="sw" id="sw-dm-mock" style="display:none"><span class="label">配布物</span></div>
     <div class="sw" id="sw-heading-size" style="display:none"><span class="label">見出しサイズ</span></div>
     <div class="sw" id="sw-greeting" style="display:none"><span class="label">ご挨拶</span></div>
     <!-- 組み合わせの型（?template=1 / 2。既定 1。2026-10-29）。1＝既定の組み合わせ（layout 2c・KV fade なし・Fruit deco なし・ステートメント左端・ご挨拶 1）、2＝layout 1b・KV fade あり・Fruit deco あり・ステートメント中央・ご挨拶 2。選ぶとほかの行の指定を外す。ほかの行とは別物なので一番下に少し離して置く -->
@@ -786,7 +786,7 @@
       { const motionDefault = ['2', '4'].includes(tpl) ? 'no' : '1';
         row('sw-motion-video', ['no', '1'], 'motion-video', motionDefault, (k) => k === '1' ? 'あり' : 'なし'); }
       row('sw-catalog-photo', ['1', 'no'], 'catalog-photo', 'no', (k) => k === '1' ? 'カルーセル' : 'なし');
-      row('sw-dm-mock', ['transparent', 'white'], 'dm-mock', 'transparent', (k) => k === 'white' ? '白背景' : '透過・影');
+      row('sw-dm-mock', ['white', 'transparent', 'aligned'], 'dm-mock', 'transparent', (k) => ({ white: '白背景', transparent: '透過・斜め重ね', aligned: '透過・整列' }[k]));
       row('sw-heading-size', ['tiny', 'small', 'normal', 'large'], 'heading-size', 'normal', (k) => ({ tiny: '最小', small: '小', normal: '標準', large: '大' }[k]));
       const tb = document.getElementById('sw-template'); tb.style.display = '';
       pills(tb, ['1', '2', '3'], off ? '' : tpl, tplHref, (k) => ({ '1': '最新', '2': '最新（待機なし）', '3': '1列案' }[k])); // 「1列案（待機なし）」（4）は 2026-11-08 にボタンを外した（?template=4 の URL はまだ動く）
@@ -1318,7 +1318,7 @@
         </figcaption>
       </figure>
       <figure class="handout">
-        <img src="assets/img/handouts/leaflet.jpg" alt="リーフレット（仮イメージ）"
+        <img data-leaflet-mock src="assets/img/handouts/leaflet-mock-overlap.png" alt="リーフレット（仮イメージ）"
              loading="lazy" width="1600" height="1200">
         <figcaption>
           <p class="handout__name">リーフレット</p>
@@ -1341,7 +1341,7 @@
       </figure>
       <figure class="layout1-row">
         <h3>リーフレット</h3>
-        <figcaption><img src="assets/img/handouts/leaflet.jpg" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>配布場所については後日公開</p></figcaption>
+        <figcaption><img data-leaflet-mock src="assets/img/handouts/leaflet-mock-overlap.png" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>配布場所については後日公開</p></figcaption>
       </figure>
       <figure class="layout1-row">
         <h3>DM</h3>
@@ -1349,9 +1349,15 @@
       </figure>
     </div>
     <script>
-      if (new URLSearchParams(location.search).get('dm-mock') === 'white') {
-        document.querySelectorAll('[data-dm-mock]').forEach((img) => { img.src = 'assets/img/handouts/dm-overlap-draft.png'; });
-      }
+      const handoutMock = new URLSearchParams(location.search).get('dm-mock');
+      const handoutFiles = {
+        white: ['dm-overlap-draft.png', 'leaflet-mock-white.png'],
+        transparent: ['dm-overlap-transparent.png', 'leaflet-mock-overlap.png'],
+        aligned: ['dm-mock-aligned.png', 'leaflet-mock-aligned.png']
+      };
+      const [dmFile, leafletFile] = handoutFiles[handoutMock] || handoutFiles.transparent;
+      document.querySelectorAll('[data-dm-mock]').forEach((img) => { img.src = 'assets/img/handouts/' + dmFile; });
+      document.querySelectorAll('[data-leaflet-mock]').forEach((img) => { img.src = 'assets/img/handouts/' + leafletFile; });
     </script>
   </section>
 

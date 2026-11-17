@@ -520,6 +520,7 @@ html[data-statement="edge"]:not([data-design="d"]) body.home .lead { width: min(
   gap: 24px;
 }
 .handout img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.handout img[data-dm-mock], .handout img[data-leaflet-mock] { object-fit: contain; }
 .handout figcaption { display: grid; gap: 4px; margin-top: 16px; }
 .handout__name { font-size: var(--fs-body); font-weight: 700; }
 .handout__desc { font-size: 14px; color: var(--c-text); }
@@ -1644,6 +1645,3 @@ body.home .kv-info__art { transform: translateX(-4.7884%); }
 /* キャンパスマップは最大480px、狭い画面では表示領域いっぱいに。 */
 body.home .home-campus .place__mapbox,
 body.home .home-campus[data-dir="north"] .place__mapbox { width: min(100%, 480px); }
-
-/* 公開用：比較用パネルを表示しない */
-.design-switch { display: none !important; }
