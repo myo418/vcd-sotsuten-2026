@@ -1534,16 +1534,15 @@
 
         // 無造作配置は No.01 から左→右、上→下。座標は元の散らし方を維持する。
   const SCATTER_ORDER = ['ishizuka', 'ota', 'kitazaki', 'goto', 'sawada', 'shirai', 'terayama', 'nakano', 'furugen', 'in'];
-  // 線画で囲まれた内側を含めた面積が揃う画像幅。
-  const AREA_WIDTH = { furugen: 1.2514, goto: 1.4898, in: 1.5268, ishizuka: 1.4515, kitazaki: 2.9669, nakano: 1.7062, ota: 1.5304, sawada: 1.7337, shirai: 1.6847, terayama: 1.636 };
   const DESKTOP_SLOTS = ['ishizuka', 'shirai', 'sawada', 'terayama', 'nakano', 'furugen', 'ota', 'goto', 'kitazaki', 'in'];
   const MOBILE_SLOTS = ['ishizuka', 'shirai', 'sawada', 'terayama', 'nakano', 'goto', 'furugen', 'kitazaki', 'ota', 'in'];
   const displayItems = SHORT_GRID ? ITEMS : [...ITEMS].sort((a, b) => SCATTER_ORDER.indexOf(a[0]) - SCATTER_ORDER.indexOf(b[0]));
   displayItems.forEach(([slug, name, originalPic, originalLab]) => {
     const rank = SCATTER_ORDER.indexOf(slug);
     const desktopCenters = [23, 52, 81, 12, 37, 62, 87, 21, 52, 83];
-    const desktopRows = [10, 8, 4, 35, 36, 40, 39, 61, 65, 64];
-    const desktopWidth = AREA_WIDTH[slug] * 12;
+    const desktopRows = [10, 8, 7, 35, 36, 37, 39, 61, 65, 64];
+    const sizeBoost = ['kitazaki', 'shirai', 'terayama'].includes(slug) ? 1.2 : ['nakano', 'sawada'].includes(slug) ? 1.1 : 1;
+    const desktopWidth = (rank >= 3 && rank <= 6 ? Math.min(originalPic[2], 22) : originalPic[2]) * sizeBoost;
     const pic = SHORT_GRID ? originalPic : [desktopCenters[rank] - desktopWidth / 2, desktopRows[rank], desktopWidth];
     const lab = SHORT_GRID ? originalLab : [desktopCenters[rank], desktopRows[rank]];
           const file = SRC.pic[slug];
@@ -1576,9 +1575,9 @@
                   const i = order.indexOf(slug);
                   const cols = GRID_LAYOUT === 'grid3' ? 3 : GRID_LAYOUT === 'grid4' ? 4 : 5;
                   const rows = Math.ceil(order.length / cols), width = ({ 3: 28, 4: 21, 5: 18 })[cols];
-                  const mobileWidth = AREA_WIDTH[slug] * 14.4;
+                  const mobileWidth = (rank === 5 ? 28 : MOBILE_ITEMS[slug][2] * ((rank >= 2 && rank <= 4) || rank >= 7 ? .9 : 1)) * sizeBoost;
       const mobileCenters = [31, 69, 17, 50, 83, 30, 70, 17, 50, 83];
-      const mobileRows = [7, 8, 26, 31, 31, 50, 50, 67, 73, 69];
+      const mobileRows = [7, 8, 27, 31, 31, 47, 50, 67, 73, 69];
       const mobileCenter = mobileCenters[rank];
       const p = SHORT_GRID ? [(i % cols + .5) * 100 / cols - width / 2, Math.floor(i / cols) * 100 / rows, width] : mobileBoard.matches ? [mobileCenter - mobileWidth / 2, mobileRows[rank], mobileWidth] : pic;
             a.style.left = p[0] + '%'; a.style.top = p[1] + '%'; a.style.width = p[2] + '%';
@@ -1847,7 +1846,7 @@
 <script src="assets/script.js?v=202611081240" defer></script>
 <script src="assets/fruit-features.js?v=20261109" defer></script>
 <script src="assets/fruit-intro.js?v=20261111d" defer></script>
-<script src="assets/fruit-linked.js?v=20261118j" defer></script>
+<script src="assets/fruit-linked.js?v=20261118k" defer></script>
   <dialog class="motion-intro" id="motion-intro" aria-label="オープニング動画">
     <span class="motion-intro__focus" tabindex="-1" aria-label="オープニング動画"></span>
     <button class="motion-intro__close" type="button" aria-label="動画を閉じる">×</button>

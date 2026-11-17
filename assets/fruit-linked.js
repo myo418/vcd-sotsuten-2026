@@ -20,8 +20,8 @@
   const title = document.createElement('h2'); const feature = document.createElement('div'); const featureLabel = document.createElement('span'); const featureText = document.createElement('p'); const description = document.createElement('p');
   const english = document.createElement('span'); english.className = 'fruit-preview__english';
   const englishTitles = { ishizuka: 'Seminarium ishizukae', ota: 'Seminarium otae', kitazaki: 'Seminarium kitazakiae', goto: 'Seminarium gotoi', sawada: 'Seminarium sawadae', shirai: 'Seminarium shiraii', terayama: 'Seminarium terayamae', nakano: 'Seminarium nakanoi', furugen: 'Seminarium furukatae', in: 'Seminarium graduate' };
-  // 線画の内側も塗った領域として数えた、正規化済み画像の面積。
-  const artworkAreas = { furugen: 495998, goto: 314827, in: 341383, ishizuka: 326809, kitazaki: 145074, nakano: 158649, ota: 181300, sawada: 268387, shirai: 265254, terayama: 291451 };
+  // 一覧の画像幅に対する、透明余白を除いた実の長辺の比率。
+  const artworkRatios = { ishizuka: 861 / 850, ota: 826 / 640, kitazaki: 558 / 749, goto: 699 / 695, sawada: 843 / 900, shirai: 686 / 708, terayama: 856 / 900, nakano: 841 / 680, furugen: 761 / 798, in: 848 / 900 };
   feature.className = 'fruit-preview__feature';
   description.className = 'fruit-preview__description';
   featureLabel.className = 'fruit-preview__feature-label'; featureLabel.textContent = '特徴';
@@ -80,8 +80,13 @@
     await cached.ready;
     if (current !== request) return;
     image.src = cached.img.src;
-    const smallestArea = Math.min(...Object.values(artworkAreas));
-    image.style.setProperty('--preview-scale', Math.sqrt(smallestArea / (artworkAreas[slug] || smallestArea)));
+    const sizes = [...board.querySelectorAll('a')].filter(a => a.querySelector('img')).map(a => {
+      const key = getSlug(a);
+      return { slug: key, size: a.querySelector('img').offsetWidth * (artworkRatios[key] || 1) };
+    });
+    const largest = Math.max(...sizes.map(entry => entry.size), 1);
+    const selected = sizes.find(entry => entry.slug === slug);
+    image.style.setProperty('--preview-scale', selected ? selected.size / largest : 1);
     const sourceTitle = item.querySelector('h3');
     number.textContent = sourceTitle.querySelector('.fruit-number')?.textContent || '';
     title.textContent = Array.from(sourceTitle.childNodes).filter(node => node.nodeType === Node.TEXT_NODE).map(node => node.textContent).join('').trim();
