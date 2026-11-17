@@ -34,10 +34,7 @@
   const intro = (slug) => document.querySelector(`.fruit-intro__fruit[data-fruit="${CSS.escape(slug)}"]`)?.closest('article');
   const show = (slug) => {
     const item = intro(slug); if (!item) return;
-    image.src = `assets/img/seminars/normalized/seminar-${slug}.webp?v=20261118`;
-    const reference = [...board.querySelectorAll('a')].find(a => getSlug(a) === slug && a.querySelector('img'));
-    const referenceWidth = reference?.querySelector('img')?.offsetWidth;
-    image.style.width = referenceWidth ? `${referenceWidth * 1.6}px` : '';
+    image.src = `assets/img/seminars/normalized/seminar-${slug}.webp?v=20261118b`;
     const sourceTitle = item.querySelector('h3');
     number.textContent = sourceTitle.querySelector('.fruit-number')?.textContent || '';
     title.textContent = Array.from(sourceTitle.childNodes).filter(node => node.nodeType === Node.TEXT_NODE).map(node => node.textContent).join('').trim();
