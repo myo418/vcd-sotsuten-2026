@@ -1318,7 +1318,7 @@
         </figcaption>
       </figure>
       <figure class="handout">
-        <img data-leaflet-mock src="assets/img/handouts/leaflet-mock-overlap.png" alt="リーフレット（仮イメージ）"
+        <img data-leaflet-mock src="assets/img/handouts/leaflet-bifold-overlap.png" alt="リーフレット（仮イメージ）"
              loading="lazy" width="1600" height="1200">
         <figcaption>
           <p class="handout__name">リーフレット</p>
@@ -1341,7 +1341,7 @@
       </figure>
       <figure class="layout1-row">
         <h3>リーフレット</h3>
-        <figcaption><img data-leaflet-mock src="assets/img/handouts/leaflet-mock-overlap.png" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>配布場所については後日公開</p></figcaption>
+        <figcaption><img data-leaflet-mock src="assets/img/handouts/leaflet-bifold-overlap.png" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>配布場所については後日公開</p></figcaption>
       </figure>
       <figure class="layout1-row">
         <h3>DM</h3>
@@ -1350,10 +1350,11 @@
     </div>
     <script>
       const handoutMock = new URLSearchParams(location.search).get('dm-mock');
+      document.documentElement.dataset.handoutMock = handoutMock || 'transparent';
       const handoutFiles = {
-        white: ['dm-overlap-draft.png', 'leaflet-mock-white.png'],
-        transparent: ['dm-overlap-transparent.png', 'leaflet-mock-overlap.png'],
-        aligned: ['dm-mock-aligned.png', 'leaflet-mock-aligned.png']
+        white: ['dm-overlap-draft.png', 'leaflet-bifold-white.png'],
+        transparent: ['dm-overlap-transparent.png', 'leaflet-bifold-overlap.png'],
+        aligned: ['dm-aligned-shadow.png', 'leaflet-bifold-aligned.png']
       };
       const [dmFile, leafletFile] = handoutFiles[handoutMock] || handoutFiles.transparent;
       document.querySelectorAll('[data-dm-mock]').forEach((img) => { img.src = 'assets/img/handouts/' + dmFile; });
