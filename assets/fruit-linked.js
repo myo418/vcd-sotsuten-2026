@@ -13,6 +13,7 @@
   const panel = document.createElement('aside');
   panel.className = 'fruit-preview'; panel.setAttribute('aria-hidden', 'true');
   const image = document.createElement('img'); image.alt = '';
+  const art = document.createElement('div'); art.className = 'fruit-preview__art'; art.append(image);
   const header = document.createElement('div'); header.className = 'fruit-preview__header';
   const number = document.createElement('span'); number.className = 'fruit-preview__number';
   const titleGroup = document.createElement('div'); titleGroup.className = 'fruit-preview__title-group';
@@ -25,7 +26,12 @@
   description.className = 'fruit-preview__description';
   featureLabel.className = 'fruit-preview__feature-label'; featureLabel.textContent = '特徴';
   feature.append(featureLabel, featureText); titleGroup.append(title, english); header.append(number, titleGroup);
-  panel.append(header, feature, image, description); document.body.append(panel);
+  panel.append(header, feature, art, description); document.body.append(panel);
+  let request = 0;
+  const imageCache = Object.fromEntries(Object.keys(englishTitles).map(slug => {
+    const img = new Image(); img.src = `assets/img/seminars/normalized/seminar-${slug}.webp?v=20261118c`;
+    return [slug, { img, ready: img.decode().catch(() => {}) }];
+  }));
   const getSlug = (el) => { const link = el && el.closest('.board a, .seminar-scatter a, .fruit-intro__fruit'); if (!link) return ''; if (link.dataset.fruit || link.dataset.fruitSlug) return link.dataset.fruit || link.dataset.fruitSlug; try { const value = new URL(link.href).searchParams.get('seminar') || ''; return ({ '石塚ゼミ': 'ishizuka', '白井ゼミ': 'shirai', '沢田ゼミ': 'sawada', '寺山ゼミ': 'terayama', '中野ゼミ': 'nakano', '後藤ゼミ': 'goto', '古堅ゼミ': 'furugen', '北崎ゼミ': 'kitazaki', '大田ゼミ': 'ota', '大学院': 'in' })[value] || value; } catch { return ''; } };
   if (['seminar', 'mobile'].includes(clickAction)) root.querySelectorAll('.board a, .seminar-scatter a').forEach((link) => {
     const slug = getSlug(link); if (!slug) return;
@@ -34,9 +40,13 @@
     link.dataset.fruitSlug = slug; link.href = url.href; link.target = '_self';
   });
   const intro = (slug) => document.querySelector(`.fruit-intro__fruit[data-fruit="${CSS.escape(slug)}"]`)?.closest('article');
-  const show = (slug) => {
+  const show = async (slug) => {
     const item = intro(slug); if (!item) return;
-    image.src = `assets/img/seminars/normalized/seminar-${slug}.webp?v=20261118c`;
+    const current = ++request;
+    const cached = imageCache[slug]; if (!cached) return;
+    await cached.ready;
+    if (current !== request) return;
+    image.src = cached.img.src;
     const sizes = [...board.querySelectorAll('a')].filter(a => a.querySelector('img')).map(a => {
       const key = getSlug(a);
       return { slug: key, size: a.querySelector('img').offsetWidth * (artworkRatios[key] || 1) };
@@ -67,11 +77,11 @@
           if (distance < nearest) { nearest = distance; slug = getSlug(a); }
         });
       }
-      if (slug && (slug !== hoverSlug || !panel.classList.contains('is-visible'))) { hoverSlug = slug; show(slug); }
+      if (slug && slug !== hoverSlug) { hoverSlug = slug; show(slug); }
     });
-    board.addEventListener('pointerleave', () => { hoverSlug = ''; panel.classList.remove('is-visible'); });
+    board.addEventListener('pointerleave', () => { hoverSlug = ''; request++; panel.classList.remove('is-visible'); });
     root.addEventListener('focusin', (e) => { const slug = getSlug(e.target); if (slug && matchMedia('(min-width: 1001px)').matches) show(slug); });
-    root.addEventListener('focusout', () => panel.classList.remove('is-visible'));
+    root.addEventListener('focusout', () => { request++; panel.classList.remove('is-visible'); });
   }
   if (['seminar', 'mobile'].includes(clickAction)) root.addEventListener('click', (e) => {
     const slug = getSlug(e.target); if (!slug) return;
