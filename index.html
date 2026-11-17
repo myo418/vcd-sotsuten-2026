@@ -1326,7 +1326,7 @@
         </figcaption>
       </figure>
       <figure class="handout">
-        <img data-dm-mock src="assets/img/handouts/dm-webred-overlap.png" alt="DM（仮イメージ）"
+        <img data-dm-mock src="assets/img/handouts/dm-black-shadow-overlap.png" alt="DM（仮イメージ）"
              loading="lazy" width="1536" height="1024">
         <figcaption>
           <p class="handout__name">DM</p>
@@ -1345,7 +1345,7 @@
       </figure>
       <figure class="layout1-row">
         <h3>DM</h3>
-        <figcaption><img data-dm-mock src="assets/img/handouts/dm-webred-overlap.png" alt="DM（仮イメージ）" loading="lazy" width="1536" height="1024"><p>配布場所については後日公開</p></figcaption>
+        <figcaption><img data-dm-mock src="assets/img/handouts/dm-black-shadow-overlap.png" alt="DM（仮イメージ）" loading="lazy" width="1536" height="1024"><p>配布場所については後日公開</p></figcaption>
       </figure>
     </div>
     <script>
@@ -1353,9 +1353,9 @@
       document.documentElement.dataset.handoutMock = handoutMock || 'transparent';
       const handoutFiles = {
         white: ['dm-webred-white.png', 'leaflet-webred-white.png'],
-        transparent: ['dm-webred-overlap.png', 'leaflet-webred-overlap.png'],
-        aligned: ['dm-webred-aligned.png', 'leaflet-webred-aligned.png'],
-        red: ['dm-webred-photo.png', 'leaflet-webred-photo.png']
+        transparent: ['dm-black-shadow-overlap.png', 'leaflet-webred-overlap.png'],
+        aligned: ['dm-black-shadow-aligned.png', 'leaflet-webred-aligned.png'],
+        red: ['dm-flat-red.png', 'leaflet-flat-red.png']
       };
       const [dmFile, leafletFile] = handoutFiles[handoutMock] || handoutFiles.transparent;
       document.querySelectorAll('[data-dm-mock]').forEach((img) => { img.src = 'assets/img/handouts/' + dmFile; });
@@ -1592,7 +1592,7 @@
                   const rows = Math.ceil(order.length / cols), width = ({ 3: 28, 4: 21, 5: 18 })[cols];
                   const mobileWidth = (rank === 5 ? 28 : MOBILE_ITEMS[slug][2] * ((rank >= 2 && rank <= 4) || rank >= 7 ? .9 : 1)) * sizeBoost;
       const mobileCenters = [31, 69, 17, 50, 83, 30, 70, 17, 50, 83];
-      const mobileRows = [7, 8, 27, 31, 31, 47, 50, 67, 73, 69];
+      const mobileRows = [7, 8, 27, 30, 30, 51, 51, 73, 76, 73];
       const mobileCenter = mobileCenters[rank];
       const p = SHORT_GRID ? [(i % cols + .5) * 100 / cols - width / 2, Math.floor(i / cols) * 100 / rows, width] : mobileBoard.matches ? [mobileCenter - mobileWidth / 2, mobileRows[rank], mobileWidth] : pic;
             a.style.left = p[0] + '%'; a.style.top = p[1] + '%'; a.style.width = p[2] + '%';

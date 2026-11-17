@@ -522,7 +522,7 @@ html[data-statement="edge"]:not([data-design="d"]) body.home .lead { width: min(
 .handout img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .handout img[data-dm-mock], .handout img[data-leaflet-mock] { object-fit: contain; }
 html[data-handout-mock="aligned"] img[data-dm-mock] { object-position: left center; transform: translateX(-10.4%); }
-html[data-handout-mock="aligned"] img[data-leaflet-mock] { object-position: left center; transform: translateX(-22.3%); }
+html[data-handout-mock="aligned"] img[data-leaflet-mock] { object-position: left center; transform: translateX(-20.2%); }
 .handout figcaption { display: grid; gap: 4px; margin-top: 16px; }
 .handout__name { font-size: var(--fs-body); font-weight: 700; }
 .handout__desc { font-size: 14px; color: var(--c-text); }
