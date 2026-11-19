@@ -1741,7 +1741,7 @@ body.home .home-campus[data-dir="west-higashi"] .place__bld:hover { background: 
 }
 
 /* ゼミ紹介の後に、再生操作付きの動画を置く。 */
-body.home .video-section { gap: 24px; padding-block: 0 var(--home-block-gap); }
+body.home .video-section { gap: 40px; padding-block: 0 var(--home-block-gap); }
 .video-section__player { width: min(320px, 100%); }
 .video-section__play { position: relative; display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
 .video-section__play img, .video-section__video { display: block; width: 100%; height: auto; }
@@ -1766,6 +1766,4 @@ html[data-video-style="fruit"] .video-section__thumb,
 html[data-video-style="thumbnail"] .video-section__fruit { display: none; }
 .video-section__icon { background: transparent; border: 0; color: var(--c-bg); }
 .video-section__icon::after { border-left-color: currentColor; }
-@media (min-width: 691px) {
-  html[data-top-layout="1"] body.home .video-section__player { margin-left: calc(var(--layout1-label-col) + var(--layout1-column-gap)); max-width: calc(100% - var(--layout1-label-col) - var(--layout1-column-gap)); }
-}
+body.home .video-section__player { margin-inline: auto; }
