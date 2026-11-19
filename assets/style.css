@@ -505,7 +505,7 @@ html[data-statement="edge"]:not([data-design="d"]) body.home .lead { width: min(
   place-items: center;
   aspect-ratio: 6 / 5;
   padding: 1em;
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
   color: var(--c-text-dim);
   background: rgba(0, 0, 0, .08);
@@ -619,7 +619,7 @@ html[data-top-layout="1"] body.home .layout1-map img { display: block; width: 10
 html[data-top-layout="1"] body.home .layout1-linklist { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
 html[data-top-layout="1"] body.home .layout1-linklist a,
 html[data-top-layout="1"] body.home .layout1-footer a {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.8;
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -652,7 +652,7 @@ html[data-top-layout="1"] body.home .layout1-footer .copyright { margin-top: 36p
 }
 
 .copyright {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.8;
   color: var(--c-text-dim);
 }
@@ -788,7 +788,7 @@ body.home .home-campus { grid-template-columns: 1fr max-content minmax(0, 400px)
 body.home .home-campus > figcaption { grid-column: 1 / -1; }
 body.home .home-campus .place__mapbox { grid-column: 3; grid-row: 2; }
 body.home .home-campus .floor-guide-buildings { grid-column: 2; grid-row: 2; align-self: center; margin-right: 24px !important; }
-@media (max-width: 690px) { body.home .home-campus .floor-guide-buildings { margin-right: 12px !important; } body.home .home-campus .floor-guide-buildings button { font-size: 13px; padding: .4em .8em; } }
+@media (max-width: 690px) { body.home .home-campus .floor-guide-buildings { margin-right: 12px !important; } body.home .home-campus .floor-guide-buildings button { font-size: 14px; padding: .4em .8em; } }
 body.home .home-campus .place__lead { margin: 0; font-size: calc(var(--fs-section) * var(--heading-scale)); font-weight: 700; line-height: 1.4; }
 body.home .home-campus .place__mapbox { position: relative; width: min(400px, 100%); margin-inline: auto; }
 body.home .home-campus .place__mapbox img { display: block; width: 100%; height: auto; }
@@ -851,7 +851,7 @@ html[data-works-layout="2"] body:not(.home) .site-footer__inner::before { conten
   .deco { --deco-w: 160px; }
   #handouts { padding-bottom: 240px; }
   /* ご挨拶：スマホでは少し小さく、行間を詰める（STUDIO 版と同じ） */
-  #greeting .section__body { font-size: 15px; line-height: 1.9; letter-spacing: .02em; }
+  #greeting .section__body { font-size: 16px; line-height: 1.9; letter-spacing: .02em; }
   #greeting .section__byline { font-size: 14px; line-height: 1.8; }
   .handouts { grid-template-columns: 1fr; gap: 32px; }
   .kv-info { --kv-info-overlap: 40px; }
@@ -1064,7 +1064,7 @@ html[data-greet="2"] body.home #greeting .section__body {
   font-size: 16px; line-height: var(--lh); letter-spacing: .05em; text-align: justify;
   background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--lh) - 1px), rgba(189, 49, 36, .22) calc(var(--lh) - 1px), rgba(189, 49, 36, .22) var(--lh));
 }
-html[data-greet="2"] body.home #greeting .section__byline { order: 3; justify-self: end; text-align: right; color: var(--ink); /* 地の白と同じ色（--c-text-dim）になって消えていた（2026-10-28） */ font-size: 15px; line-height: 1.8; letter-spacing: .05em; }
+html[data-greet="2"] body.home #greeting .section__byline { order: 3; justify-self: end; text-align: right; color: var(--ink); /* 地の白と同じ色（--c-text-dim）になって消えていた（2026-10-28） */ font-size: 16px; line-height: 1.8; letter-spacing: .05em; }
 @media (max-width: 1000px) { html[data-greet="2"] body.home #greeting { padding: 72px 64px 80px; } }
 @media (max-width: 690px) {
   html[data-greet="2"] body.home #greeting { --lh: 28px; padding: 48px 24px 56px; gap: 32px; }
@@ -1241,7 +1241,7 @@ html[data-catalog-photo="no"] body.home .handout--catalog figcaption { margin-to
 .handout__photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .handout__photos img { display: block; }
 .catalog-carousel { position: relative; }
-.catalog-carousel__controls { position: absolute; z-index: 1; top: 8px; right: 8px; display: flex; align-items: center; gap: 8px; padding: 3px 7px; border-radius: 999px; background: rgb(0 0 0 / .55); color: #fff; font-size: 13px; line-height: 1.3; }
+.catalog-carousel__controls { position: absolute; z-index: 1; top: 8px; right: 8px; display: flex; align-items: center; gap: 8px; padding: 3px 7px; border-radius: 999px; background: rgb(0 0 0 / .55); color: #fff; font-size: 14px; line-height: 1.3; }
 .catalog-carousel__controls button { padding: 2px 5px; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
 .catalog-carousel__controls button:disabled { opacity: .35; cursor: default; }
 @media (min-width: 691px) {
@@ -1327,7 +1327,7 @@ html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__body {
   html[data-top-layout="1"][data-greet="1"] body.home #greeting { grid-template-columns: 1fr; row-gap: 6px; }
   html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__title { grid-column: 1; grid-row: auto; font-size: 24px; }
   html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__byline { grid-column: 1; grid-row: auto; }
-  html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__body { grid-column: 1; grid-row: auto; font-size: 15px; }
+  html[data-top-layout="1"][data-greet="1"] body.home #greeting .section__body { grid-column: 1; grid-row: auto; font-size: 16px; }
 }
 
 /* 左揃えステートメントは、現在選択中の大きさを基準に左端を動かさず15%拡大する。 */
@@ -1359,7 +1359,7 @@ html[data-fruit-layout="longshort"] body.home #student-works .fruit-intro { gap:
 .fruit-intro__item { display: grid; grid-template-columns: minmax(0, var(--layout1-label-col, 162px)) minmax(0, 1fr); gap: var(--layout1-column-gap, 20px); align-items: start; }
 .fruit-intro__item img { display: block; width: 90%; max-width: 100%; height: auto; margin-inline: auto; }
 .fruit-intro__item h3 { margin: 0 0 12px; font-size: 18px; line-height: 1.5; }
-.fruit-intro__item p { margin: 0; font-size: 15px; line-height: 1.9; text-align: justify; }
+.fruit-intro__item p { margin: 0; font-size: 16px; line-height: 1.9; text-align: justify; }
 html[data-fruit-layout="longshort"] .fruit-intro__item div > p:not(.fruit-intro__short) { display: none; }
 html[data-fruit-layout="longshort"] .fruit-intro__item > div { align-self: center; }
 @media (min-width: 691px) { html[data-top-layout="1"] body.home .fruit-intro__item > div { width: var(--layout1-content-max); } }
@@ -1378,9 +1378,9 @@ html[data-fruit-click="none"] body.home #student-works :is(.board a, .seminar-sc
   .fruit-preview__header { flex-shrink: 0; margin-bottom: clamp(10px, 2vh, 20px); }
   .fruit-preview__number, .fruit-preview__feature-label { font-size: clamp(11px, 1.5vh, 14px); line-height: 1.7; }
   .fruit-preview__number { font-weight: 600; }
-  .fruit-preview h2 { margin: 0; font-size: clamp(15px, 2.5vh, 22px); line-height: 1.3; }
+  .fruit-preview h2 { margin: 0; font-size: clamp(16px, 2.5vh, 22px); line-height: 1.3; }
   .fruit-preview__english { display: block; font-size: clamp(11px, 1.5vh, 14px); font-style: italic; font-weight: 600; line-height: 1.3; }
-  .fruit-preview p { flex-shrink: 0; width: 100%; margin: 0; font-size: clamp(10px, 1.7vh, 15px); line-height: 1.7; }
+  .fruit-preview p { flex-shrink: 0; width: 100%; margin: 0; font-size: clamp(14px, 1.7vh, 16px); line-height: 1.7; }
   .fruit-preview .fruit-preview__description { box-sizing: border-box; min-height: var(--preview-description-height, 0px); padding-left: clamp(54px, 6vw, 86px); font-size: clamp(10px, 1.6vh, 14px); }
   .fruit-preview .fruit-preview__feature:not([hidden]) { flex-shrink: 0; margin-bottom: clamp(12px, 3vh, 32px); }
   .fruit-preview__feature { min-height: var(--preview-feature-height, 3.4em); }
@@ -1402,7 +1402,7 @@ html[data-works-linked] body.home #student-works .seminar-links__all { display: 
 html[data-works-short] body.home #student-works .seminar-links__all { display: none; }
 .fruit-short-overlay { position: fixed; z-index: 80; width: min(240px, calc(100vw - 32px)); box-sizing: border-box; padding: 13px 15px; border-radius: 10px; background: var(--c-red-dark); color: rgb(var(--paper-rgb)); box-shadow: 0 4px 16px rgb(0 0 0 / .16); pointer-events: none; font: 500 14px/1.65 var(--ff-jp); }
 .fruit-short-overlay[hidden] { display: none; }
-.fruit-short-overlay strong { display: block; margin-bottom: 3px; font-size: 13px; }
+.fruit-short-overlay strong { display: block; margin-bottom: 3px; font-size: 14px; }
 
 /* 整列案：指定した列数に合わせて台紙の高さを変える。 */
 html[data-works-grid] body.home .seminars-b { aspect-ratio: 1000 / 540; }
