@@ -778,7 +778,7 @@
       }
       row('sw-top-layout', ['2', '1', '3'], 'top-layout', isOneColumn ? '1' : '3', (k) => ({ '2': '初期', '1': '2列左揃え', '3': '2列ノド揃え' }[k])); // 文字組み：2＝初期、1＝2列左揃え、3＝2列で中央側に揃える
       row('sw-campus-btn', ['no', 'round', 'grid', 'grid-fit', 'fill-full', 'fill', 'edge'], 'campus-btn', isOneColumn ? 'round' : 'fill', (k) => ({ no: 'なし', round: '◯', grid: '線・幅いっぱい', 'grid-fit': '線・可変幅', 'fill-full': '塗り・幅いっぱい', fill: '塗り・可変幅', edge: '右線' }[k]));
-      row('sw-campus-map', ['no', 'north', 'west'], 'campus-map', 'west', (k) => ({ no: 'なし', north: '北上', west: '西上' }[k])); // ゼミ一覧の下のキャンパスマップ。なし／北上／西上（2026-11-08 に向きの行をまとめた。旧 ?campus-map=1 は北上）
+      row('sw-campus-map', ['no', 'north', 'west', 'west-higashi'], 'campus-map', 'west-higashi', (k) => ({ no: 'なし', north: '北上', west: '西上', 'west-higashi': '西上・東案' }[k])); // ゼミ一覧の下のキャンパスマップ。なし／北上／西上（2026-11-08 に向きの行をまとめた。旧 ?campus-map=1 は北上）
       // アクセス地図は v4 に固定（2026-11-11）
       row('sw-statement', ['edge', 'center'], 'statement', isOneColumn ? 'center' : 'edge', (k) => ({ center: '中央', edge: '左端' }[k])); // ステートメントの揃え（2026-10-29。左端は 10-30、10-31 から既定）
       row('sw-statement-size', ['smallest', 'small', 'normal'], 'statement-size', 'smallest', (k) => ({ smallest: '小', small: '中', normal: '大' }[k]));
@@ -1279,12 +1279,13 @@
       var DIRS = {
         north: { src: 'assets/img/map/campus-north.png?v=1109y', w: 1307, h: 1026, baseW: 1227, baseH: 1026, pos: {
           '12号館': [26, 25.4, 10.4, 15], '8号館': [61.7, 26.6, 2.6, 12.3], '9号館': [65.4, 27, 7.3, 22.5], '10号館': [74.3, 26.5, 15.5, 13], '10号館前芝生': [74.5, 39.9, 15.1, 9.7], '美術館前芝生': [39.5, 51.5, 11, 18] } },
+        'west-higashi': { src: 'assets/img/map/campus-west-higashi.svg', w: 867, h: 1057, baseW: 867, baseH: 1057, pos: { '12号館': [60.5, 24.5, 13, 12.6], '8号館': [60.5, 40.2, 13, 21], '9号館': [49.5, 66, 23.8, 7.2], '10号館': [60.5, 75.2, 13, 15.5], '10号館前芝生': [49.5, 74.5, 10, 15], '美術館前芝生': [19.5, 25.5, 27, 25] } },
         west: { src: 'assets/img/map/campus-west.png?v=1109u', w: 1106, h: 1307, baseW: 1026, baseH: 1227, pos: {
           '12号館': [60.5, 26, 13, 11.5], '8号館': [61.2, 61.7, 12.2, 2.6], '9号館': [50.5, 65.4, 22.5, 7.3], '10号館': [60.5, 74.3, 13, 15.5], '10号館前芝生': [50.5, 74.5, 9.5, 15.1], '美術館前芝生': [30.5, 39.5, 18, 11] } }
       };
       var FALLBACK = 'assets/img/map/campus-1106-clear.png?v=1109';
       var mapChoice = new URLSearchParams(location.search).get('campus-map');
-      var dir = mapChoice === 'north' || mapChoice === '1' ? 'north' : 'west';
+      var dir = mapChoice === 'west' ? 'west' : mapChoice === 'north' || mapChoice === '1' ? 'north' : 'west-higashi';
       var d = DIRS[dir], fig = document.getElementById('home-campus'), img = document.getElementById('home-campus-img');
       if (!fig || !img) return;
       fig.dataset.dir = dir;
