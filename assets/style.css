@@ -1784,3 +1784,9 @@ html[data-video-style="thumbnail"] .video-section__caption { display: none; }
 .video-section__icon::after { content: none; }
 .video-section__icon svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .video-section__icon path { fill: currentColor; stroke: white; stroke-width: 1.1; stroke-linejoin: round; stroke-linecap: round; }
+
+/* ゼミ切り替え時は背景を保ったまま内容だけをフェードする。 */
+@media (min-width: 1001px) {
+  .fruit-preview > :is(.fruit-preview__header, .fruit-preview__feature, .fruit-preview__art, .fruit-preview__description) { transition: opacity .16s ease; }
+  .fruit-preview.is-changing > :is(.fruit-preview__header, .fruit-preview__feature, .fruit-preview__art, .fruit-preview__description) { opacity: 0; }
+}

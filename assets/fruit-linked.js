@@ -77,7 +77,11 @@
     const item = intro(slug); if (!item) return;
     const current = ++request;
     const cached = imageCache[slug]; if (!cached) return;
-    await cached.ready;
+    const changing = panel.classList.contains('is-visible');
+    if (changing) panel.classList.add('is-changing');
+    const fadeOut = changing && !matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? new Promise(resolve => setTimeout(resolve, 160)) : Promise.resolve();
+    await Promise.all([cached.ready, fadeOut]);
     if (current !== request) return;
     image.src = cached.img.src;
     const sizes = [...board.querySelectorAll('a')].filter(a => a.querySelector('img')).map(a => {
@@ -96,6 +100,7 @@
     description.textContent = item.querySelector('p').textContent;
     measureDescription();
     panel.classList.add('is-visible');
+    panel.classList.remove('is-changing');
   };
   if (hoverAction === 'linked') {
     let hoverSlug = '';
@@ -113,7 +118,7 @@
       }
       if (slug && slug !== hoverSlug) { hoverSlug = slug; show(slug); }
     });
-    board.addEventListener('pointerleave', () => { hoverSlug = ''; request++; panel.classList.remove('is-visible'); });
+    board.addEventListener('pointerleave', () => { hoverSlug = ''; request++; panel.classList.remove('is-visible', 'is-changing'); });
     root.addEventListener('focusin', (e) => { const slug = getSlug(e.target); if (slug && matchMedia('(min-width: 1001px)').matches) show(slug); });
     root.addEventListener('focusout', () => { request++; panel.classList.remove('is-visible'); });
   }
