@@ -1571,7 +1571,7 @@
     const rank = SCATTER_ORDER.indexOf(slug);
     const desktopCenters = [28, 55, 80, 12, 37, 62, 87, 25, 52, 83];
     const desktopRows = [10, 11, 7, 37, 36, 37, 39, 61, 68, 64];
-    const sizeBoost = ['kitazaki', 'shirai', 'terayama'].includes(slug) ? 1.2 : ['nakano', 'sawada'].includes(slug) ? 1.1 : 1;
+    const sizeBoost = slug === 'kitazaki' ? 1.08 : ['shirai', 'terayama'].includes(slug) ? 1.2 : ['nakano', 'sawada'].includes(slug) ? 1.1 : 1;
     const desktopWidth = (rank >= 3 && rank <= 6 ? Math.min(originalPic[2], 22) : originalPic[2]) * sizeBoost;
     const pic = SHORT_GRID ? originalPic : [desktopCenters[rank] - desktopWidth / 2, desktopRows[rank], desktopWidth];
     const lab = SHORT_GRID ? originalLab : [desktopCenters[rank], desktopRows[rank]];
@@ -1606,8 +1606,8 @@
                   const cols = GRID_LAYOUT === 'grid3' ? 3 : GRID_LAYOUT === 'grid4' ? 4 : 5;
                   const rows = Math.ceil(order.length / cols), width = ({ 3: 28, 4: 21, 5: 18 })[cols];
                   const mobileWidth = desktopWidth * 1.4625;
-      const mobileCenters = [31, 69, 26.4, 52, 82, 30, 70, 19, 50, 81];
-      const mobileRows = [5, 6, 24, 30, 25, 49, 49, 72, 80, 72];
+      const mobileCenters = [31, 69, 24, 51, 83, 30, 70, 19, 50, 81];
+      const mobileRows = [5, 6, 24, 33, 25, 49, 49, 72, 80, 72];
       const mobileCenter = mobileCenters[rank];
       const p = SHORT_GRID ? [(i % cols + .5) * 100 / cols - width / 2, Math.floor(i / cols) * 100 / rows, width] : mobileBoard.matches ? [mobileCenter - mobileWidth / 2, mobileRows[rank], mobileWidth] : pic;
             a.style.left = p[0] + '%'; a.style.top = p[1] + '%'; a.style.width = p[2] + '%';
