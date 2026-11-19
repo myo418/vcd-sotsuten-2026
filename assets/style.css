@@ -356,6 +356,7 @@ html[data-kv1] body.home .kv.has-art-pos::after { top: calc(min(var(--kv-art-bot
   vertical-align: .18em;
   letter-spacing: 0;
 }
+.weekday-mark > span { transform: translateX(-.05em); }
 
 /* KV のアニメーションが終わってから下からスライド＋フェードで出す（タイミングは kv.js の CATCH_DELAY） */
 .js-intro .kv__catch {
