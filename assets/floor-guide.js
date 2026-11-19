@@ -18,7 +18,7 @@
   function open(building, trigger) {
     lastFocus = trigger;
     dialog.setAttribute('aria-label', building + 'の展示場所');
-    const direction = guide.dataset.dir === 'west' ? 'west' : 'north';
+    const direction = guide.dataset.dir === 'north' ? 'north' : 'west';
     floorList.replaceChildren(...floors[building].map(([name, path]) => {
       const section = document.createElement('section');
       section.className = 'floor-guide-floor';
