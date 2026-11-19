@@ -1727,3 +1727,10 @@ html[data-handout-mock="text"][data-top-layout="1"] body.home .layout1-handouts 
 
 /* 新しい展示場所マップは画像自体にホバー表示を含む。 */
 body.home .home-campus[data-dir="west-higashi"] .place__bld:hover { background: transparent; }
+
+/* フロアマップの区切り線は画像間だけに設ける。 */
+.floor-guide-floor + .floor-guide-floor { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgb(var(--paper-rgb) / .45); }
+@media (min-width: 901px) {
+  .floor-guide-floors { gap: 0; align-items: stretch; }
+  .floor-guide-floor + .floor-guide-floor { margin-top: 8px; margin-left: 16px; padding-top: 0; padding-left: 16px; border-top: 0; border-left: 1px solid rgb(var(--paper-rgb) / .45); }
+}
