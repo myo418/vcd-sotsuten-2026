@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
-<link rel="stylesheet" href="assets/style.css?v=20261119v">
+<link rel="stylesheet" href="assets/style.css?v=20261120a">
 <!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
      表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
 <script>
@@ -1174,11 +1174,11 @@
     <div class="layout1-only layout1-grid layout1-outline reveal">
       <div class="layout1-row">
         <h3>会期</h3>
-        <div><p>2027年1月14日<span class="weekday-mark">木</span>から17日<span class="weekday-mark">日</span></p><p>9時開場－17時閉場（最終入場16時）</p></div>
+        <div><p>2027年1月14日<span class="weekday-mark">木</span>から17日<span class="weekday-mark">日</span></p><p>9時開場-17時閉場（最終入場16時）</p></div>
       </div>
       <div class="layout1-row">
         <h3>会場</h3>
-        <div><p>武蔵野美術大学 鷹の台キャンパス</p><p>〒187－8505 東京都小平市小川町1－736</p></div>
+        <div><p>武蔵野美術大学 鷹の台キャンパス</p><p>〒187-8505 東京都小平市小川町1-736</p></div>
       </div>
     </div>
   </section>
@@ -1883,7 +1883,7 @@
   </div>
 </footer>
 
-<script src="assets/kv.js?v=20261119b" defer></script>
+<script src="assets/kv.js?v=20261120a" defer></script>
 <script src="assets/deco.js?v=20261116b" defer></script>
 <script src="assets/script.js?v=202611081240" defer></script>
 <script src="assets/fruit-features.js?v=20261109" defer></script>
@@ -1897,6 +1897,7 @@
     <video class="motion-intro__video" playsinline muted preload="none" tabindex="-1" aria-label="卒業・修了制作展のモーション動画">
       <source src="assets/video/web-motion-20261119.mp4?v=20261119" type="video/mp4">
     </video>
+    <span class="motion-intro__end-title" aria-hidden="true">実りの、その先へ。</span>
     <input class="motion-intro__seek" type="range" min="0" max="1000" value="0" aria-label="動画の再生位置">
     <button class="motion-intro__play" type="button" hidden>動画を再生</button>
   </dialog>
@@ -1910,6 +1911,7 @@
         } catch (e) { return false; }
       };
       const skipOpening = consumeSeminarReturn();
+      if (skipOpening) document.documentElement.dataset.seminarReturn = "1";
       const openingEnabled = document.documentElement.dataset.motionVideo === '1';
       const dialog = document.getElementById('motion-intro');
       const video = dialog.querySelector('video');
@@ -1936,6 +1938,7 @@
         if (!Number.isFinite(video.duration) || !video.duration) return;
         seek.value = Math.round(video.currentTime / video.duration * 1000);
         seek.style.setProperty('--progress', (Number(seek.value) / 10) + '%');
+        dialog.classList.toggle('is-end-title-visible', video.duration - video.currentTime <= 2.8);
         dialog.classList.toggle('is-ending', video.duration - video.currentTime <= .7);
       });
       seek.addEventListener('input', () => { seek.style.setProperty('--progress', (Number(seek.value) / 10) + '%'); if (Number.isFinite(video.duration)) video.currentTime = video.duration * Number(seek.value) / 1000; });
@@ -1944,7 +1947,7 @@
       video.addEventListener('error', close);
       const start = (withSound = false) => {
         clearTimeout(closingTimer);
-        dialog.classList.remove('is-ending', 'is-closing');
+        dialog.classList.remove('is-ending', 'is-closing', 'is-end-title-visible');
         video.muted = !withSound;
         updateSound();
         playButton.hidden = true;

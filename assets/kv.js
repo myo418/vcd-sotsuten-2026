@@ -279,7 +279,7 @@ void main(){
       }).observe(cv);
 
       // 動きを抑える設定なら、完成状態を一度だけ描いて終わり
-      if (NO_ANIM || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (NO_ANIM || document.documentElement.dataset.seminarReturn === '1' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         start = performance.now() - TOTAL * 1000;
         last = TOTAL;
         draw(TOTAL);
