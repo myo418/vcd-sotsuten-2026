@@ -1632,7 +1632,7 @@ body.home .kv-info__meta > :not(.kv-info__logo) { display: block; }
 
 /* 番号順の無造作配置には、絵と名前が重ならない高さを確保する。 */
 html[data-fruit-layout="scatter"] body.home .seminars-b { aspect-ratio: 1000 / 1250; }
-@media (max-width: 690px) { html[data-fruit-layout="scatter"] body.home .seminars-b { aspect-ratio: 1000 / 2300; } }
+@media (max-width: 690px) { html[data-fruit-layout="scatter"] body.home .seminars-b { aspect-ratio: 1000 / 2700; } }
 @media (min-width: 1001px) { .fruit-preview img { flex: 0 1 auto; width: auto; height: auto; min-height: 0; max-width: min(100%, calc(var(--preview-art-size, 390px) * var(--preview-scale, 1))); max-height: calc(var(--preview-art-size, 390px) * var(--preview-scale, 1)); } }
 
 /* 展示場所・配布物・ゼミ紹介の順に、独立した余白を取る。 */
