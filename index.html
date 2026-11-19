@@ -1606,8 +1606,8 @@
                   const cols = GRID_LAYOUT === 'grid3' ? 3 : GRID_LAYOUT === 'grid4' ? 4 : 5;
                   const rows = Math.ceil(order.length / cols), width = ({ 3: 28, 4: 21, 5: 18 })[cols];
                   const mobileWidth = desktopWidth * 1.4625;
-      const mobileCenters = [31, 69, 24, 51, 83, 30, 70, 19, 50, 81];
-      const mobileRows = [5, 6, 24, 33, 25, 49, 49, 72, 80, 72];
+      const mobileCenters = [31, 69, 21, 51, 83, 26, 66, 16, 50, 85];
+      const mobileRows = [10, 6, 24, 33, 29, 49, 49, 72, 73, 72];
       const mobileCenter = mobileCenters[rank];
       const p = SHORT_GRID ? [(i % cols + .5) * 100 / cols - width / 2, Math.floor(i / cols) * 100 / rows, width] : mobileBoard.matches ? [mobileCenter - mobileWidth / 2, mobileRows[rank], mobileWidth] : pic;
             a.style.left = p[0] + '%'; a.style.top = p[1] + '%'; a.style.width = p[2] + '%';
