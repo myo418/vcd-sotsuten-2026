@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
-<link rel="stylesheet" href="assets/style.css?v=20261119n">
+<link rel="stylesheet" href="assets/style.css?v=20261119o">
 <!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
      表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
 <script>
@@ -1843,7 +1843,7 @@
       <button class="video-section__play" type="button" aria-label="動画を再生">
         <img class="video-section__thumb" src="assets/img/motion-thumbnail.jpg" alt="" loading="lazy" width="480" height="854">
         <img class="video-section__fruit" src="assets/img/video-fruit.png?v=20261119n" alt="" loading="lazy" width="216" height="218">
-        <span class="video-section__icon" aria-hidden="true"></span>
+        <span class="video-section__icon" aria-hidden="true"><svg viewBox="0 0 52 54" focusable="false"><path d="M 12 7 C 11 6, 10 8, 10 11 C 10 20, 11 36, 10 44 C 10 47, 12 48, 15 46 C 23 41, 32 35, 41 29 C 44 27, 44 26, 41 24 C 33 19, 22 12, 14 8 Z"/></svg></span>
       </button>
       <p class="video-section__caption">もう一度動画を見る</p>
     </div>
@@ -1920,7 +1920,14 @@
       soundButton.addEventListener('click', () => { video.muted = !video.muted; updateSound(); });
       dialog.querySelector('.motion-intro__restart').addEventListener('click', () => { video.currentTime = 0; video.play().then(() => { playButton.hidden = true; }).catch(() => { playButton.hidden = false; }); });
       video.addEventListener('volumechange', updateSound);
-      const close = () => { if (dialog.open) dialog.close(); };
+      let closingTimer;
+      const close = () => {
+        if (!dialog.open || dialog.classList.contains('is-closing')) return;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) { dialog.close(); return; }
+        dialog.classList.add('is-closing');
+        closingTimer = setTimeout(() => { if (dialog.open) dialog.close(); }, 400);
+      };
+      dialog.addEventListener('cancel', (event) => { event.preventDefault(); close(); });
       dialog.querySelector('button').addEventListener('click', close);
       video.addEventListener('click', close);
       dialog.addEventListener('click', (event) => { if (event.target === dialog) close(); });
@@ -1936,7 +1943,8 @@
       playButton.addEventListener('click', () => video.play().then(() => { playButton.hidden = true; }).catch(() => {}));
       video.addEventListener('error', close);
       const start = (withSound = false) => {
-        dialog.classList.remove('is-ending');
+        clearTimeout(closingTimer);
+        dialog.classList.remove('is-ending', 'is-closing');
         video.muted = !withSound;
         updateSound();
         playButton.hidden = true;
