@@ -1381,7 +1381,7 @@ html[data-fruit-click="none"] body.home #student-works :is(.board a, .seminar-sc
   .fruit-preview h2 { margin: 0; font-size: clamp(16px, 2.5vh, 22px); line-height: 1.3; }
   .fruit-preview__english { display: block; font-size: clamp(11px, 1.5vh, 14px); font-style: italic; font-weight: 600; line-height: 1.3; }
   .fruit-preview p { flex-shrink: 0; width: 100%; margin: 0; font-size: clamp(14px, 1.7vh, 16px); line-height: 1.7; }
-  .fruit-preview .fruit-preview__description { box-sizing: border-box; min-height: var(--preview-description-height, 0px); padding-left: clamp(54px, 6vw, 86px); font-size: clamp(10px, 1.6vh, 14px); }
+  .fruit-preview .fruit-preview__description { box-sizing: border-box; min-height: var(--preview-description-height, 0px); padding-left: clamp(54px, 6vw, 86px); padding-right: 8%; font-size: clamp(10px, 1.6vh, 14px); }
   .fruit-preview .fruit-preview__feature:not([hidden]) { flex-shrink: 0; margin-bottom: clamp(12px, 3vh, 32px); }
   .fruit-preview__feature { min-height: var(--preview-feature-height, 3.4em); }
   .fruit-preview__art { flex: 0 0 var(--preview-art-size, min(43vh, 390px)); display: flex; align-items: center; justify-content: center; margin-bottom: clamp(8px, 2vh, 24px); }

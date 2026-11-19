@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
-<link rel="stylesheet" href="assets/style.css?v=20261119s">
+<link rel="stylesheet" href="assets/style.css?v=20261119t">
 <!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
      表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
 <script>
@@ -1569,8 +1569,8 @@
   const displayItems = SHORT_GRID ? ITEMS : [...ITEMS].sort((a, b) => SCATTER_ORDER.indexOf(a[0]) - SCATTER_ORDER.indexOf(b[0]));
   displayItems.forEach(([slug, name, originalPic, originalLab]) => {
     const rank = SCATTER_ORDER.indexOf(slug);
-    const desktopCenters = [26, 55, 80, 12, 37, 62, 87, 23, 52, 83];
-    const desktopRows = [10, 11, 7, 37, 36, 37, 39, 61, 65, 64];
+    const desktopCenters = [28, 55, 80, 12, 37, 62, 87, 25, 52, 83];
+    const desktopRows = [10, 11, 7, 37, 36, 37, 39, 61, 68, 64];
     const sizeBoost = ['kitazaki', 'shirai', 'terayama'].includes(slug) ? 1.2 : ['nakano', 'sawada'].includes(slug) ? 1.1 : 1;
     const desktopWidth = (rank >= 3 && rank <= 6 ? Math.min(originalPic[2], 22) : originalPic[2]) * sizeBoost;
     const pic = SHORT_GRID ? originalPic : [desktopCenters[rank] - desktopWidth / 2, desktopRows[rank], desktopWidth];
@@ -1605,8 +1605,8 @@
                   const i = order.indexOf(slug);
                   const cols = GRID_LAYOUT === 'grid3' ? 3 : GRID_LAYOUT === 'grid4' ? 4 : 5;
                   const rows = Math.ceil(order.length / cols), width = ({ 3: 28, 4: 21, 5: 18 })[cols];
-                  const mobileWidth = (rank === 5 ? 28 : MOBILE_ITEMS[slug][2] * ((rank >= 2 && rank <= 4) || rank >= 7 ? .9 : 1)) * sizeBoost;
-      const mobileCenters = [31, 69, 17, 50, 83, 30, 70, 17, 50, 83];
+                  const mobileWidth = desktopWidth * 1.1;
+      const mobileCenters = [31, 69, 20, 51, 83, 30, 70, 17, 50, 83];
       const mobileRows = [7, 8, 27, 30, 30, 51, 51, 73, 76, 73];
       const mobileCenter = mobileCenters[rank];
       const p = SHORT_GRID ? [(i % cols + .5) * 100 / cols - width / 2, Math.floor(i / cols) * 100 / rows, width] : mobileBoard.matches ? [mobileCenter - mobileWidth / 2, mobileRows[rank], mobileWidth] : pic;
