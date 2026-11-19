@@ -1841,22 +1841,8 @@
         <img src="assets/img/motion-thumbnail.jpg" alt="" loading="lazy" width="480" height="854">
         <span class="video-section__icon" aria-hidden="true"></span>
       </button>
-      <video class="video-section__video" controls playsinline preload="none" hidden aria-label="卒業・修了制作展のモーション動画">
-        <source src="assets/video/web-motion-20261111.mp4?v=20261111" type="video/mp4">
-      </video>
     </div>
   </section>
-  <script>
-    (() => {
-      const section = document.querySelector('.video-section');
-      const button = section.querySelector('.video-section__play');
-      const video = section.querySelector('.video-section__video');
-      button.addEventListener('click', () => {
-        button.hidden = true; video.hidden = false;
-        video.play().catch(() => {});
-      });
-    })();
-  </script>
 
 </main>
 
@@ -1919,7 +1905,7 @@
         } catch (e) { return false; }
       };
       const skipOpening = consumeSeminarReturn();
-      if (document.documentElement.dataset.motionVideo !== '1') return;
+      const openingEnabled = document.documentElement.dataset.motionVideo === '1';
       const dialog = document.getElementById('motion-intro');
       const video = dialog.querySelector('video');
       const playButton = dialog.querySelector('.motion-intro__play');
@@ -1944,9 +1930,9 @@
       video.addEventListener('ended', close);
       playButton.addEventListener('click', () => video.play().then(() => { playButton.hidden = true; }).catch(() => {}));
       video.addEventListener('error', close);
-      const start = () => {
+      const start = (withSound = false) => {
         dialog.classList.remove('is-ending');
-        video.muted = true;
+        video.muted = !withSound;
         updateSound();
         playButton.hidden = true;
         seek.value = 0;
@@ -1956,9 +1942,10 @@
         video.currentTime = 0;
         video.play().catch(() => { playButton.hidden = false; }); // 自動再生できない場合のみ再生ボタンを表示
       };
-      if (!skipOpening) start();
+      document.querySelector('.video-section__play').addEventListener('click', () => start(true));
+      if (openingEnabled && !skipOpening) start();
       addEventListener('pageshow', (event) => {
-        if (!event.persisted) return;
+        if (!openingEnabled || !event.persisted) return;
         if (consumeSeminarReturn()) { close(); return; }
         start();
       });
