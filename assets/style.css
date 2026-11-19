@@ -353,7 +353,8 @@ html[data-kv1] body.home .kv.has-art-pos::after { top: calc(min(var(--kv-art-bot
   border-radius: 50%;
   font-size: .76em;
   line-height: 1;
-  vertical-align: .08em;
+  vertical-align: .18em;
+  letter-spacing: 0;
 }
 
 /* KV のアニメーションが終わってから下からスライド＋フェードで出す（タイミングは kv.js の CATCH_DELAY） */
