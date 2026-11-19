@@ -1739,3 +1739,13 @@ body.home .home-campus[data-dir="west-higashi"] .place__bld:hover { background: 
 @media (min-width: 1001px) {
   html[data-design="d"]:is([data-kvd="3"], [data-kvd="4"]) .fruit-preview { left: auto; right: 0; }
 }
+
+/* ゼミ紹介の後に、再生操作付きの動画を置く。 */
+body.home .video-section { gap: 24px; padding-block: 0 var(--home-block-gap); }
+.video-section__player { width: min(320px, 100%); }
+.video-section__play { position: relative; display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.video-section__play img, .video-section__video { display: block; width: 100%; height: auto; }
+.video-section__play[hidden], .video-section__video[hidden] { display: none; }
+.video-section__icon { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; border-radius: 50%; background: rgb(0 0 0 / .55); transform: translate(-50%, -50%); }
+.video-section__icon::after { content: ''; position: absolute; top: 50%; left: 53%; transform: translate(-50%, -50%); border-top: 11px solid transparent; border-bottom: 11px solid transparent; border-left: 17px solid white; }
+.video-section__play:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
