@@ -179,7 +179,8 @@ void main(){
     const cs = getComputedStyle(cv.closest('.kv') || cv);
     const zoom = parseFloat(cs.getPropertyValue('--kv-zoom')) || 1;
     const sx = parseFloat(cs.getPropertyValue('--kv-shift'));
-    const s = Math.min(w / (EW * FIT), h / (EH * FIT)) * zoom; // 画像1pxあたりの画面px
+    const fitHeight = cs.getPropertyValue('--kv-fit-viewport').trim() === '1' ? Math.min(h, window.innerHeight * dpr) : h;
+    const s = Math.min(w / (EW * FIT), fitHeight / (EH * FIT)) * zoom; // 画像1pxあたりの画面px
     const free = (w - EW * s) / 2;                      // 左右に余っている量
     // 絵が画面外に出ないように制限（はみ出させる倍率のときは制限しない）
     const shift = zoom > 1 ? (isNaN(sx) ? 0 : sx) * dpr : Math.max(-free, Math.min(free, (isNaN(sx) ? SHIFT_X : sx) * dpr));
