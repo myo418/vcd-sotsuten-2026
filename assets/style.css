@@ -1790,3 +1790,7 @@ html[data-video-style="thumbnail"] .video-section__caption { display: none; }
   .fruit-preview > :is(.fruit-preview__header, .fruit-preview__feature, .fruit-preview__art, .fruit-preview__description) { transition: opacity .16s ease; }
   .fruit-preview.is-changing > :is(.fruit-preview__header, .fruit-preview__feature, .fruit-preview__art, .fruit-preview__description) { opacity: 0; }
 }
+
+@media (max-width: 690px) {
+  html[data-video-style="fruit"] body.home .video-section__player { width: min(128px, 100%); }
+}
