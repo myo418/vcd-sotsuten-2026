@@ -843,7 +843,7 @@ html[data-works-layout="2"] body:not(.home) .site-footer__inner::before { conten
 }
 
 @media (max-width: 690px) {
-  :root { --gutter: 20px; }
+  :root { --gutter: 30px; }
   /* KV：スマホでは絵が横幅いっぱいで高さが余るので、枠を絵の高さに寄せて開催情報との間を詰める（絵は枠に収まるように描かれる。2026-10-21） */
   .kv { min-height: 0; height: min(100svh, 112vw); }
   /* ステートメントの上：大田ゼミの実（above .lead__img。高さ 280px ほど）が開催情報に寄りすぎないよう、上の余白を広く取る */
@@ -1655,3 +1655,14 @@ html[data-top-layout="1"] body.home .layout1-handouts img[data-dm-mock] { width:
 /* 透過・整列のリーフレットは、画像内の余白を考慮して大きく表示する。 */
 html[data-handout-mock="aligned"] body.home .handout img[data-leaflet-mock],
 html[data-handout-mock="aligned"][data-top-layout="1"] body.home .layout1-handouts img[data-leaflet-mock] { width: 130%; max-width: none; }
+
+/* 画面幅が狭いPCでも、固定KVと右列の文字の間を空ける。 */
+@media (min-width: 1001px) {
+  html[data-design="d"]:not([data-kvd="3"]):not([data-kvd="4"]) body.home main { padding-left: calc(var(--kvd-col) + 40px); }
+  html[data-design="d"]:not([data-kvd="3"]):not([data-kvd="4"]) body.home .site-footer { margin-left: calc(var(--kvd-col) + 40px); }
+}
+/* フロア案内は、閉じるボタンと最初の図面の上の余白を詰める。 */
+.floor-guide-card { padding-top: 8px; }
+.floor-guide-card header { padding-block: 0; }
+.floor-guide-floor { margin-top: 8px; }
+@media (min-width: 901px) { .floor-guide-floor + .floor-guide-floor { margin-top: 8px; } }
