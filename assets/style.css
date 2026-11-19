@@ -1684,3 +1684,28 @@ html[data-handout-mock="aligned"][data-top-layout="1"] body.home .layout1-handou
   html[data-design="d"] body.home .home-campus .floor-guide-buildings { grid-column: 1 !important; grid-row: 3; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 4px 0 0 !important; }
   html[data-design="d"] body.home .home-campus .floor-guide-buildings button { border-radius: 999px; text-align: center; padding: .4em .8em; }
 }
+
+/* KVの右上には大学ロゴを置かない。 */
+body.home .kv__logo { display: none; }
+/* 中間幅の縦配置はスマホと同じようにKVの直後にタイトルを置く。 */
+@media (min-width: 691px) and (max-width: 1000px) {
+  body.home .kv-info { margin-top: 0; padding-top: 0; }
+}
+/* 狭めの画面ではKV下端を背景に溶かす。スマホの既存設定はそのまま。 */
+@media (min-width: 691px) and (max-width: 1280px) {
+  body.home .kv::after {
+    content: ""; position: absolute; inset: auto 0 0; height: 14%; z-index: 1; pointer-events: none;
+    background: linear-gradient(to bottom, rgb(var(--c-bg-rgb) / 0), var(--c-bg));
+  }
+}
+
+@media (min-width: 691px) and (max-width: 1280px) {
+  body.home .kv.has-art-pos::after,
+  html[data-kvfade] body.home .kv.has-art-pos::after,
+  html[data-kv1] body.home .kv.has-art-pos::after {
+    top: calc(min(var(--kv-art-bottom), 100%) - var(--kv-art-h) * .14);
+    bottom: auto;
+    height: calc(100% - min(var(--kv-art-bottom), 100%) + var(--kv-art-h) * .14);
+    background: linear-gradient(to bottom, rgb(var(--c-bg-rgb) / 0), rgb(var(--c-bg-rgb) / .25) calc(var(--kv-art-h) * .055), var(--c-bg) calc(var(--kv-art-h) * .1));
+  }
+}
