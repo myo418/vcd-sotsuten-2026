@@ -1764,6 +1764,6 @@ body.home .video-section { gap: 40px; padding-block: 0 var(--home-block-gap); }
 html[data-video-style="fruit"] .video-section__player { width: min(160px, 100%); }
 html[data-video-style="fruit"] .video-section__thumb,
 html[data-video-style="thumbnail"] .video-section__fruit { display: none; }
-.video-section__icon { background: transparent; border: 0; color: var(--c-bg); }
+.video-section__icon { background: transparent; border: 0; color: var(--c-bg); transition: color .25s ease; }
 .video-section__icon::after { border-left-color: currentColor; }
 body.home .video-section__player { margin-inline: auto; }
