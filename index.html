@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
-<link rel="stylesheet" href="assets/style.css?v=20261120b">
+<link rel="stylesheet" href="assets/style.css?v=20261120c">
 <!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
      表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
 <script>
@@ -1895,9 +1895,8 @@
     <button class="motion-intro__sound" type="button" aria-pressed="false" aria-label="音をオン"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6a8 8 0 0 1 0 12" class="sound-waves"/><path d="M16 9l5 6m0-6-5 6" class="sound-muted"/></svg></button>
     <button class="motion-intro__restart" type="button" aria-label="最初から再生"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5v6h6M4.5 11a8 8 0 1 1 .7 5"/></svg></button>
     <video class="motion-intro__video" playsinline muted preload="none" tabindex="-1" aria-label="卒業・修了制作展のモーション動画">
-      <source src="assets/video/web-motion-20261119.mp4?v=20261119" type="video/mp4">
+      <source src="assets/video/opening-motion-20261120.mp4" type="video/mp4">
     </video>
-    <span class="motion-intro__end-title" aria-hidden="true">実りの、その先へ。</span>
     <input class="motion-intro__seek" type="range" min="0" max="1000" value="0" aria-label="動画の再生位置">
     <button class="motion-intro__play" type="button" hidden>動画を再生</button>
   </dialog>
@@ -1938,19 +1937,17 @@
         if (!Number.isFinite(video.duration) || !video.duration) return;
         seek.value = Math.round(video.currentTime / video.duration * 1000);
         seek.style.setProperty('--progress', (Number(seek.value) / 10) + '%');
-        dialog.classList.toggle('is-end-title-visible', dialog.dataset.teaser !== '1' && video.duration - video.currentTime <= 2.8);
         dialog.classList.toggle('is-ending', video.duration - video.currentTime <= .7);
       });
       seek.addEventListener('input', () => { seek.style.setProperty('--progress', (Number(seek.value) / 10) + '%'); if (Number.isFinite(video.duration)) video.currentTime = video.duration * Number(seek.value) / 1000; });
       video.addEventListener('ended', close);
       playButton.addEventListener('click', () => video.play().then(() => { playButton.hidden = true; }).catch(() => {}));
       video.addEventListener('error', close);
-      const start = (withSound = false, teaser = false) => {
-        const source = teaser ? 'assets/video/sns-motion-20261119.mp4' : 'assets/video/web-motion-20261119.mp4?v=20261119';
+      const start = (withSound = false) => {
+        const source = 'assets/video/opening-motion-20261120.mp4';
         if (video.getAttribute('src') !== source) { video.src = source; video.load(); }
-        dialog.dataset.teaser = teaser ? '1' : '0';
         clearTimeout(closingTimer);
-        dialog.classList.remove('is-ending', 'is-closing', 'is-end-title-visible');
+        dialog.classList.remove('is-ending', 'is-closing');
         video.muted = !withSound;
         updateSound();
         playButton.hidden = true;
@@ -1961,7 +1958,7 @@
         video.currentTime = 0;
         video.play().catch(() => { playButton.hidden = false; }); // 自動再生できない場合のみ再生ボタンを表示
       };
-      document.querySelector('.video-section__play').addEventListener('click', () => start(true, true));
+      document.querySelector('.video-section__play').addEventListener('click', () => start(true));
       if (openingEnabled && !skipOpening) start();
       addEventListener('pageshow', (event) => {
         if (!openingEnabled || !event.persisted) return;

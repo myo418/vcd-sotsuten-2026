@@ -1210,8 +1210,6 @@ html[data-catalog-photo="no"] body.home .handout--catalog figcaption { margin-to
 .motion-intro.is-ending { opacity: 0; }
 .motion-intro.is-ending::backdrop { background: rgb(0 0 0 / 0); }
 .motion-intro__video { display: block; width: 100%; height: 100%; object-fit: cover; }
-.motion-intro__end-title { position: absolute; inset: 0; display: grid; place-items: center; color: white; font: 500 clamp(20px, 5vw, 30px)/1.4 "Zen Kaku Gothic New", sans-serif; letter-spacing: .08em; opacity: 0; pointer-events: none; transition: opacity .55s ease; }
-.motion-intro.is-end-title-visible .motion-intro__end-title { opacity: 1; }
 .motion-intro__close { position: absolute; z-index: 1; top: 8px; right: -36px; width: 26px; height: 26px; border: 0; background: transparent; color: rgb(255 255 255 / .7); font: 600 18px/1 sans-serif; cursor: pointer; }
 .motion-intro__close:focus-visible { outline: 1px solid rgb(255 255 255 / .5); outline-offset: 2px; }
 .motion-intro__sound { position: absolute; z-index: 1; top: 12px; left: 12px; display: grid; place-items: center; width: 36px; height: 36px; padding: 7px; border: 0; border-radius: 999px; background: rgb(0 0 0 / .45); color: #fff; cursor: pointer; }
