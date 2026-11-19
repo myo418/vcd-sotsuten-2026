@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
-<link rel="stylesheet" href="assets/style.css?v=20261119c">
+<link rel="stylesheet" href="assets/style.css?v=20261119e">
 <!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
      表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
 <script>
@@ -1279,7 +1279,7 @@
       var DIRS = {
         north: { src: 'assets/img/map/campus-north.png?v=1109y', w: 1307, h: 1026, baseW: 1227, baseH: 1026, pos: {
           '12号館': [26, 25.4, 10.4, 15], '8号館': [61.7, 26.6, 2.6, 12.3], '9号館': [65.4, 27, 7.3, 22.5], '10号館': [74.3, 26.5, 15.5, 13], '10号館前芝生': [74.5, 39.9, 15.1, 9.7], '美術館前芝生': [39.5, 51.5, 11, 18] } },
-        'west-higashi': { src: 'assets/img/map/campus-west-higashi.svg', w: 867, h: 1057, baseW: 867, baseH: 1057, pos: { '12号館': [60.5, 24.5, 13, 12.6], '8号館': [60.5, 40.2, 13, 21], '9号館': [49.5, 66, 23.8, 7.2], '10号館': [60.5, 75.2, 13, 15.5], '10号館前芝生': [49.5, 74.5, 10, 15], '美術館前芝生': [19.5, 25.5, 27, 25] } },
+        'west-higashi': { src: 'assets/img/map/hover/campus-1.png', w: 1664, h: 2457, baseW: 1664, baseH: 2457, pos: { '12号館': [63, 32, 14, 10], '8号館': [63, 44, 14, 19], '9号館': [51, 66, 24, 7], '10号館': [63, 73, 14, 16], '10号館前芝生': [51, 80, 12, 7], '美術館前芝生': [30, 39, 14, 10] } },
         west: { src: 'assets/img/map/campus-west.png?v=1109u', w: 1106, h: 1307, baseW: 1026, baseH: 1227, pos: {
           '12号館': [60.5, 26, 13, 11.5], '8号館': [61.2, 61.7, 12.2, 2.6], '9号館': [50.5, 65.4, 22.5, 7.3], '10号館': [60.5, 74.3, 13, 15.5], '10号館前芝生': [50.5, 74.5, 9.5, 15.1], '美術館前芝生': [30.5, 39.5, 18, 11] } }
       };
@@ -1295,6 +1295,17 @@
         var p = d.pos[b.dataset.building];
         if (p) { b.style.left = (p[0] * d.baseW / d.w) + '%'; b.style.top = (p[1] * d.baseH / d.h) + '%'; b.style.width = (p[2] * d.baseW / d.w) + '%'; b.style.height = (p[3] * d.baseH / d.h) + '%'; }
       });
+      // 新しい地図は場所ごとに用意された画像へ切り替える。
+      if (dir === 'west-higashi') {
+        var states = { '12号館': 5, '8号館': 8, '9号館': 7, '10号館': 6, '10号館前芝生': 4, '美術館前芝生': 3 };
+        var base = d.src;
+        Object.values(states).forEach(function (n) { var preload = new Image(); preload.src = 'assets/img/map/hover/campus-' + n + '.png'; });
+        function show(button) { var n = button && states[button.dataset.building]; img.src = n ? 'assets/img/map/hover/campus-' + n + '.png' : base; }
+        fig.addEventListener('mouseover', function (e) { var button = e.target.closest('[data-building]'); if (button && fig.contains(button)) show(button); });
+        fig.addEventListener('mouseout', function (e) { var button = e.target.closest('[data-building]'); if (button && !button.contains(e.relatedTarget)) show(null); });
+        fig.addEventListener('focusin', function (e) { var button = e.target.closest('[data-building]'); if (button) show(button); });
+        fig.addEventListener('focusout', function (e) { if (e.target.closest('[data-building]')) show(null); });
+      }
     })();
     </script>
     <!-- campus-map:end -->
