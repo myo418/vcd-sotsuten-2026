@@ -1734,3 +1734,8 @@ body.home .home-campus[data-dir="west-higashi"] .place__bld:hover { background: 
   .floor-guide-floors { gap: 0; align-items: stretch; }
   .floor-guide-floor + .floor-guide-floor { margin-top: 8px; margin-left: 16px; padding-top: 0; padding-left: 16px; border-top: 0; border-left: 1px solid rgb(var(--paper-rgb) / .45); }
 }
+
+/* 左列をスクロールする案では、ゼミ解説を右のKV側に表示する。 */
+@media (min-width: 1001px) {
+  html[data-design="d"]:is([data-kvd="3"], [data-kvd="4"]) .fruit-preview { left: auto; right: 0; }
+}
