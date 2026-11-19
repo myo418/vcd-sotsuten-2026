@@ -1719,3 +1719,8 @@ body.home .kv__logo { display: none; }
 @media (min-width: 1001px) {
   html[data-design="d"] body.home .kv-info { min-height: 100svh; justify-content: center; padding-block: 0; }
 }
+
+/* 配布物のテキスト表示では、各項目の画像を隠して見出しと本文を揃える。 */
+html[data-handout-mock="text"] body.home .handout :is(img, .handout__photos),
+html[data-handout-mock="text"] body.home .layout1-handouts :is(img, .handout__photos, .catalog-carousel) { display: none; }
+html[data-handout-mock="text"][data-top-layout="1"] body.home .layout1-handouts figcaption { padding-top: 0; }
