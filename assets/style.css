@@ -1671,3 +1671,16 @@ html[data-handout-mock="aligned"][data-top-layout="1"] body.home .layout1-handou
 @media (min-width: 691px) and (max-width: 1000px) {
   html[data-top-layout="1"] body.home { --layout1-content-max: 100%; }
 }
+
+/* 中間的なPC幅では、固定KVと右列は維持しつつ右列内を1列にする。 */
+@media (min-width: 1001px) and (max-width: 1280px) {
+  html[data-design="d"][data-top-layout="1"] body.home { --layout1-content-max: 100%; }
+  html[data-design="d"][data-top-layout="1"] body.home .layout1-row { grid-template-columns: minmax(0, 1fr); row-gap: 6px; }
+  html[data-design="d"][data-top-layout="1"] body.home .layout1-row > :is(h3, dt) { text-align: left; }
+  html[data-design="d"][data-top-layout="1"][data-greet="1"] body.home #greeting { grid-template-columns: minmax(0, 1fr); row-gap: 12px; }
+  html[data-design="d"][data-top-layout="1"][data-greet="1"] body.home #greeting :is(.section__title, .section__byline, .section__body) { grid-column: 1; grid-row: auto; text-align: left; }
+  html[data-design="d"] body.home .home-campus { grid-template-columns: minmax(0, 1fr) !important; }
+  html[data-design="d"] body.home .home-campus .place__mapbox { grid-column: 1 !important; grid-row: 2; }
+  html[data-design="d"] body.home .home-campus .floor-guide-buildings { grid-column: 1 !important; grid-row: 3; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 4px 0 0 !important; }
+  html[data-design="d"] body.home .home-campus .floor-guide-buildings button { border-radius: 999px; text-align: center; padding: .4em .8em; }
+}
