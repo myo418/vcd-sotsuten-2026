@@ -1666,3 +1666,8 @@ html[data-handout-mock="aligned"][data-top-layout="1"] body.home .layout1-handou
 .floor-guide-card header { padding-block: 0; }
 .floor-guide-floor { margin-top: 8px; }
 @media (min-width: 901px) { .floor-guide-floor + .floor-guide-floor { margin-top: 8px; } }
+
+/* 中間幅では本文を列内に収め、右側の余白を保つ。 */
+@media (min-width: 691px) and (max-width: 1000px) {
+  html[data-top-layout="1"] body.home { --layout1-content-max: 100%; }
+}
