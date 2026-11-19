@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
-<link rel="stylesheet" href="assets/style.css?v=20261119h">
+<link rel="stylesheet" href="assets/style.css?v=20261119j">
 <!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
      表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
 <script>
@@ -75,6 +75,7 @@
     if (['grid3', 'grid4', 'grid5'].includes(fruitLayout)) h.worksGrid = '1';
     if (fruitHover === 'linked' || fruitClick === 'seminar' || fruitClick === 'mobile') h.worksLinked = '1';
     if (p.get('campus-map') === 'no') h.nocampus = '';
+    h.videoStyle = p.get('video-style') === 'thumbnail' ? 'thumbnail' : 'fruit';
     h.catalogPhoto = 'no';
     // Template 1 は動画あり、Template 2 はなし。明示的な指定を優先。
     var mv = p.get('motion-video');
@@ -546,6 +547,7 @@
     <div class="sw" id="sw-statement" style="display:none"><span class="label">ステートメント</span></div>
     <div class="sw" id="sw-statement-size" style="display:none"><span class="label">ステートメントの大きさ</span></div>
     <div class="sw" id="sw-motion-video" style="display:none"><span class="label">モーション動画</span></div>
+    <div class="sw" id="sw-video-style" style="display:none"><span class="label">動画</span></div>
     <div class="sw" id="sw-dm-mock" style="display:none"><span class="label">配布物</span></div>
     <div class="sw" id="sw-heading-size" style="display:none"><span class="label">見出しサイズ</span></div>
     <div class="sw" id="sw-greeting" style="display:none"><span class="label">ご挨拶</span></div>
@@ -786,6 +788,7 @@
       row('sw-greeting', ['1', '2', '3'], 'greeting', isOneColumn ? '2' : '1', (k) => ({ '1': '白抜き', '2': '白背景', '3': '便箋' }[k]));
       { const motionDefault = ['2', '4'].includes(tpl) ? 'no' : '1';
         row('sw-motion-video', ['no', '1'], 'motion-video', motionDefault, (k) => k === '1' ? 'あり' : 'なし'); }
+      row('sw-video-style', ['thumbnail', 'fruit'], 'video-style', 'fruit', (k) => ({ thumbnail: '縦長サムネイル', fruit: 'にじみの実' }[k]));
       row('sw-dm-mock', ['text', 'white', 'red', 'aligned', 'transparent'], 'dm-mock', 'text', (k) => ({ text: 'テキスト', white: '実写・白背景', red: '実写・赤背景', aligned: '透過・整列', transparent: '透過・斜め重ね' }[k]));
       row('sw-heading-size', ['tiny', 'small', 'normal', 'large'], 'heading-size', 'normal', (k) => ({ tiny: '最小', small: '小', normal: '標準', large: '大' }[k]));
       const tb = document.getElementById('sw-template'); tb.style.display = '';
@@ -797,7 +800,7 @@
         ['sw-white', 'sw-bg', 'sw-sidebar', 'sw-layout', 'sw-top-layout', 'sw-kv-size', 'sw-heading-size', 'sw-motion-video', 'sw-kv-anim', 'sw-kv-speed', 'sw-kv-fade',
          'sw-fruit-deco', 'sw-mobile-fruit-deco', 'sw-statement', 'sw-statement-size', 'sw-greeting', 'sw-campus-map', 'sw-campus-btn',
          'sw-works', 'sw-fruit-hover', 'sw-fruit-click', 'sw-fruit-anim',
-         'sw-dm-mock', 'sw-template'].forEach((id) => container.append(document.getElementById(id)));
+         'sw-dm-mock', 'sw-video-style', 'sw-template'].forEach((id) => container.append(document.getElementById(id)));
       }
     }
   })();
@@ -1838,7 +1841,8 @@
     <div class="section__head"><h2 class="section__title">動画</h2></div>
     <div class="video-section__player">
       <button class="video-section__play" type="button" aria-label="動画を再生">
-        <img src="assets/img/motion-thumbnail.jpg" alt="" loading="lazy" width="480" height="854">
+        <img class="video-section__thumb" src="assets/img/motion-thumbnail.jpg" alt="" loading="lazy" width="480" height="854">
+        <img class="video-section__fruit" src="assets/img/video-fruit.png" alt="" loading="lazy" width="204" height="205">
         <span class="video-section__icon" aria-hidden="true"></span>
       </button>
     </div>
