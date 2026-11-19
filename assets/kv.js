@@ -46,8 +46,8 @@
   const IMG = {
     // 2026-10-28 に キービジュアル/1009 の絵へ差し替え（?v= はブラウザの古い絵のキャッシュよけ。絵を変えたら上げる。web/key-visual/kv5/_work/build.py で作る。前の絵は key-visual/kv4/）
     // 左上の「背景色」の暖色2案は、対応する水彩KV（bg2）を使う。bg3専用素材が届くまでは bg2 を暫定利用する。
-    bg:    ['2', '3'].includes(document.documentElement.dataset.bg) ? 'assets/img/kv/kv-bg2.jpg?v=1103' : 'assets/img/kv/kv-bg.jpg?v=1009', // 1913×2461
-    lines: 'assets/img/kv/kv-lines.png?v=1009', // 1913×2461
+    bg:    ['2', '3'].includes(document.documentElement.dataset.bg) ? 'assets/img/kv/kv-bg2.jpg?v=20261120g' : 'assets/img/kv/kv-bg.jpg?v=1009', // 1913×2461
+    lines: 'assets/img/kv/kv-lines.png?v=20261120g', // 1913×2461
     time:  VERTICAL ? 'assets/img/kv/kv-time-top.png?v=1103' : ANIM_B ? 'assets/img/kv/kv-time-b.png?v=1009b' : 'assets/img/kv/kv-time.png?v=1009',
     text:  'assets/img/kv/kv-text.png?v=1102',  // 1913×2461（キャッチの文字だけ・透過）
     alpha: 'assets/img/kv/kv-bg-alpha.png?v=1009', // 1913×2461（にじみの不透明度。赤い地を透かすときだけ使う）

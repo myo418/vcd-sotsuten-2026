@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
-<link rel="stylesheet" href="assets/style.css?v=20261120f">
+<link rel="stylesheet" href="assets/style.css?v=20261120g">
 <!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
      表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
 <script>
@@ -502,11 +502,12 @@
     /* 閉じたときは「＋」だけの小さい丸（文字を隠し、薄く。2026-10-28） */
     .sws:not(.is-open) .sw-toggle { width: 28px; height: 28px; padding: 0; gap: 0; justify-content: center; font-size: 0; letter-spacing: 0; background: rgba(163, 39, 24, .55); opacity: .7; }
     /* 「＋」は文字だとフォントで上下にずれるので、線 2 本で描いて丸の真ん中に置く（gap も 0 に。隠した文字との間があくと右にずれる。2026-10-29） */
+    .sws:not(.is-open) .sw-toggle > span { display: none; }
     .sws:not(.is-open) .sw-toggle::after { content: ''; width: 10px; height: 10px; background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat, linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat; }
     .sws:not(.is-open) .sw-toggle:hover { opacity: 1; }
   </style>
-  <div class="sws is-open" id="sws">
-    <button type="button" class="sw-toggle" id="sw-toggle" aria-expanded="true" aria-controls="sws">設定</button>
+  <div class="sws" id="sws">
+    <button type="button" class="sw-toggle" id="sw-toggle" aria-label="設定を開く" aria-expanded="false" aria-controls="sws"><span>設定</span></button>
     <div class="sw" id="sw-design"><span class="label">デザイン</span></div>
     <!-- 白の案（?white=1〜3。2 が既定）。文字・白地・便箋に使う白を比べる -->
     <div class="sw" id="sw-white"><span class="label">白</span></div>
@@ -836,9 +837,8 @@
         channel.onmessage = (e) => { if (e.data === 'playing' || e.data === 'ended') showMotion(e.data === 'playing'); };
       } else showMotion(false);
     } catch (e) {}
-    const set = (open) => { box.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', open); if (open) setTimeout(fitPanel, 1000); };
-    let open = true;
-    try { open = sessionStorage.getItem(KEY) !== '0'; } catch (e) {}
+    const set = (open) => { box.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', open); btn.setAttribute('aria-label', open ? '設定を閉じる' : '設定を開く'); if (open) setTimeout(fitPanel, 1000); };
+    let open = false;
     set(open);
     btn.addEventListener('click', () => { open = !open; set(open); try { sessionStorage.setItem(KEY, open ? '1' : '0'); } catch (e) {} });
   })();
@@ -1335,7 +1335,7 @@
         </figcaption>
       </figure>
       <figure class="handout">
-        <img data-leaflet-mock src="assets/img/handouts/leaflet-webred-overlap.png" alt="リーフレット（仮イメージ）"
+        <img data-leaflet-mock src="assets/img/handouts/leaflet-webred-overlap.png?v=20261120g" alt="リーフレット（仮イメージ）"
              loading="lazy" width="1600" height="1200">
         <figcaption>
           <p class="handout__name">リーフレット</p>
@@ -1343,7 +1343,7 @@
         </figcaption>
       </figure>
       <figure class="handout">
-        <img data-dm-mock src="assets/img/handouts/dm-black-shadow-overlap.png" alt="DM（仮イメージ）"
+        <img data-dm-mock src="assets/img/handouts/dm-black-shadow-overlap.png?v=20261120g" alt="DM（仮イメージ）"
              loading="lazy" width="1536" height="1024">
         <figcaption>
           <p class="handout__name">DM</p>
@@ -1358,21 +1358,21 @@
       </figure>
       <figure class="layout1-row">
         <h3>リーフレット</h3>
-        <figcaption><img data-leaflet-mock src="assets/img/handouts/leaflet-webred-overlap.png" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>10号館306教室、10号館412教室にて配布予定。</p></figcaption>
+        <figcaption><img data-leaflet-mock src="assets/img/handouts/leaflet-webred-overlap.png?v=20261120g" alt="リーフレット（仮イメージ）" loading="lazy" width="1600" height="1200"><p>10号館306教室、10号館412教室にて配布予定。</p></figcaption>
       </figure>
       <figure class="layout1-row">
         <h3>DM</h3>
-        <figcaption><img data-dm-mock src="assets/img/handouts/dm-black-shadow-overlap.png" alt="DM（仮イメージ）" loading="lazy" width="1536" height="1024"><p>10号館306教室、10号館412教室にて配布予定。</p></figcaption>
+        <figcaption><img data-dm-mock src="assets/img/handouts/dm-black-shadow-overlap.png?v=20261120g" alt="DM（仮イメージ）" loading="lazy" width="1536" height="1024"><p>10号館306教室、10号館412教室にて配布予定。</p></figcaption>
       </figure>
     </div>
     <script>
       const handoutMock = new URLSearchParams(location.search).get('dm-mock');
       document.documentElement.dataset.handoutMock = handoutMock || 'text';
       const handoutFiles = {
-        white: ['dm-webred-white.png', 'leaflet-webred-white.png'],
-        transparent: ['dm-black-shadow-overlap.png', 'leaflet-webred-overlap.png'],
-        aligned: ['dm-black-shadow-aligned.png', 'leaflet-webred-aligned.png'],
-        red: ['dm-flat-red.png', 'leaflet-flat-red.png']
+        white: ['dm-webred-white.png?v=20261120g', 'leaflet-webred-white.png?v=20261120g'],
+        transparent: ['dm-black-shadow-overlap.png?v=20261120g', 'leaflet-webred-overlap.png?v=20261120g'],
+        aligned: ['dm-black-shadow-aligned.png?v=20261120g', 'leaflet-webred-aligned.png?v=20261120g'],
+        red: ['dm-flat-red.png?v=20261120g', 'leaflet-flat-red.png?v=20261120g']
       };
       const [dmFile, leafletFile] = handoutFiles[handoutMock] || handoutFiles.transparent;
       document.querySelectorAll('[data-dm-mock]').forEach((img) => { img.src = 'assets/img/handouts/' + dmFile; });
@@ -1885,7 +1885,7 @@
   </div>
 </footer>
 
-<script src="assets/kv.js?v=20261120a" defer></script>
+<script src="assets/kv.js?v=20261120b" defer></script>
 <script src="assets/deco.js?v=20261116b" defer></script>
 <script src="assets/script.js?v=202611081240" defer></script>
 <script src="assets/fruit-features.js?v=20261109" defer></script>
@@ -1897,7 +1897,7 @@
     <button class="motion-intro__sound" type="button" aria-pressed="false" aria-label="音をオン"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6a8 8 0 0 1 0 12" class="sound-waves"/><path d="M16 9l5 6m0-6-5 6" class="sound-muted"/></svg></button>
     <button class="motion-intro__restart" type="button" aria-label="最初から再生"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5v6h6M4.5 11a8 8 0 1 1 .7 5"/></svg></button>
     <video class="motion-intro__video" playsinline muted preload="none" tabindex="-1" aria-label="卒業・修了制作展のモーション動画">
-      <source src="assets/video/opening-motion-20261120.mp4" type="video/mp4">
+      <source src="assets/video/opening-motion-20261120.mp4?v=20261120g" type="video/mp4">
     </video>
     <div class="motion-intro__loading" role="status" aria-label="動画を読み込み中"><span></span></div>
     <input class="motion-intro__seek" type="range" min="0" max="1000" value="0" aria-label="動画の再生位置">
@@ -1930,6 +1930,8 @@
       const close = () => {
         if (!dialog.open || dialog.classList.contains('is-closing')) return;
         if (matchMedia('(prefers-reduced-motion: reduce)').matches) { dialog.close(); return; }
+        video.pause();
+        dialog.classList.remove('is-loading');
         dialog.classList.add('is-closing');
         closingTimer = setTimeout(() => { if (dialog.open) dialog.close(); }, 400);
       };
@@ -1949,7 +1951,7 @@
       playButton.addEventListener('click', () => video.play().then(() => { playButton.hidden = true; }).catch(() => {}));
       video.addEventListener('error', () => { dialog.classList.remove('is-loading'); close(); });
       const start = (withSound = false) => {
-        const source = 'assets/video/opening-motion-20261120.mp4';
+        const source = 'assets/video/opening-motion-20261120.mp4?v=20261120g';
         if (video.getAttribute('src') !== source) { video.src = source; video.load(); }
         clearTimeout(closingTimer);
         dialog.classList.remove('is-ending', 'is-closing');
