@@ -1783,4 +1783,4 @@ html[data-video-style="thumbnail"] .video-section__caption { display: none; }
 /* 手描きの揺らぎを残した再生マーク。 */
 .video-section__icon::after { content: none; }
 .video-section__icon svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.video-section__icon path { fill: currentColor; stroke: white; stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.video-section__icon path { fill: currentColor; stroke: white; stroke-width: 1.1; stroke-linejoin: round; stroke-linecap: round; }
