@@ -1569,7 +1569,7 @@
   const displayItems = SHORT_GRID ? ITEMS : [...ITEMS].sort((a, b) => SCATTER_ORDER.indexOf(a[0]) - SCATTER_ORDER.indexOf(b[0]));
   displayItems.forEach(([slug, name, originalPic, originalLab]) => {
     const rank = SCATTER_ORDER.indexOf(slug);
-    const desktopCenters = [26, 55, 83, 12, 37, 62, 87, 23, 52, 83];
+    const desktopCenters = [26, 55, 86, 12, 37, 62, 87, 23, 52, 83];
     const desktopRows = [10, 11, 7, 37, 36, 37, 39, 61, 65, 64];
     const sizeBoost = ['kitazaki', 'shirai', 'terayama'].includes(slug) ? 1.2 : ['nakano', 'sawada'].includes(slug) ? 1.1 : 1;
     const desktopWidth = (rank >= 3 && rank <= 6 ? Math.min(originalPic[2], 22) : originalPic[2]) * sizeBoost;
