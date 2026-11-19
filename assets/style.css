@@ -1501,7 +1501,7 @@ body.home .home-campus[data-dir="north"] .place__mapbox { width: min(480px, 100%
 
 /* 展示場所のボタン：マウスを乗せる・キーで選ぶと白地に（文字は地の赤）。2026-11-08 */
 body.home .home-campus .floor-guide-buildings button { transition: background-color .15s, color .15s; }
-@media (hover: hover) { body.home .home-campus .floor-guide-buildings button:hover { background: rgb(var(--paper-rgb)); border-color: rgb(var(--paper-rgb)); color: var(--c-bg); } }
+@media (hover: hover) { body.home .home-campus .floor-guide-buildings button:is(:hover, .is-map-active) { background: rgb(var(--paper-rgb)); border-color: rgb(var(--paper-rgb)); color: var(--c-bg); } }
 body.home .home-campus .floor-guide-buildings button:focus-visible { background: rgb(var(--paper-rgb)); border-color: rgb(var(--paper-rgb)); color: var(--c-bg); outline: none; }
 
 /* スマホの本文とテキストリンクは14pxに揃える。 */
@@ -1556,7 +1556,7 @@ html:is([data-campus-btn="fill"], [data-campus-btn="fill-full"]) body.home .home
   background: rgb(var(--paper-rgb)); border-color: rgb(var(--paper-rgb)); color: var(--c-bg); font-weight: 700;
 }
 @media (hover: hover) {
-  html:is([data-campus-btn="fill"], [data-campus-btn="fill-full"]) body.home .home-campus .floor-guide-buildings button:hover { background: transparent; color: rgb(var(--paper-rgb)); }
+  html:is([data-campus-btn="fill"], [data-campus-btn="fill-full"]) body.home .home-campus .floor-guide-buildings button:is(:hover, .is-map-active) { background: transparent; color: rgb(var(--paper-rgb)); }
 }
 html:is([data-campus-btn="fill"], [data-campus-btn="fill-full"]) body.home .home-campus .floor-guide-buildings button:focus-visible {
   background: transparent; color: rgb(var(--paper-rgb)); outline: 2px solid rgb(var(--paper-rgb)); outline-offset: 3px;
@@ -1576,7 +1576,7 @@ html[data-campus-btn="edge"] body.home .home-campus .floor-guide-buildings butto
 }
 html[data-campus-btn="edge"] body.home .home-campus .floor-guide-buildings button:focus-visible { outline: 2px solid rgb(var(--paper-rgb)); outline-offset: 3px; }
 @media (hover: hover) {
-  html[data-campus-btn="edge"] body.home .home-campus .floor-guide-buildings button:hover {
+  html[data-campus-btn="edge"] body.home .home-campus .floor-guide-buildings button:is(:hover, .is-map-active) {
     background: rgb(var(--paper-rgb)); color: var(--c-bg); border-right-color: rgb(var(--paper-rgb));
   }
 }

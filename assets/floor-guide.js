@@ -1,6 +1,31 @@
 (() => {
   const guide = document.querySelector('.home-campus');
   if (!guide) return;
+  // 地図上の場所に対応するボタンにもホバー状態を反映する。
+  const mapbox = guide.querySelector('.place__mapbox');
+  const placeButtons = guide.querySelectorAll('.floor-guide-buildings button[data-building]');
+  let hoveredBuilding = null;
+  let focusedBuilding = null;
+  function syncMapButton() {
+    const building = hoveredBuilding || focusedBuilding;
+    placeButtons.forEach(button => button.classList.toggle('is-map-active', button.dataset.building === building));
+  }
+  mapbox.addEventListener('pointerover', event => {
+    if (event.pointerType === 'touch') return;
+    const target = event.target.closest('.place__bld[data-building]');
+    if (target) { hoveredBuilding = target.dataset.building; syncMapButton(); }
+  });
+  mapbox.addEventListener('pointerout', event => {
+    const target = event.target.closest('.place__bld[data-building]');
+    if (target && !target.contains(event.relatedTarget)) { hoveredBuilding = null; syncMapButton(); }
+  });
+  mapbox.addEventListener('focusin', event => {
+    const target = event.target.closest('.place__bld[data-building]');
+    if (target && target.matches(':focus-visible')) { focusedBuilding = target.dataset.building; syncMapButton(); }
+  });
+  mapbox.addEventListener('focusout', event => {
+    if (event.target.closest('.place__bld[data-building]')) { focusedBuilding = null; syncMapButton(); }
+  });
   const floors = {
     '8号館': [['3階', '8-3'], ['2階', '8-2']],
     '9号館': [['2階', '9-2'], ['1階', '9-1'], ['地下1階', '9-b1']],
