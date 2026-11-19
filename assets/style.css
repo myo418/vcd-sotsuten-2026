@@ -1714,3 +1714,8 @@ body.home .kv__logo { display: none; }
 @media (min-width: 691px) and (max-width: 1000px) {
   body.home .kv { min-height: 123svh; --kv-zoom: 1.3; --kv-shift: -80; --kv-fit-viewport: 1; }
 }
+
+/* 2列表示では開催情報を画面の高さに対して中央に置く。 */
+@media (min-width: 1001px) {
+  html[data-design="d"] body.home .kv-info { min-height: 100svh; justify-content: center; padding-block: 0; }
+}
