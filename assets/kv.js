@@ -16,7 +16,7 @@
 
   // ===== タイミング調整（秒）=====
   const SPEED = document.documentElement.dataset.kvSpeed === 'slow' ? 1 : .6;
-  const START_DELAY = 1.0; // KV が見えてから線画を描き始めるまで
+  const START_DELAY = 0; // KV が見えたらすぐ線画を描き始める
   const LINE_DUR  = 2.4 * SPEED;
   const GAP       = -0.2;  // 速度に関わらず、線が終わる少し前に塗りを開始
   const BG_DUR    = 2.8;   // 塗りの広がる時間は共通
@@ -252,11 +252,11 @@ void main(){
     cancelAnimationFrame(raf);
     start = performance.now() + START_DELAY * 1000; // 開始を START_DELAY 秒先に置く（それまでは 0 秒目＝赤い地）
     raf = requestAnimationFrame(frame);
-    // キャッチ（読み上げ用の HTML の印）と開催情報は絵の上の文字（TX0）と同じ時計で。イントロの終わりはどちらか遅い方が出きったとき
+    // キャッチ（読み上げ用の HTML の印）と開催情報は絵の上の文字（TX0）と同じ時計で。下部コンテンツは開催情報と同時に表示する
     [catchTimer, infoTimer, doneTimer].forEach(clearTimeout);
     catchTimer = setTimeout(showCatchText, (START_DELAY + TX0) * 1000);
     infoTimer = setTimeout(showInfo, (START_DELAY + INFO_AT) * 1000);
-    doneTimer = setTimeout(done, (START_DELAY + Math.max(TOTAL, INFO_AT + INFO_DUR)) * 1000);
+    doneTimer = setTimeout(done, (START_DELAY + INFO_AT) * 1000);
   };
 
   const blank = () => { const c = document.createElement('canvas'); c.width = c.height = 1; return c; };
