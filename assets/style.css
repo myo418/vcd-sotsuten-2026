@@ -1709,3 +1709,8 @@ body.home .kv__logo { display: none; }
     background: linear-gradient(to bottom, rgb(var(--c-bg-rgb) / 0), rgb(var(--c-bg-rgb) / .25) calc(var(--kv-art-h) * .055), var(--c-bg) calc(var(--kv-art-h) * .1));
   }
 }
+
+/* タブレット幅ではKVの絵を少し左へ寄せる。 */
+@media (min-width: 691px) and (max-width: 1000px) {
+  body.home .kv { --kv-shift: -80; }
+}
