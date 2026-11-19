@@ -1747,7 +1747,7 @@ body.home .video-section { gap: 24px; padding-block: 0 var(--home-block-gap); }
 .video-section__play img, .video-section__video { display: block; width: 100%; height: auto; }
 .video-section__play[hidden], .video-section__video[hidden] { display: none; }
 .video-section__icon { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; border-radius: 50%; background: rgb(0 0 0 / .55); transform: translate(-50%, -50%); }
-.video-section__icon::after { content: ''; position: absolute; top: 50%; left: 53%; transform: translate(-50%, -50%); border-top: 11px solid transparent; border-bottom: 11px solid transparent; border-left: 17px solid white; }
+.video-section__icon::after { content: ''; position: absolute; top: 50%; left: 53%; transform: translate(-50%, -50%); border-top: 17px solid transparent; border-bottom: 17px solid transparent; border-left: 26px solid white; }
 .video-section__play:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 
 /* 動画は再生マークだけを表示する。 */
@@ -1755,7 +1755,7 @@ body.home .video-section { gap: 24px; padding-block: 0 var(--home-block-gap); }
 .video-section__play { width: 60px; height: 60px; color: inherit; }
 .video-section__icon { background: transparent; border: 1px solid currentColor; }
 .video-section__icon::after { border-left-color: currentColor; }
-.video-section__play:hover .video-section__icon { background: rgb(var(--paper-rgb)); color: var(--c-bg); }
+.video-section__play:hover .video-section__icon { color: white; }
 
 /* 動画のサムネイルと実の再生ボタンを切り替える。 */
 .video-section__player { width: min(320px, 100%); }
@@ -1764,7 +1764,7 @@ body.home .video-section { gap: 24px; padding-block: 0 var(--home-block-gap); }
 html[data-video-style="fruit"] .video-section__player { width: min(160px, 100%); }
 html[data-video-style="fruit"] .video-section__thumb,
 html[data-video-style="thumbnail"] .video-section__fruit { display: none; }
-.video-section__icon { background: rgb(0 0 0 / .45); border: 0; color: white; }
+.video-section__icon { background: transparent; border: 0; color: var(--c-bg); }
 .video-section__icon::after { border-left-color: currentColor; }
 @media (min-width: 691px) {
   html[data-top-layout="1"] body.home .video-section__player { margin-left: calc(var(--layout1-label-col) + var(--layout1-column-gap)); max-width: calc(100% - var(--layout1-label-col) - var(--layout1-column-gap)); }
