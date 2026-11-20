@@ -20,7 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <!-- ?v= はキャッシュよけ（CSS・JS を変えたら上げる。works/ のページは studio-embed/local/page.template.html） -->
-<link rel="stylesheet" href="assets/style.css?v=20261120g">
+<link rel="stylesheet" href="assets/style.css?v=20261120h">
 <!-- KV の文字（キャッチ・大学名・タイトル・MAU ロゴ）を最初の描画から隠しておく。
      表示は kv.js が KV のアニメーションに合わせて行う。kv.js が動かなかったときのため 10 秒で必ず出す -->
 <script>
@@ -54,9 +54,12 @@
     h.kvorder = '2'; // 開催情報を先、キャッチを後に固定
     var an = p.get('kv-anim') || (simple ? 'no' : '2'); if (an === 'no') h.kvanim = '0'; else if (an !== '1') h.kvanim = an === '3' ? '3' : '2';
     h.kvSpeed = p.get('kv-speed') === 'slow' ? 'slow' : 'fast';
-    // PC とスマホの装飾は別々に設定する。Template 1 の既定は PC なし・スマホあり。
-    h.pcDeco = ['1', 'no'].includes(p.get('fruit-deco')) ? p.get('fruit-deco') : (t2 ? '1' : 'no');
+    // 装飾は実際のレイアウトに合わせ、1列では表示・2列では非表示を既定にする。
+    h.pcDeco = ['1', 'no'].includes(p.get('fruit-deco')) ? p.get('fruit-deco') : 'no';
     h.mobileDeco = ['1', 'no'].includes(p.get('mobile-fruit-deco')) ? p.get('mobile-fruit-deco') : '1';
+    var twoColumn = matchMedia('(min-width: 1001px)');
+    var updateDecoVisibility = function () { var isTwo = h.design === 'd' && twoColumn.matches; h.decoVisible = (isTwo ? h.pcDeco : h.mobileDeco) === 'no' ? '0' : '1'; };
+    updateDecoVisibility(); twoColumn.addEventListener('change', updateDecoVisibility);
     // 旧 works の指定も読みつつ、配置と操作を独立して選ぶ。
     var legacyWorks = p.get('works');
     var requestedFruitLayout = p.get('fruit-layout');
@@ -522,8 +525,8 @@
     <div class="sw" id="sw-kv-anim" style="display:none"><span class="label">キービジュアルの動き</span></div>
     <div class="sw" id="sw-kv-speed" style="display:none"><span class="label">キービジュアルの速度</span></div>
     <div class="sw" id="sw-fruit-anim" style="display:none"><span class="label">ゼ実の動き</span></div>
-    <div class="sw" id="sw-fruit-deco" style="display:none"><span class="label">装飾の実（パソコン）</span></div>
-    <div class="sw" id="sw-mobile-fruit-deco" style="display:none"><span class="label">装飾の実（スマホ）</span></div>
+    <div class="sw" id="sw-fruit-deco" style="display:none"><span class="label">装飾の実（2列）</span></div>
+    <div class="sw" id="sw-mobile-fruit-deco" style="display:none"><span class="label">装飾の実（1列）</span></div>
     <div class="sw" id="sw-works" style="display:none"><span class="label">ゼ実の配置</span></div>
     <div class="sw" id="sw-fruit-hover" style="display:none"><span class="label">ゼ実のマウスオーバー</span></div>
     <div class="sw" id="sw-fruit-click" style="display:none"><span class="label">ゼ実のタップ</span></div>
@@ -770,7 +773,7 @@
       row('sw-kv-anim', ['no', '1', '2', '3'], 'kv-anim', ['2', '4'].includes(tpl) ? 'no' : '2', (k) => ({ no: 'なし', '1': '中心から', '2': '上寄りから', '3': '最上部から' }[k]));
       row('sw-kv-speed', ['slow', 'fast'], 'kv-speed', 'fast', (k) => k === 'fast' ? '速' : '遅');
       row('sw-fruit-anim', ['1', '2', '3'], 'fruit-anim', '2', (k) => ({ '1': 'ぷるぷる', '2': '根本から揺れる', '3': '拡大' }[k]));
-      row('sw-fruit-deco', ['no', '1'], 'fruit-deco', isOneColumn ? '1' : 'no', (k) => k === '1' ? 'あり' : 'なし');
+      row('sw-fruit-deco', ['no', '1'], 'fruit-deco', 'no', (k) => k === '1' ? 'あり' : 'なし');
       row('sw-mobile-fruit-deco', ['1', 'no'], 'mobile-fruit-deco', '1', (k) => k === '1' ? 'あり' : 'なし');
       { const layout = document.documentElement.dataset.fruitLayout, hover = document.documentElement.dataset.fruitHover, click = document.documentElement.dataset.fruitClick;
         const fruitHref = (key, value) => { const u = new URL(url.href); u.searchParams.delete('works'); u.searchParams.delete('fruit-action'); u.searchParams.set('fruit-layout', key === 'fruit-layout' ? value : layout); u.searchParams.set('fruit-hover', key === 'fruit-hover' ? value : hover); u.searchParams.set('fruit-click', key === 'fruit-click' ? value : click); return u.href; };

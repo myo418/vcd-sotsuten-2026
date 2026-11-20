@@ -767,15 +767,15 @@ main { overflow-x: clip; }
 }
 /* 古堅ゼミの実がご挨拶の後と開催概要の見出しの間に収まる余白。 */
 @media (min-width: 691px) and (max-width: 1299px) {
-  html:not([data-pc-deco="no"]) body.home #greeting { margin-bottom: 260px; }
+  html[data-deco-visible="1"] body.home #greeting { margin-bottom: 260px; }
 }
 @media (min-width: 1300px) {
-  html:not([data-pc-deco="no"]) body.home #greeting { margin-bottom: 480px; }
-  html[data-design="d"]:not([data-pc-deco="no"]) body.home #greeting { margin-bottom: 260px; }
+  html[data-deco-visible="1"] body.home #greeting { margin-bottom: 480px; }
+  html[data-design="d"][data-deco-visible="1"] body.home #greeting { margin-bottom: 260px; }
 }
 @media (max-width: 690px) {
-  html:not([data-mobile-deco="no"]) body.home #greeting { margin-bottom: 190px; }
-  html:not([data-mobile-deco="no"]) body.home #handouts { margin-top: 180px; }
+  html[data-deco-visible="1"] body.home #greeting { margin-bottom: 190px; }
+  html[data-deco-visible="1"] body.home #handouts { margin-top: 180px; }
 }
 /* 画面の端から絵の幅の2割がはみ出す（--bleed で個別に変えられる）。--page-w は本文の列の幅（通常は画面幅。トップのデザイン D では右半分） */
 .deco--left  { left:  calc(50% - var(--page-w, 100vw) / 2 - var(--deco-w) * var(--bleed, .2)); }
@@ -803,7 +803,7 @@ html[data-nocampus] body.home .home-campus { display: none; }
 /* 作品・展示場所のセクションをなくす（?works=no。html[data-noworks]。トップの切り替え「Works」。2026-10-28）。サイドバーのリンク先はそのまま */
 html[data-noworks] body.home #student-works { display: none; }
 /* 装飾の実をなくす（?deco=2。html[data-nodeco]。トップの切り替え「Deco」。2026-10-28） */
-@media (min-width: 691px) { html[data-pc-deco="no"] body.home .deco { display: none; } }
+html[data-deco-visible="0"] body.home .deco { display: none; }
 /* 本文を絵より手前に */
 .lead > :not(.deco),
 .section > :not(.deco) { position: relative; z-index: 1; }
@@ -1229,9 +1229,7 @@ html[data-catalog-photo="no"] body.home .handout--catalog figcaption { margin-to
 
 /* スマホだけ装飾の実を切り替える（PC側の設定はそのまま） */
 @media (max-width: 690px) {
-  html[data-mobile-deco="no"] body.home .deco { display: none; }
-  html[data-mobile-deco="1"] body.home .deco { display: block; }
-  html[data-mobile-deco="no"] body.home #handouts { padding-bottom: clamp(60px, 9vh, 100px); }
+  html[data-deco-visible="0"] body.home #handouts { padding-bottom: clamp(60px, 9vh, 100px); }
 }
 
 /* スマホではキャッチを少し大きく */
@@ -1546,16 +1544,16 @@ body.home .site-footer { margin-top: 0; }
   body.home .kv-info { margin-top: 0; padding-top: 0; }
   body.home .lead { padding-block: 256px; }
   html[data-greet="1"] body.home #greeting { padding-bottom: calc(var(--home-block-gap) + 96px); }
-  html:not([data-mobile-deco="no"]) body.home :is(#greeting, #handouts) { margin-block: 0; }
+  html[data-deco-visible="1"] body.home :is(#greeting, #handouts) { margin-block: 0; }
 }
 
 /* 装飾を表示するときは、対応するブロックの下に実が入る余白を取る。 */
 @media (min-width: 691px) {
-  html:not([data-pc-deco="no"]) body.home #access { padding-bottom: max(var(--home-block-gap), 500px); }
+  html[data-deco-visible="1"] body.home #access { padding-bottom: max(var(--home-block-gap), 500px); }
   body.home .lead .deco { max-width: 160px; }
 }
 @media (max-width: 690px) {
-  html:not([data-mobile-deco="no"]) body.home :is(#outline, #access) { padding-bottom: 300px; }
+  html[data-deco-visible="1"] body.home :is(#outline, #access) { padding-bottom: 300px; }
 }
 
 /* 展示場所の塗りボタン。地図の線画と区別し、操作できる項目として見せる。 */
@@ -1644,8 +1642,8 @@ html[data-fruit-layout="scatter"] body.home .seminars-b { aspect-ratio: 1000 / 1
 
 /* 展示場所・配布物・ゼミ紹介の順に、独立した余白を取る。 */
 body.home #exhibition-places { padding-block: 0 var(--home-block-gap); }
-@media (min-width: 691px) { html:not([data-pc-deco="no"]) body.home #exhibition-places { padding-bottom: max(var(--home-block-gap), 500px); } }
-@media (max-width: 690px) { html:not([data-mobile-deco="no"]) body.home #exhibition-places { padding-bottom: 300px; } }
+@media (min-width: 691px) { html[data-deco-visible="1"] body.home #exhibition-places { padding-bottom: max(var(--home-block-gap), 500px); } }
+@media (max-width: 690px) { html[data-deco-visible="1"] body.home #exhibition-places { padding-bottom: 300px; } }
 html:is([data-nocampus], [data-noworks]) body.home #exhibition-places { display: none; }
 
 /* 開催情報画像の透明な左余白を補正し、ほかの見出しと揃える。 */
