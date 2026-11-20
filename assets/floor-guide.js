@@ -52,7 +52,7 @@
       map.className = 'floor-guide-map';
       const img = document.createElement('img');
       img.className = 'floor-guide-image';
-      img.src = `assets/img/map/floors/${path}-${direction}.png?v=20261119e`;
+      img.src = `assets/img/map/floors/${path}-${direction}.png?v=20261120west`;
       img.alt = building + (name === '芝生' ? '' : ' ' + name) + 'のフロアマップ';
       map.append(img);
       section.append(map);
