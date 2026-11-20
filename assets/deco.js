@@ -102,7 +102,7 @@ void main(){
   // 線をにじみの上に重ねる（背景は透明）
   float a=la+na*(1.-la);
   vec3 c=(lc*la+nj.rgb*na*(1.-la))/max(a,1e-4);
-  gl_FragColor=vec4(c,a);
+  gl_FragColor=vec4(c*a,a);
 }`;
 
   const load = (src) => new Promise((res, rej) => {
@@ -120,7 +120,7 @@ void main(){
     const slug = el.dataset.deco;
     const cv = document.createElement('canvas');
     el.appendChild(cv);
-    const gl = cv.getContext('webgl', { premultipliedAlpha: false, antialias: false, alpha: true });
+    const gl = cv.getContext('webgl', { premultipliedAlpha: true, antialias: false, alpha: true });
 
     // WebGL が使えなければ、完成した絵（にじみ＋線）を img で出す
     const fallback = () => {
