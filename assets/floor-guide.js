@@ -42,6 +42,8 @@
   let lastFocus;
   function open(building, trigger) {
     lastFocus = trigger;
+    dialog.dataset.building = building;
+    dialog.classList.toggle('floor-guide-dialog--fit', ['8号館', '12号館', '10号館前芝生', '美術館前芝生'].includes(building));
     dialog.setAttribute('aria-label', building + 'の展示場所');
     const direction = guide.dataset.dir === 'north' ? 'north' : 'west';
     floorList.replaceChildren(...floors[building].map(([name, path]) => {

@@ -1434,14 +1434,6 @@ body.home .home-campus .floor-guide-buildings button { border: 1px solid current
 .floor-guide-map { position: relative; width: fit-content; max-width: 100%; margin-inline: auto; }
 .floor-guide-marker:not([hidden]) { position: absolute; width: 24px; height: 24px; box-sizing: border-box; border: 3px solid #ffe14d; border-radius: 50%; background: rgb(255 225 77 / .3); transform: translate(-50%, -50%); pointer-events: none; }
 
-@media (min-width: 901px) {
-  .floor-guide-dialog:has(.floor-guide-floor + .floor-guide-floor) { width: min(1280px, calc(100% - 64px)); }
-  .floor-guide-floors { display: flex; gap: 32px; align-items: flex-start; }
-  .floor-guide-floor { flex: 1 1 0; min-width: 0; }
-  .floor-guide-floor + .floor-guide-floor { margin-top: 24px; }
-  .floor-guide-image { width: auto; max-height: calc(min(90dvh, 900px) - 170px); }
-}
-
 /* 展示場所ダイアログはフェードインで開く（2026-11-08）。動きを減らす設定のときは出さない */
 @keyframes floor-guide-fade { from { opacity: 0; } to { opacity: 1; } }
 .floor-guide-dialog[open], .floor-guide-dialog[open]::backdrop { animation: floor-guide-fade .3s ease-out; }
@@ -1670,7 +1662,6 @@ html[data-handout-mock="aligned"][data-top-layout="1"] body.home .layout1-handou
 .floor-guide-card { padding-top: 8px; }
 .floor-guide-card header { padding-block: 0; }
 .floor-guide-floor { margin-top: 8px; }
-@media (min-width: 901px) { .floor-guide-floor + .floor-guide-floor { margin-top: 8px; } }
 
 /* 中間幅では本文を列内に収め、右側の余白を保つ。 */
 @media (min-width: 691px) and (max-width: 1000px) {
@@ -1735,9 +1726,13 @@ body.home .home-campus[data-dir="west-higashi"] .place__bld:hover { background: 
 
 /* フロアマップの区切り線は画像間だけに設ける。 */
 .floor-guide-floor + .floor-guide-floor { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgb(var(--paper-rgb) / .45); }
+.floor-guide-dialog--fit .floor-guide-image { width: auto; max-height: max(0px, calc(min(90dvh, 900px) - 100px)); }
+.floor-guide-dialog--fit[data-building="8号館"] .floor-guide-image { max-height: max(0px, calc((min(90dvh, 900px) - 120px) / 2)); }
 @media (min-width: 901px) {
-  .floor-guide-floors { gap: 0; align-items: stretch; }
-  .floor-guide-floor + .floor-guide-floor { margin-top: 8px; margin-left: 16px; padding-top: 0; padding-left: 16px; border-top: 0; border-left: 1px solid rgb(var(--paper-rgb) / .45); }
+  .floor-guide-dialog[data-building="10号館"] { width: min(1600px, calc(100% - 32px)); }
+  .floor-guide-dialog[data-building="10号館"] .floor-guide-floors { display: flex; align-items: stretch; }
+  .floor-guide-dialog[data-building="10号館"] .floor-guide-floor { flex: 1 1 0; min-width: 0; }
+  .floor-guide-dialog[data-building="10号館"] .floor-guide-floor + .floor-guide-floor { margin-top: 8px; margin-left: 16px; padding-top: 0; padding-left: 16px; border-top: 0; border-left: 1px solid rgb(var(--paper-rgb) / .45); }
 }
 
 /* 左列をスクロールする案では、ゼミ解説を右のKV側に表示する。 */
