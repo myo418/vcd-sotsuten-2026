@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ゼミの紹介 | 視覚伝達デザイン学科 卒業・修了制作展</title>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ゼ実の紹介 | 視覚伝達デザイン学科 卒業・修了制作展</title>
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css?v=20261113b">
+<link rel="stylesheet" href="assets/style.css?v=20261121d">
 <script> { const p = new URLSearchParams(location.search); if (p.get('bg') === '3') document.documentElement.dataset.bg = '3'; else if (p.get('bg') !== '1') document.documentElement.dataset.bg = '2'; if (/^[13]$/.test(p.get('white'))) document.documentElement.dataset.white = p.get('white'); } </script>
 <script>try { sessionStorage.setItem('vcd2026-return-from-seminar', '1'); } catch (e) {}</script>
 <style>
@@ -9,6 +9,10 @@
   .fruit-page main { box-sizing: border-box; max-width: 760px; margin: auto; padding: 32px clamp(20px, 6vw, 48px) 80px; }
   .fruit-page a { color: inherit; text-underline-offset: .2em; }
   .fruit-page .back { font-size: 14px; }
+  .fruit-page .back--bottom { display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: fit-content; max-width: 100%; min-height: 52px; margin: 72px auto 0; padding: 12px 16px; border: 1px solid currentColor; font-size: 18px; text-decoration: none; }
+  .fruit-page .back--bottom:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+  .fruit-page .back-arrow { display: inline-flex; align-items: center; line-height: 1; margin-right: .35em; }
+  .fruit-page .back-arrow svg { display: block; width: 1.6em; height: 1em; }
   .fruit-page .heading, .fruit-page .feature { display: grid; grid-template-columns: 54px minmax(0, 1fr); align-items: start; }
   .fruit-page .heading { margin: 42px 0 20px; }
   .fruit-page :is(.number, .feature > span) { text-align: right; padding-right: 12px; }
@@ -22,10 +26,13 @@
   .fruit-page .feature p { margin: 0; }
   .fruit-page .description { white-space: pre-line; font-size: 16px; line-height: 2; text-align: justify; }
   .fruit-page .next { display: inline-block; margin-top: 36px; }
-  @media (max-width: 690px) { .fruit-page :is(.back, .feature, .description, .next) { font-size: 14px; } }
+  @media (max-width: 690px) {
+    .fruit-page :is(.back, .feature, .description, .next) { font-size: 14px; }
+    .fruit-page .back--bottom { font-size: 18px; }
+  }
 </style></head><body class="fruit-page"><main>
-<a class="back" href="./?works=linked&motion-video=no#student-works">← ゼミの紹介に戻る</a>
-<div class="heading"><span class="number" id="number"></span><div><h1 id="title">ゼミの紹介</h1><span class="english" id="english"></span></div></div><div class="feature" id="feature" hidden><span>特徴</span><p id="feature-text"></p></div><img class="art" id="art" alt="" hidden><p class="description" id="description" aria-live="polite">読み込み中…</p>
+<div class="heading"><span class="number" id="number"></span><div><h1 id="title">ゼ実の紹介</h1><span class="english" id="english"></span></div></div><div class="feature" id="feature" hidden><span>特徴</span><p id="feature-text"></p></div><img class="art" id="art" alt="" hidden><p class="description" id="description" aria-live="polite">読み込み中…</p>
+<a class="back back--bottom" href="./?works=linked&motion-video=no#student-works"><span class="back-arrow" aria-hidden="true"><svg viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 8h30M1 8l7-5M1 8l7 5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>ゼ実の紹介に戻る</span></a>
 <!-- 下の「このゼミの作品を見る →」は外した（2026-11-08） -->
-</main><script src="assets/fruit-features.js?v=20261109" defer></script><script src="assets/fruit-page.js?v=20261115a" defer></script><script src="assets/latin-baseline.js?v=20261111c" defer></script>
+</main><script src="assets/fruit-features.js?v=20261109" defer></script><script src="assets/fruit-page.js?v=20261121a" defer></script><script src="assets/latin-baseline.js?v=20261121a" defer></script>
 </body></html>

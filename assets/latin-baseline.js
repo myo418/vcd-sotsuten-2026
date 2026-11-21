@@ -1,16 +1,16 @@
-// 欧文と数字のベースラインを少し上げる。後から追加された文章にも適用する。
+// 欧文・数字とハイフンのベースラインを少し上げる。後から追加された文章にも適用する。
 (() => {
   const excluded = 'script, style, noscript, textarea, input, select, option, svg, canvas, code, pre, [contenteditable], .ms, .material-icons, .material-symbols-outlined, .weekday-mark, .latin-baseline';
-  const pattern = /[A-Za-z]+|[0-9]+(?![\uFE0F\u20E3])/g;
+  const pattern = /[A-Za-z]+|[0-9]+(?![\uFE0F\u20E3])|(?<=[0-9\u3000-\u9fff])-|-(?=[0-9\u3000-\u9fff])/g;
   function wrap(node) {
     const parent = node.parentElement;
-    if (!parent || parent.closest(excluded) || !/[A-Za-z0-9]/.test(node.data)) return;
+    if (!parent || parent.closest(excluded) || !/[A-Za-z0-9-]/.test(node.data)) return;
     const fragment = document.createDocumentFragment();
     let last = 0;
     for (const match of node.data.matchAll(pattern)) {
       fragment.append(document.createTextNode(node.data.slice(last, match.index)));
       const span = document.createElement('span');
-      span.className = /^[A-Za-z]/.test(match[0]) ? 'latin-baseline latin-baseline--letters' : 'latin-baseline';
+      span.className = match[0] === '-' ? 'latin-baseline latin-baseline--hyphen' : /^[A-Za-z]/.test(match[0]) ? 'latin-baseline latin-baseline--letters' : 'latin-baseline';
       span.textContent = match[0];
       fragment.append(span);
       last = match.index + match[0].length;

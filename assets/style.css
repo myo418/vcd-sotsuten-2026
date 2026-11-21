@@ -1604,6 +1604,8 @@ body.home .home-campus[data-dir="north"] .place__mapbox { width: 100%; }
 
 /* 欧文・数字をわずかに持ち上げる。 */
 .latin-baseline { position: relative; top: -0.05em; }
+.latin-baseline--hyphen { top: -0.12em; }
+.greeting-dots { font-size: .5em; letter-spacing: 0; vertical-align: .2em; }
 
 /* ティザーと共通の開催情報画像。内容は読み上げ用の HTML に残す。 */
 body.home .kv-info__art { position: relative; width: min(100%, 600px); }

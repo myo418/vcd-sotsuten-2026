@@ -8,7 +8,10 @@
   const root = document.querySelector('#student-works');
   if (!root || !board) return;
   const heading = root.querySelector('.section__title .works-heading');
-  if (heading) heading.textContent = 'ゼミの紹介';
+  if (heading) heading.textContent = 'ゼ実の紹介';
+  root.querySelectorAll('.board a.label, .seminar-scatter__label').forEach(label => {
+    label.textContent = label.textContent.replace(/ゼミ$/, 'ゼ実');
+  });
   const all = root.querySelector('.seminar-links__all'); if (all) all.hidden = true;
   const panel = document.createElement('aside');
   panel.className = 'fruit-preview'; panel.setAttribute('aria-hidden', 'true');
