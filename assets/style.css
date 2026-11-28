@@ -1730,7 +1730,7 @@ body.home .home-campus[data-dir="west-higashi"] .place__bld:hover { background: 
 /* フロアマップの区切り線は画像間だけに設ける。 */
 .floor-guide-floor + .floor-guide-floor { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgb(var(--paper-rgb) / .45); }
 .floor-guide-dialog--fit .floor-guide-image { width: auto; max-height: max(0px, calc(min(90dvh, 900px) - 100px)); }
-@media (min-width: 901px) {
+@media (min-width: 1400px) {
   .floor-guide-dialog[data-building="10号館"] { width: min(1600px, calc(100% - 32px)); }
   .floor-guide-dialog[data-building="10号館"] .floor-guide-floors { display: flex; align-items: stretch; }
   .floor-guide-dialog[data-building="10号館"] .floor-guide-floor { flex: 1 1 0; min-width: 0; }
