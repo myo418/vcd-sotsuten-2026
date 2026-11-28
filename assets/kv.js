@@ -198,6 +198,7 @@ void main(){
       kv.style.setProperty('--kv-art-bottom', `${(oy + EH * s) / dpr}px`);
       kv.style.setProperty('--kv-art-h', `${EH * s / dpr}px`);
       kv.classList.add('has-art-pos');
+      kv.classList.toggle('has-visible-art-bottom', oy + EH * s <= h);
     }
 
     gl.uniform2f(U('uRes'), w, h);

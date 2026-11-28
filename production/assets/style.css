@@ -1730,7 +1730,6 @@ body.home .home-campus[data-dir="west-higashi"] .place__bld:hover { background: 
 /* フロアマップの区切り線は画像間だけに設ける。 */
 .floor-guide-floor + .floor-guide-floor { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgb(var(--paper-rgb) / .45); }
 .floor-guide-dialog--fit .floor-guide-image { width: auto; max-height: max(0px, calc(min(90dvh, 900px) - 100px)); }
-.floor-guide-dialog--fit[data-building="8号館"] .floor-guide-image { max-height: max(0px, calc((min(90dvh, 900px) - 120px) / 2)); }
 @media (min-width: 901px) {
   .floor-guide-dialog[data-building="10号館"] { width: min(1600px, calc(100% - 32px)); }
   .floor-guide-dialog[data-building="10号館"] .floor-guide-floors { display: flex; align-items: stretch; }
@@ -1797,3 +1796,29 @@ html[data-video-style="thumbnail"] .video-section__caption { display: none; }
 @media (max-width: 690px) {
   html[data-video-style="fruit"] body.home .video-section__player { width: min(128px, 100%); }
 }
+
+/* 学名のラベルは番号・特徴と同じ左の列に配置する。 */
+.fruit-preview__english { position: relative; }
+.fruit-preview__scientific-label { position: absolute; right: 100%; box-sizing: border-box; width: clamp(54px, 6vw, 86px); padding-right: 12px; text-align: right; font-style: normal; font-weight: 700; }
+
+/* KVのフェードは絵の実際の下端に固定し、枠や画面の下端には追従させない。 */
+html body.home .kv::after { content: none; }
+html body.home .kv.has-art-pos::after,
+html[data-kvfade] body.home .kv.has-art-pos::after,
+html[data-kv1] body.home .kv.has-art-pos::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--kv-art-bottom) - var(--kv-art-h) * .14);
+  bottom: auto;
+  height: calc(var(--kv-art-h) * .14);
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgb(var(--c-bg-rgb) / 0), rgb(var(--c-bg-rgb) / .25) 40%, var(--c-bg) 100%);
+}
+
+/* 絵の下端がKV枠の外にある場合は、フェードを表示しない。 */
+html body.home .kv.has-art-pos:not(.has-visible-art-bottom)::after,
+html[data-kvfade] body.home .kv.has-art-pos:not(.has-visible-art-bottom)::after,
+html[data-kv1] body.home .kv.has-art-pos:not(.has-visible-art-bottom)::after { content: none; }

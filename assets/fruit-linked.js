@@ -22,6 +22,8 @@
   const titleGroup = document.createElement('div'); titleGroup.className = 'fruit-preview__title-group';
   const title = document.createElement('h2'); const feature = document.createElement('div'); const featureLabel = document.createElement('span'); const featureText = document.createElement('p'); const description = document.createElement('p');
   const english = document.createElement('span'); english.className = 'fruit-preview__english';
+  const scientificLabel = document.createElement('span'); scientificLabel.className = 'fruit-preview__scientific-label'; scientificLabel.textContent = '学名';
+  const scientificName = document.createElement('span'); english.append(scientificLabel, scientificName);
   const englishTitles = { ishizuka: 'Seminarium ishizukae', ota: 'Seminarium otae', kitazaki: 'Seminarium kitazakiae', goto: 'Seminarium gotoi', sawada: 'Seminarium sawadae', shirai: 'Seminarium shiraii', terayama: 'Seminarium terayamae', nakano: 'Seminarium nakanoi', furugen: 'Seminarium furukatae', in: 'Seminarium graduate' };
   // 一覧の画像幅に対する、透明余白を除いた実の長辺の比率。
   const artworkRatios = { ishizuka: 861 / 850, ota: 826 / 640, kitazaki: 558 / 749, goto: 699 / 695, sawada: 843 / 900, shirai: 686 / 708, terayama: 856 / 900, nakano: 841 / 680, furugen: 761 / 798, in: 848 / 900 };
@@ -97,7 +99,7 @@
     const sourceTitle = item.querySelector('h3');
     number.textContent = sourceTitle.querySelector('.fruit-number')?.textContent || '';
     title.textContent = Array.from(sourceTitle.childNodes).filter(node => node.nodeType === Node.TEXT_NODE).map(node => node.textContent).join('').trim();
-    english.textContent = englishTitles[slug] || '';
+    scientificName.textContent = englishTitles[slug] || '';
     featureText.textContent = window.fruitFeatures?.[slug] || '';
     feature.hidden = !featureText.textContent;
     description.textContent = item.querySelector('p').textContent;
